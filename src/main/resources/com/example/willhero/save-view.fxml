@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="709.0" styleClass="savebg" stylesheets="@background.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER" disable="true" prefHeight="55.0" prefWidth="709.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text disable="true" fill="WHITE" stroke="#4974e5" strokeType="OUTSIDE" strokeWidth="3.5" text="Saved Games" textAlignment="CENTER" wrappingWidth="256.90625" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Arial Bold" size="36.0" />
+               </font>
+               <effect>
+                  <Glow />
+               </effect>
+            </Text>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutY="111.0" prefHeight="22.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="175.0">
+         <children>
+            <Pane prefHeight="40.0" prefWidth="80.0" HBox.hgrow="ALWAYS" />
+            <Button alignment="CENTER" mnemonicParsing="false" stylesheets="@background.css" text="Save 1" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../Will%20Hero%20Resources/playbutton.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Pane prefHeight="40.0" prefWidth="38.0" HBox.hgrow="ALWAYS" />
+            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="133.0" text="Save 2" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../Will%20Hero%20Resources/playbutton.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Pane prefHeight="40.0" prefWidth="59.0" HBox.hgrow="ALWAYS" />
+            <Button alignment="CENTER" layoutX="357.0" layoutY="13.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="125.0" text="Save 3" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../Will%20Hero%20Resources/playbutton.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Pane prefHeight="43.0" prefWidth="85.0" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <Button alignment="CENTER" layoutX="579.0" layoutY="431.0" mnemonicParsing="false" stylesheets="@background.css" text="Back" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="27.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../Will%20Hero%20Resources/back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>
