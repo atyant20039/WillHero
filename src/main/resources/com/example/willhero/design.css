@@ -1,0 +1,29 @@
+.mainbg {
+    -fx-background-image:url('background.jpg');
+    -fx-background-size: 100% 100%;
+}
+
+.loadbg {
+    -fx-background-image:url('loadbg.jpg');
+    -fx-background-size: 100% 100%;
+}
+
+.savebg {
+    -fx-background-image:url('savebg.png');
+    -fx-background-size: 100% 100%;
+}
+
+.sky {
+    -fx-background-image:url('sky.png');
+    -fx-background-size: 100% 100%;
+}
+
+.button{
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-family:"Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 1.5em; /* 12 */
+    -fx-text-fill: #000000;
+}
