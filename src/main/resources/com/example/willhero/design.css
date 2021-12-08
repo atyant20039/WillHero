@@ -27,3 +27,8 @@
     -fx-font-size: 1.5em; /* 12 */
     -fx-text-fill: #000000;
 }
+
+.button:pressed {
+    -fx-background-color: transparent;
+    -fx-text-fill: #000000;
+}
