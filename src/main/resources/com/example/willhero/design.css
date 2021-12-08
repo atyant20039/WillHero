@@ -23,9 +23,7 @@
     -fx-border-width: 0;
     -fx-background-radius: 0;
     -fx-background-color: transparent;
-    -fx-font-family:"Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 1.5em; /* 12 */
-    -fx-text-fill: #000000;
+    -fx-text-fill: #ffffff;
 }
 
 .button:pressed {
