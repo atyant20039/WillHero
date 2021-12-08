@@ -6,11 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="680.0" styleClass="mainbg" stylesheets="@design.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -20,7 +16,7 @@
                <graphic>
                   <ImageView fitHeight="53.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@loadgame.png" />
+                        <Image url="@whiteloadgame.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -29,11 +25,11 @@
                </font>
             </Button>
             <Pane prefHeight="141.0" prefWidth="77.0" HBox.hgrow="ALWAYS" />
-            <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="141.0" prefWidth="124.0" style="-fx-background-color: transparent;" text="Play" textAlignment="CENTER" textFill="black" HBox.hgrow="ALWAYS">
+            <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="141.0" prefWidth="124.0" style="-fx-background-color: transparent;" text="Play" textAlignment="CENTER" textFill="#4974e5" HBox.hgrow="ALWAYS">
                <graphic>
-                  <ImageView fitHeight="48.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="69.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@playbutton.png" />
+                        <Image url="@blueplaybutton.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -46,7 +42,7 @@
                <graphic>
                   <ImageView fitHeight="53.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@exit.png" />
+                        <Image url="@whiteexit.png" />
                      </image>
                   </ImageView>
                </graphic>
