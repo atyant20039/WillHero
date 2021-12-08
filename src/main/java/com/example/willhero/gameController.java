@@ -21,12 +21,6 @@ public class gameController implements Initializable {
     @FXML
     private Pane floatPane;
 
-//    @FXML
-////    private Rectangle r1, r11, r12, r13, r14, r15;
-//
-//    @FXML
-//    private ImageView pl1;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         TranslateTransition translate1 = new TranslateTransition();
@@ -43,19 +37,6 @@ public class gameController implements Initializable {
         translate2.setAutoReverse(true);
         translate2.setByY(floatPane.getLayoutY() + 10);
         translate2.play();
-
-//        Image p1 = new Image("C:\\Users\\Atyant Sony\\IdeaProjects\\WillHero\\src\\main\\java\\com\\example\\willhero\\p1.png");
-//        Image p2 = new Image("C:\\Users\\Atyant Sony\\IdeaProjects\\WillHero\\src\\main\\java\\com\\example\\willhero\\p2.png");
-//        Image p3 = new Image("C:\\Users\\Atyant Sony\\IdeaProjects\\WillHero\\src\\main\\java\\com\\example\\willhero\\p3.png");
-//        Image p4 = new Image("C:\\Users\\Atyant Sony\\IdeaProjects\\WillHero\\src\\main\\java\\com\\example\\willhero\\p4.png");
-//
-//        Image[] platform_arr = {p1,p2,p3,p4};
-//        Rectangle[] rect_arr = {r1,r11,r12,r13,r14,r15};
-//        int i = 0;
-//        for (Rectangle r : rect_arr){
-//            r.setFill(new ImagePattern(platform_arr[i%4]));
-//            i++;
-//        }
 
     }
 }
