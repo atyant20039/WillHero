@@ -3,9 +3,12 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="680.0" styleClass="sky" stylesheets="@design.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willhero.gameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="sky" stylesheets="@design.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willhero.gameController">
    <children>
       <Pane fx:id="cloudPane" layoutX="1300.0" prefHeight="402.0" prefWidth="2877.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -48,53 +51,107 @@
       </Pane>
       <Pane fx:id="floatPane" layoutY="11.0" opacity="0.75" prefHeight="402.0" prefWidth="3150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="62.0" fitWidth="53.0" layoutX="119.0" layoutY="165.0" pickOnBounds="true">
+            <ImageView fitHeight="62.0" fitWidth="53.0" layoutX="126.0" layoutY="214.0" pickOnBounds="true">
                <image>
                   <Image url="@p5_float.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="55.0" fitWidth="53.0" layoutX="524.0" layoutY="196.0" pickOnBounds="true">
+            <ImageView fitHeight="55.0" fitWidth="53.0" layoutX="531.0" layoutY="245.0" pickOnBounds="true">
                <image>
                   <Image url="@p6_float.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="55.0" fitWidth="53.0" layoutX="828.0" layoutY="164.0" pickOnBounds="true">
+            <ImageView fitHeight="55.0" fitWidth="53.0" layoutX="835.0" layoutY="213.0" pickOnBounds="true">
                <image>
                   <Image url="@p7_float.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="55.0" fitWidth="53.0" layoutX="1123.0" layoutY="192.0" pickOnBounds="true">
+            <ImageView fitHeight="55.0" fitWidth="53.0" layoutX="1130.0" layoutY="241.0" pickOnBounds="true">
                <image>
                   <Image url="@p8_float.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="62.0" fitWidth="53.0" layoutX="1591.0" layoutY="134.0" pickOnBounds="true">
+            <ImageView fitHeight="62.0" fitWidth="53.0" layoutX="1598.0" layoutY="183.0" pickOnBounds="true">
                <image>
                   <Image url="@p5_float.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="55.0" fitWidth="53.0" layoutX="2455.0" layoutY="126.0" pickOnBounds="true">
+            <ImageView fitHeight="55.0" fitWidth="53.0" layoutX="2462.0" layoutY="175.0" pickOnBounds="true">
                <image>
                   <Image url="@p6_float.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="55.0" fitWidth="53.0" layoutX="2349.0" layoutY="181.0" pickOnBounds="true">
+            <ImageView fitHeight="55.0" fitWidth="53.0" layoutX="2356.0" layoutY="230.0" pickOnBounds="true">
                <image>
                   <Image url="@p7_float.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="55.0" fitWidth="53.0" layoutX="1964.0" layoutY="162.0" pickOnBounds="true">
+            <ImageView fitHeight="55.0" fitWidth="53.0" layoutX="1971.0" layoutY="211.0" pickOnBounds="true">
                <image>
                   <Image url="@p8_float.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="55.0" fitWidth="53.0" layoutX="2945.0" layoutY="154.0" pickOnBounds="true">
+            <ImageView fitHeight="55.0" fitWidth="53.0" layoutX="2951.0" layoutY="237.0" pickOnBounds="true">
                <image>
                   <Image url="@p6_float.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="mainPane" prefHeight="402.0" prefWidth="680.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane prefHeight="600.0" prefWidth="3000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" layoutX="175.0" layoutY="386.0" AnchorPane.bottomAnchor="14.0">
+               <children>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="platform1" stylesheets="@design.css">
+                     <children>
+                        <Rectangle fx:id="r1" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="200.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: transparent;" width="271.0" />
+                     </children>
+                  </StackPane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="platform2" stylesheets="@design.css">
+                     <children>
+                        <Rectangle fx:id="r16" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="200.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: transparent;" width="272.0" />
+                     </children>
+                  </StackPane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="platform4" stylesheets="@design.css">
+                     <children>
+                        <Rectangle fx:id="r11" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="200.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: transparent;" width="266.0" />
+                     </children>
+                  </StackPane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="platform3" stylesheets="@design.css">
+                     <children>
+                        <Rectangle fx:id="r161" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="200.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: transparent;" width="231.0" />
+                     </children>
+                  </StackPane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="platform2" stylesheets="@design.css">
+                     <children>
+                        <Rectangle fx:id="r12" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="200.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: transparent;" width="251.0" />
+                     </children>
+                  </StackPane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="platform4" stylesheets="@design.css">
+                     <children>
+                        <Rectangle fx:id="r162" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="200.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: transparent;" width="239.0" />
+                     </children>
+                  </StackPane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="platform1" stylesheets="@design.css">
+                     <children>
+                        <Rectangle fx:id="r13" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="200.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: transparent;" width="266.0" />
+                     </children>
+                  </StackPane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="platform3" stylesheets="@design.css">
+                     <children>
+                        <Rectangle fx:id="r163" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="200.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: transparent;" width="238.0" />
+                     </children>
+                  </StackPane>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
