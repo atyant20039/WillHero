@@ -100,6 +100,11 @@
       </Pane>
       <AnchorPane prefHeight="600.0" prefWidth="3000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <StackPane fx:id="hero" layoutX="398.0" layoutY="330.0" prefHeight="55.0" prefWidth="43.0" styleClass="hero" stylesheets="@design.css" AnchorPane.bottomAnchor="213.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="34.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: transparent;" width="40.0" StackPane.alignment="BOTTOM_CENTER" />
+               </children>
+            </StackPane>
             <HBox alignment="CENTER" layoutX="175.0" layoutY="386.0" AnchorPane.bottomAnchor="14.0">
                <children>
                   <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="platform1" stylesheets="@design.css">

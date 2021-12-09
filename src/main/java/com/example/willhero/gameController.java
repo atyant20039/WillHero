@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -20,6 +21,9 @@ public class gameController implements Initializable {
 
     @FXML
     private Pane floatPane;
+
+    @FXML
+    private StackPane hero;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -37,6 +41,14 @@ public class gameController implements Initializable {
         translate2.setAutoReverse(true);
         translate2.setByY(floatPane.getLayoutY() + 10);
         translate2.play();
+
+        TranslateTransition translate3 = new TranslateTransition();
+        translate3.setNode(hero);
+        translate3.setDuration(Duration.millis(500));
+        translate3.setCycleCount(TranslateTransition.INDEFINITE);
+        translate3.setAutoReverse(true);
+        translate3.setByY(-50);
+        translate3.play();
 
     }
 }
