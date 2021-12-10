@@ -47,7 +47,7 @@ public class gameController implements Initializable {
         translate3.setDuration(Duration.millis(500));
         translate3.setCycleCount(TranslateTransition.INDEFINITE);
         translate3.setAutoReverse(true);
-        translate3.setByY(-50);
+        translate3.setByY(-75);
         translate3.play();
 
     }

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="savebg" stylesheets="@design.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <HBox alignment="CENTER" disable="true" prefHeight="55.0" prefWidth="709.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Text disable="true" fill="WHITE" fontSmoothingType="LCD" stroke="#4974e5" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="4.0" text="Saved Games" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                    <font>
+                        <Font name="Arial Rounded MT Bold" size="36.0" />
+                    </font>
+                    <effect>
+                        <Glow />
+                    </effect>
+                </Text>
+            </children>
+        </HBox>
+        <VBox alignment="CENTER" layoutX="433.0" layoutY="72.0" prefHeight="200.0" prefWidth="150.0" AnchorPane.leftAnchor="420.0" AnchorPane.rightAnchor="420.0" AnchorPane.topAnchor="75.0">
+            <children>
+                <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" stylesheets="@design.css" text="Game 1" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+                    <font>
+                        <Font name="Arial Rounded MT Bold" size="20.0" />
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@whiteplaybutton.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Pane prefHeight="40.0" prefWidth="160.0" VBox.vgrow="ALWAYS" />
+                <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" stylesheets="@design.css" text="Game 2" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+                    <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@whiteplaybutton.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <font>
+                        <Font name="Arial Rounded MT Bold" size="20.0" />
+                    </font>
+                </Button>
+                <Pane prefHeight="40.0" prefWidth="160.0" VBox.vgrow="ALWAYS" />
+                <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" stylesheets="@design.css" text="Game 3" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+                    <font>
+                        <Font name="Arial Rounded MT Bold" size="20.0" />
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@whiteplaybutton.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
