@@ -21,7 +21,7 @@
                   </ImageView>
                </graphic>
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="Arial Rounded MT Bold" size="20.0" />
                </font>
             </Button>
             <Pane prefHeight="141.0" prefWidth="77.0" HBox.hgrow="ALWAYS" />

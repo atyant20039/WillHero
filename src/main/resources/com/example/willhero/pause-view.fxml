@@ -27,14 +27,14 @@
       </HBox>
       <VBox alignment="CENTER" layoutX="420.0" layoutY="75.0" prefHeight="200.0" prefWidth="220.0" AnchorPane.leftAnchor="390.0" AnchorPane.rightAnchor="390.0" AnchorPane.topAnchor="75.0">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="220.0" stylesheets="@design.css" text="Resume" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="220.0" style="-fx-text-fill: #4974e5;" stylesheets="@design.css" text="Resume" textAlignment="CENTER" textFill="#4974e5" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="Arial Rounded MT Bold" size="20.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@whiteplaybutton.png" />
+                        <Image url="@blueplaybutton.png" />
                      </image>
                   </ImageView>
                </graphic>
