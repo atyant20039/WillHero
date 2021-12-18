@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
@@ -21,16 +22,19 @@ import java.util.ResourceBundle;
 
 public class gameController implements Initializable {
     @FXML
-    private Pane cloudPane;
+    private Pane cloudPane, floatPane;
 
     @FXML
-    private Pane floatPane;
+    private AnchorPane gamePane;
 
     @FXML
     private StackPane hero;
 
     @FXML
     private Button pause_button;
+
+    @FXML
+    private Button move_hero_button;
 
     @FXML
     protected void clicked_pause(ActionEvent event) throws IOException {
@@ -40,6 +44,7 @@ public class gameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //TODO: Cloud pane rotation is a problem. Needed to fix it later
         TranslateTransition translate1 = new TranslateTransition();
         translate1.setNode(cloudPane);
         translate1.setDuration(Duration.millis(100000));
@@ -55,13 +60,15 @@ public class gameController implements Initializable {
         translate2.setByY(floatPane.getLayoutY() + 10);
         translate2.play();
 
-        TranslateTransition translate3 = new TranslateTransition();
-        translate3.setNode(hero);
-        translate3.setDuration(Duration.millis(500));
-        translate3.setCycleCount(TranslateTransition.INDEFINITE);
-        translate3.setAutoReverse(true);
-        translate3.setByY(-75);
-        translate3.play();
+        Hero h = new Hero(hero,hero.getLayoutX(), hero.getLayoutY());
+        h.jump();
+    }
+
+    public void move_hero(ActionEvent event){
+        System.out.println("hero moved");
+        cloudPane.setLayoutX(cloudPane.getLayoutX() - 25);
+        floatPane.setLayoutX(floatPane.getLayoutX() - 25);
+        gamePane.setLayoutX(gamePane.getLayoutX() - 25);
 
     }
 }
