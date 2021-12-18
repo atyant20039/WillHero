@@ -12,10 +12,7 @@ import static java.lang.System.exit;
 
 public class main_menuController {
     @FXML
-    private Button load_game_button;
-
-    @FXML
-    private Button play_game_button, exit_game_button;
+    private Button load_game_button, play_game_button, exit_game_button;
 
     @FXML
     protected void clicked_load_game_button(ActionEvent event) throws IOException {

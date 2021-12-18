@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="savebg" stylesheets="@design.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="savebg" stylesheets="@design.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willhero.load_saved_game_Controller">
     <children>
         <HBox alignment="CENTER" disable="true" prefHeight="55.0" prefWidth="709.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -67,7 +67,7 @@
                 </Button>
             </children>
         </VBox>
-      <Button focusTraversable="false" layoutX="934.0" layoutY="561.0" mnemonicParsing="false" stylesheets="@design.css" text="Back" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="25.0">
+      <Button fx:id="back_button" focusTraversable="false" layoutX="934.0" layoutY="561.0" mnemonicParsing="false" onAction="#clicked_back" stylesheets="@design.css" text="Back" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="25.0">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
