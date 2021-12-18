@@ -9,8 +9,5 @@
         <module name="WillHero" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="WillHero" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>

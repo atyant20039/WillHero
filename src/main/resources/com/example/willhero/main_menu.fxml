@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="680.0" styleClass="mainbg" stylesheets="@design.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="mainbg" stylesheets="@design.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willhero.main_menuController">
    <children>
       <HBox alignment="CENTER" layoutX="54.0" layoutY="282.0" prefHeight="141.0" prefWidth="571.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="54.0" AnchorPane.rightAnchor="55.0">
          <children>
-            <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="143.0" prefWidth="148.0" style="-fx-background-color: transparent;" text="Load Game" textAlignment="CENTER" textFill="black" wrapText="true" HBox.hgrow="ALWAYS">
+            <Button fx:id="load_game_button" contentDisplay="TOP" mnemonicParsing="false" onAction="#clicked_load_game_button" prefHeight="143.0" prefWidth="148.0" style="-fx-background-color: transparent;" text="Load Game" textAlignment="CENTER" textFill="black" wrapText="true" HBox.hgrow="ALWAYS">
                <graphic>
                   <ImageView fitHeight="53.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -25,7 +25,7 @@
                </font>
             </Button>
             <Pane prefHeight="141.0" prefWidth="77.0" HBox.hgrow="ALWAYS" />
-            <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="141.0" prefWidth="124.0" style="-fx-background-color: transparent; -fx-text-fill: #4974e5;" text="Play" textAlignment="CENTER" textFill="#4974e5" HBox.hgrow="ALWAYS">
+            <Button fx:id="play_game_button" contentDisplay="TOP" mnemonicParsing="false" onAction="#clicked_play_game_button" prefHeight="141.0" prefWidth="124.0" style="-fx-background-color: transparent; -fx-text-fill: #4974e5;" text="Play" textAlignment="CENTER" textFill="#4974e5" HBox.hgrow="ALWAYS">
                <graphic>
                   <ImageView fitHeight="69.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -38,7 +38,7 @@
                </font>
             </Button>
             <Pane prefHeight="141.0" prefWidth="86.0" HBox.hgrow="ALWAYS" />
-            <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="146.0" prefWidth="114.0" style="-fx-background-color: transparent;" text="Exit" textAlignment="CENTER" textFill="black" HBox.hgrow="ALWAYS">
+            <Button fx:id="exit_game_button" contentDisplay="TOP" mnemonicParsing="false" onAction="#clicked_exit_game_button" prefHeight="146.0" prefWidth="114.0" style="-fx-background-color: transparent;" text="Exit" textAlignment="CENTER" textFill="black" HBox.hgrow="ALWAYS">
                <graphic>
                   <ImageView fitHeight="53.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>

@@ -2,8 +2,11 @@ package com.example.willhero;
 
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -12,6 +15,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,6 +28,15 @@ public class gameController implements Initializable {
 
     @FXML
     private StackPane hero;
+
+    @FXML
+    private Button pause_button;
+
+    @FXML
+    protected void clicked_pause(ActionEvent event) throws IOException {
+        System.out.println("pause clicked");
+        pause_button.getScene().setRoot(FXMLLoader.load(getClass().getResource("pause-view.fxml")));
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
