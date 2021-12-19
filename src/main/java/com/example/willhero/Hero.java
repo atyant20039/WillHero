@@ -1,6 +1,7 @@
 package com.example.willhero;
 
 import javafx.animation.TranslateTransition;
+import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
@@ -12,13 +13,18 @@ public class Hero extends GameObject{
     private User myUser;
     private String myHelmet;
     private int myCoins = 0, lives = 1;
-    private StackPane fxid;
-    private double x,y;
+//    private Object fxid;
+//    private double x,y;
 
-    Hero(StackPane fxid, double x, double y){
-        this.fxid = fxid;
-        this.x = x;
-        this.y = y;
+    Hero(Object fxid, double x, double y){
+        super(fxid, x,y);
+//        this.x=x; this.y = y;
+//        this.fxid = fxid;
+    }
+
+    @Override
+    public void collision(GameObject o1, GameObject o2) {
+
     }
 
     public User getUser() {
@@ -27,7 +33,7 @@ public class Hero extends GameObject{
 
     public void jump(){
         TranslateTransition translate3 = new TranslateTransition();
-        translate3.setNode(fxid);
+        translate3.setNode((Node) fxid);
         translate3.setDuration(Duration.millis(500));
         translate3.setCycleCount(TranslateTransition.INDEFINITE);
         translate3.setAutoReverse(true);
@@ -47,11 +53,12 @@ public class Hero extends GameObject{
 
     }
 
-    public void changeWeapon(){
+    public void changeWeapon(int index){
 
     }
 
     public boolean revive(){
+        // TODO : code to check if reviving is possible or not
         return true;
     }
 
