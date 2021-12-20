@@ -39,7 +39,7 @@ public class gameController implements Initializable {
     @FXML
     protected void clicked_pause(ActionEvent event) throws IOException {
         System.out.println("pause clicked");
-        pause_button.getScene().setRoot(FXMLLoader.load(getClass().getResource("pause-view.fxml")));
+        pause_button.getScene().setRoot(FXMLLoader.load(getClass().getResource("pause_menu.fxml")));
     }
 
     @Override
@@ -66,9 +66,10 @@ public class gameController implements Initializable {
 
     public void move_hero(ActionEvent event){
         System.out.println("hero moved");
-        cloudPane.setLayoutX(cloudPane.getLayoutX() - 25);
-        floatPane.setLayoutX(floatPane.getLayoutX() - 25);
-        gamePane.setLayoutX(gamePane.getLayoutX() - 25);
+        cloudPane.setLayoutX(cloudPane.getLayoutX() - 50);
+        floatPane.setLayoutX(floatPane.getLayoutX() - 50);
+        gamePane.setLayoutX(gamePane.getLayoutX() - 50);
+        hero.setLayoutX(hero.getLayoutX() + 50);
 
     }
 }

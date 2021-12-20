@@ -20,6 +20,6 @@ public class pause_menu_Controller {
     @FXML
     protected void clicked_save_and_quit(ActionEvent event) throws IOException {
         System.out.println("save and quit");
-        save_and_quit.getScene().setRoot(FXMLLoader.load(getClass().getResource("save-view.fxml")));
+        save_and_quit.getScene().setRoot(FXMLLoader.load(getClass().getResource("save_game_menu.fxml")));
     }
 }

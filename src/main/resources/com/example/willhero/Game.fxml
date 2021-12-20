@@ -153,20 +153,20 @@
                   </StackPane>
                </children>
             </HBox>
+            <StackPane fx:id="hero" layoutX="300.0" prefHeight="55.0" prefWidth="43.0" styleClass="hero" stylesheets="@design.css" AnchorPane.bottomAnchor="213.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="34.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: transparent;" width="40.0" StackPane.alignment="BOTTOM_CENTER" />
+               </children>
+            </StackPane>
          </children>
       </AnchorPane>
-      <StackPane fx:id="hero" layoutX="300.0" prefHeight="55.0" prefWidth="43.0" styleClass="hero" stylesheets="@design.css" AnchorPane.bottomAnchor="213.0">
-         <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="34.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: transparent;" width="40.0" StackPane.alignment="BOTTOM_CENTER" />
-         </children>
-      </StackPane>
       <Button fx:id="move_hero_button" mnemonicParsing="false" onAction="#move_hero" prefHeight="600.0" prefWidth="1000.0" textAlignment="CENTER" textFill="TRANSPARENT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Button fx:id="pause_button" mnemonicParsing="false" onAction="#clicked_pause" prefHeight="47.0" prefWidth="55.0" stylesheets="@design.css" textAlignment="CENTER" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
          <graphic>
-            <ImageView fitHeight="64.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="64.0" fitWidth="41.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@icon_pause_white.png" />
                </image>
