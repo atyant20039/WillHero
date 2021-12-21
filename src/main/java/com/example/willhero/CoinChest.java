@@ -2,9 +2,9 @@ package com.example.willhero;
 
 public class CoinChest extends Chest{
     private int num_coins;
-    CoinChest(Object fxid, double x, double y)
+    CoinChest(double x, double y)
     {
-        super(fxid,x, y);
+        super(x, y);
     }
 
     @Override

@@ -12,23 +12,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="sky" stylesheets="@design.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willhero.gameController">
    <children>
-      <Pane fx:id="cloudPane" layoutX="1300.0" prefHeight="402.0" prefWidth="2877.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="cloudPane" layoutX="-1000.0" prefHeight="402.0" prefWidth="3000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="55.0" fitWidth="146.0" layoutX="498.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@cloud2.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="55.0" fitWidth="146.0" layoutX="51.0" layoutY="69.0" pickOnBounds="true">
-               <image>
-                  <Image url="@cloud1.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="55.0" fitWidth="146.0" layoutX="847.0" layoutY="97.0" pickOnBounds="true">
-               <image>
-                  <Image url="@cloud1.png" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="55.0" fitWidth="146.0" layoutX="1733.0" layoutY="83.0" pickOnBounds="true">
                <image>
                   <Image url="@cloud1.png" />
@@ -51,23 +36,8 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="floatPane" layoutY="11.0" opacity="0.75" prefHeight="402.0" prefWidth="3150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="floatPane" layoutX="-1000.0" layoutY="11.0" opacity="0.75" prefHeight="402.0" prefWidth="3000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="62.0" fitWidth="53.0" layoutX="126.0" layoutY="214.0" pickOnBounds="true">
-               <image>
-                  <Image url="@p5_float.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="55.0" fitWidth="53.0" layoutX="531.0" layoutY="245.0" pickOnBounds="true">
-               <image>
-                  <Image url="@p6_float.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="55.0" fitWidth="53.0" layoutX="835.0" layoutY="213.0" pickOnBounds="true">
-               <image>
-                  <Image url="@p7_float.png" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="55.0" fitWidth="53.0" layoutX="1130.0" layoutY="241.0" pickOnBounds="true">
                <image>
                   <Image url="@p8_float.png" />
@@ -100,7 +70,7 @@
             </ImageView>
          </children>
       </Pane>
-      <AnchorPane fx:id="gamePane" prefHeight="600.0" prefWidth="3000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="gamePane" layoutX="-1000.0" prefHeight="600.0" prefWidth="3000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="CENTER" layoutX="175.0" layoutY="386.0" AnchorPane.bottomAnchor="14.0">
                <children>
@@ -153,7 +123,7 @@
                   </StackPane>
                </children>
             </HBox>
-            <StackPane fx:id="hero" layoutX="300.0" prefHeight="55.0" prefWidth="43.0" styleClass="hero" stylesheets="@design.css" AnchorPane.bottomAnchor="213.0">
+            <StackPane fx:id="hero" layoutX="1300.0" prefHeight="55.0" prefWidth="43.0" styleClass="hero" stylesheets="@design.css" AnchorPane.bottomAnchor="213.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="34.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: transparent;" width="40.0" StackPane.alignment="BOTTOM_CENTER" />
                </children>

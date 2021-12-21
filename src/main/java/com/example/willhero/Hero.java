@@ -1,5 +1,8 @@
 package com.example.willhero;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
@@ -13,13 +16,13 @@ public class Hero extends GameObject{
     private User myUser;
     private String myHelmet;
     private int myCoins = 0, lives = 1;
+    private Timeline gravity;
 //    private Object fxid;
 //    private double x,y;
 
-    Hero(Object fxid, double x, double y){
-        super(/*fxid, */x,y);
-//        this.x=x; this.y = y;
-//        this.fxid = fxid;
+    Hero(double x, double y){
+        super(x,y);
+
     }
 
     @Override
@@ -39,6 +42,14 @@ public class Hero extends GameObject{
 //        translate3.setAutoReverse(true);
 //        translate3.setByY(-75);
 //        translate3.play();
+    }
+
+    public void runGravity(){
+//        if (gravity == null){
+//            gravity = new Timeline();
+//            gravity.setCycleCount(Animation.INDEFINITE);
+//            KeyFrame g = new KeyFrame
+//        } else gravity.play();
     }
 
     public void forward(){

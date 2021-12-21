@@ -1,8 +1,8 @@
 package com.example.willhero;
 
 public abstract class Weapon extends GameObject{
-    Weapon(Object fxid, double x, double y){
-        super(/*fxid, */x, y);
+    Weapon(double x, double y){
+        super(x, y);
     }
 
     @Override

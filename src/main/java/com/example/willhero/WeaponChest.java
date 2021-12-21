@@ -3,9 +3,9 @@ package com.example.willhero;
 public class WeaponChest extends Chest{
     private Weapon give_weapon;
 
-    WeaponChest(Object fxid, double x, double y)
+    WeaponChest(double x, double y)
     {
-        super(fxid, x, y);
+        super(x, y);
     }
 
     @Override

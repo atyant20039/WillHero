@@ -1,9 +1,9 @@
 package com.example.willhero;
 
 public class Windmill extends Obstacle{
-    Windmill(Object fxid, double x, double y)
+    Windmill(double x, double y)
     {
-        super(fxid, x, y);
+        super(x, y);
     }
 
     @Override

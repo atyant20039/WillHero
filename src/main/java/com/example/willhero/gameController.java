@@ -20,8 +20,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static java.lang.Thread.sleep;
-
 public class gameController implements Initializable {
     @FXML
     private Pane cloudPane, floatPane;
@@ -46,6 +44,8 @@ public class gameController implements Initializable {
         pause_button.getScene().setRoot(FXMLLoader.load(getClass().getResource("pause_menu.fxml")));
     }
 
+    private Hero h;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //TODO: Cloud pane rotation is a problem. Needed to fix it later
@@ -64,22 +64,23 @@ public class gameController implements Initializable {
         translate2.setByY(floatPane.getLayoutY() + 10);
         translate2.play();
 
-        Hero h = new Hero(hero,hero.getLayoutX(), hero.getLayoutY());
+        h = new Hero(hero.getLayoutX(), hero.getLayoutY());
         h.jump();
     }
 
-    public void move_hero(ActionEvent event) throws InterruptedException {
+    public void move_hero(ActionEvent event) {
         System.out.println("hero moved");
         cloudPane.setLayoutX(cloudPane.getLayoutX() - 50);
         floatPane.setLayoutX(floatPane.getLayoutX() - 50);
         gamePane.setLayoutX(gamePane.getLayoutX() - 50);
         hero.setLayoutX(hero.getLayoutX() + 50);
 
-        generateObject(1);
+//        generateObject(1);
+        generateObject(2);
     }
 
-    public void generateObject(int objno) throws InterruptedException {
-        StackPane obj = factory.createObject(1,400 + (float)hero.getLayoutX(),0);
+    public void generateObject(int objno) {
+        StackPane obj = factory.createObject(objno,400 + hero.getLayoutX(),314);
         gamePane.getChildren().add(obj);
         System.out.println(obj.getId());
     }
