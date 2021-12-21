@@ -80,7 +80,7 @@ public class gameController implements Initializable {
 
 //        generateObject(1);
 //        generateGameObj(2);
-        generateBkgdObj(1);
+        generateBkgdObj(2);
     }
 
     private void generateGameObj(int objno) {

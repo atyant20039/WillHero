@@ -27,7 +27,7 @@ public class GameObjectFactory {
                 obj = new Cloud().generateCloud();
                 break;
             case 2:
-
+                obj = new FloatingLand().generateFlaotLand();
                 break;
             default:
                 break;
