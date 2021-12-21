@@ -2,7 +2,7 @@ package com.example.willhero;
 
 public class Platform extends GameObject{
     Platform(Object fxid, double x, double y){
-        super(fxid, x, y);
+        super(/*fxid, */x, y);
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.example.willhero;
 
 public class Boss extends Orcs{
     Boss(Object fxid, double x, double y, int health, int reward){
-        super(fxid, x, y, health, reward);
+        super(/*fxid, */x, y, health, reward);
     }
 
     public void attack(){

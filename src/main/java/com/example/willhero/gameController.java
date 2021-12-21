@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static java.lang.Thread.sleep;
+
 public class gameController implements Initializable {
     @FXML
     private Pane cloudPane, floatPane;
@@ -35,6 +37,8 @@ public class gameController implements Initializable {
 
     @FXML
     private Button move_hero_button;
+
+    private GameObjectFactory factory = new GameObjectFactory();
 
     @FXML
     protected void clicked_pause(ActionEvent event) throws IOException {
@@ -64,12 +68,19 @@ public class gameController implements Initializable {
         h.jump();
     }
 
-    public void move_hero(ActionEvent event){
+    public void move_hero(ActionEvent event) throws InterruptedException {
         System.out.println("hero moved");
         cloudPane.setLayoutX(cloudPane.getLayoutX() - 50);
         floatPane.setLayoutX(floatPane.getLayoutX() - 50);
         gamePane.setLayoutX(gamePane.getLayoutX() - 50);
         hero.setLayoutX(hero.getLayoutX() + 50);
 
+        generateObject(1);
+    }
+
+    public void generateObject(int objno) throws InterruptedException {
+        StackPane obj = factory.createObject(1,400 + (float)hero.getLayoutX(),0);
+        gamePane.getChildren().add(obj);
+        System.out.println(obj.getId());
     }
 }

@@ -23,6 +23,16 @@
     -fx-background-size: 100% 100%;
 }
 
+.greenOrc {
+    -fx-background-image:url('greenOrc.jpg');
+    -fx-background-size: 100% 100%;
+}
+
+.redOrc {
+    -fx-background-image:url('redOrc.jpg');
+    -fx-background-size: 100% 100%;
+}
+
 .fg1 {
     -fx-background-image:url('fg1.png');
     -fx-background-size: 100% 100%;
