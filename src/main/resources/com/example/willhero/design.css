@@ -33,16 +33,6 @@
     -fx-background-size: 100% 100%;
 }
 
-.fg1 {
-    -fx-background-image:url('fg1.png');
-    -fx-background-size: 100% 100%;
-}
-
-.fg2 {
-    -fx-background-image:url('fg2.png');
-    -fx-background-size: 100% 100%;
-}
-
 .platform1 {
     -fx-background-image:url('p1.png');
     -fx-background-size: 100% 100%;
