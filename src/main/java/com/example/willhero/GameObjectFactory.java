@@ -5,8 +5,8 @@ import javafx.scene.layout.StackPane;
 
 public class GameObjectFactory {
 
-    public StackPane createObject(int objno, double x, double y){
-        StackPane obj = null;
+    public GameObject createObject(int objno, double x, double y){
+        GameObject obj = null;
         switch (objno){
             case 1: //Orc
                 obj = new Orcs(x,y,100,10).generateOrc();

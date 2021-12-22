@@ -1,7 +1,11 @@
 package com.example.willhero;
 
+import javafx.scene.layout.StackPane;
+
 public abstract class GameObject {
-    protected double x_coordinate, y_coordinate;
+    private double x_coordinate, y_coordinate;
+    private StackPane myPane = null;
+    private String myId = null;
 
     GameObject(double x, double y){
         this.x_coordinate = x;
@@ -13,9 +17,17 @@ public abstract class GameObject {
         this.y_coordinate = y;
     }
 
-    public double[] get_coord(){
-//        double[] coord = {this.x_coordinate , this.y_coordinate};
-        return new double[]{this.x_coordinate, this.y_coordinate};
+//    public double[] get_coord(){
+////        double[] coord = {this.x_coordinate , this.y_coordinate};
+//        return new double[]{this.x_coordinate, this.y_coordinate};
+//    }
+
+    public double get_X(){
+        return this.x_coordinate;
+    }
+
+    public double get_Y(){
+        return this.y_coordinate;
     }
 
     public boolean if_collision(GameObject o1, GameObject o2){
@@ -25,4 +37,20 @@ public abstract class GameObject {
     }
 
     public abstract void collision(GameObject o1, GameObject o2);
+
+    public StackPane getPane(){
+        return this.myPane;
+    }
+
+    public void setPane(StackPane pane){
+        this.myPane = pane;
+    }
+
+    public String getId(){
+        return this.myId;
+    }
+
+    public void setId(String id){
+        this.myId = id;
+    }
 }

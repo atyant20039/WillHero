@@ -18,19 +18,22 @@ public class Boss extends Orcs{
 
     }
 
-    public StackPane generateBoss(){
+    public GameObject generateBoss(){
         StackPane Borc = new StackPane();
         Borc.setPrefWidth(100.0);
         Borc.setPrefHeight(100.0);
-        Borc.setLayoutX(this.x_coordinate);
-        Borc.setLayoutY(this.y_coordinate);
+        Borc.setLayoutX(this.get_X());
+        Borc.setLayoutY(this.get_Y());
         Rectangle Borc_rec = new Rectangle(100,100);
         Borc.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
         Borc_rec.setStyle("-fx-fill:transparent");
-        Borc.setId((String)("Boss"));
+        this.setId("Boss");
+        Borc.setId(this.getId());
         // TODO: Boss Orc Pic Needs to be Uploaded.
         Borc.getStyleClass().add("redOrc");
         Borc.getChildren().add(Borc_rec);
-        return Borc;
+
+        this.setPane(Borc);
+        return this;
     }
 }

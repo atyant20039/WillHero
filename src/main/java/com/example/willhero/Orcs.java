@@ -7,7 +7,6 @@ import java.util.Random;
 
 public class Orcs extends GameObject{
     protected int health, coin_reward;
-    protected String orcId;
     private static int count = 0;
     Random rand = new Random();
 
@@ -19,29 +18,30 @@ public class Orcs extends GameObject{
         super(x, y);
         this.health = health;
         this.coin_reward = coin_reward;
-        this.orcId = null;
     }
 
-    public StackPane generateOrc(){
+    public GameObject generateOrc(){
         int no = rand.nextInt(2);
-        StackPane orc = new StackPane();
-        orc.setPrefWidth(50.0);
-        orc.setPrefHeight(50.0);
-        orc.setLayoutX(this.x_coordinate);
-        orc.setLayoutY(this.y_coordinate);
+        StackPane myOrc = new StackPane();
+        myOrc.setPrefWidth(50.0);
+        myOrc.setPrefHeight(50.0);
+        myOrc.setLayoutX(this.get_X());
+        myOrc.setLayoutY(this.get_Y());
         Rectangle detector = new Rectangle(50,50);
-        orc.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
+        myOrc.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
         detector.setStyle("-fx-fill:transparent");
-        this.orcId = "orc" + count;
-        orc.setId(this.orcId);
+        this.setId("orc" + count);
+        myOrc.setId(this.getId());
         if (no == 1){
-            orc.getStyleClass().add("greenOrc");
-//            orc.setStyle("-fx-background-image:url('greenOrc.jpg')");
+            myOrc.getStyleClass().add("greenOrc");
+//            myOrc.setStyle("-fx-background-image:url('greenOrc.jpg')");
         } else {
-            orc.getStyleClass().add("redOrc");
+            myOrc.getStyleClass().add("redOrc");
         }
-        orc.getChildren().add(detector);
-        return orc;
+        myOrc.getChildren().add(detector);
+
+        this.setPane(myOrc);
+        return this;
     }
 
     @Override
@@ -56,9 +56,4 @@ public class Orcs extends GameObject{
     public void die(){
 
     }
-
-    public String getOrcId(){
-        return this.orcId;
-    }
-
 }

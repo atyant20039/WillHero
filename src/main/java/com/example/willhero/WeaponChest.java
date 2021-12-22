@@ -21,18 +21,21 @@ public class WeaponChest extends Chest{
 
     }
 
-    public StackPane generateWchest(){
+    public GameObject generateWchest(){
         StackPane Wchest = new StackPane();
         Wchest.setPrefWidth(100.0);
         Wchest.setPrefHeight(100.0);
-        Wchest.setLayoutX(this.x_coordinate);
-        Wchest.setLayoutY(this.y_coordinate);
+        Wchest.setLayoutX(this.get_X());
+        Wchest.setLayoutY(this.get_Y());
         Rectangle W_rec = new Rectangle(100,100);
         Wchest.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
         W_rec.setStyle("-fx-fill:transparent");
-        Wchest.setId((String)("wchest" + count));
+        this.setId("wchest" + count);
+        Wchest.setId(this.getId());
         Wchest.getStyleClass().add("Wchest");
         Wchest.getChildren().add(W_rec);
-        return Wchest;
+
+        this.setPane(Wchest);
+        return this;
     }
 }

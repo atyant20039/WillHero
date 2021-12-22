@@ -6,7 +6,6 @@ import javafx.scene.shape.Rectangle;
 import java.util.Random;
 
 public class Platform extends GameObject{
-    private String platformId;
     private static int count = 0;
     Random rand = new Random();
 
@@ -15,49 +14,45 @@ public class Platform extends GameObject{
     }
     Platform(double x, double y){
         super(x, y);
-        this.platformId = null;
     }
 
-    public StackPane generatePlatform(){
+    public GameObject generatePlatform(){
         int no = rand.nextInt(4);
-        StackPane platform = new StackPane();
-        platform.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
+        StackPane myplatform = new StackPane();
+        myplatform.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
         switch (no){
             case 0:
-                platform.getStyleClass().add("platform1");
+                myplatform.getStyleClass().add("platform1");
                 break;
             case 1:
-                platform.getStyleClass().add("platform2");
+                myplatform.getStyleClass().add("platform2");
                 break;
             case 2:
-                platform.getStyleClass().add("platform3");
+                myplatform.getStyleClass().add("platform3");
                 break;
             case 3:
-                platform.getStyleClass().add("platform4");
+                myplatform.getStyleClass().add("platform4");
                 break;
             default:
-                platform.getStyleClass().add("platform1");
+                myplatform.getStyleClass().add("platform1");
         }
 
-        platform.setPrefHeight(150);
-        platform.setPrefWidth(200);
-        platform.setLayoutX(this.x_coordinate);
-        platform.setLayoutY(this.y_coordinate);
+        myplatform.setPrefHeight(150);
+        myplatform.setPrefWidth(200);
+        myplatform.setLayoutX(this.get_X());
+        myplatform.setLayoutY(this.get_Y());
         Rectangle detector = new Rectangle(200,150);
         detector.setStyle("-fx-fill:transparent");
-        this.platformId = "plat" + count;
-        platform.setId(this.platformId);
-        platform.getChildren().add(detector);
-        return platform;
+        this.setId("plat" + count);
+        myplatform.setId(this.getId());
+        myplatform.getChildren().add(detector);
+
+        this.setPane(myplatform);
+        return this;
     }
 
     @Override
     public void collision(GameObject o1, GameObject o2) {
 
     }
-
-    public String getPlatformId(){
-        return this.platformId;
-    }
-
 }

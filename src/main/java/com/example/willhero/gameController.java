@@ -4,12 +4,14 @@ package com.example.willhero;
     Move hero
     Kill instances
     Hero Orc collision overlapping
+    Move temp pre defined platform
+    resize generated platforms (generated platforms are very small)
+    generated platforms not working with changing window sizes
 */
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,10 +26,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class gameController implements Initializable {
     @FXML
@@ -37,7 +36,7 @@ public class gameController implements Initializable {
     private AnchorPane gamePane;
 
     @FXML
-    private StackPane hero;
+    private StackPane hero, temp_plat1, temp_plat2, temp_plat3, temp_plat4;
 
     @FXML
     private Button pause_button;
@@ -49,11 +48,12 @@ public class gameController implements Initializable {
     private Text score_text;
 
     private GameObjectFactory factory = new GameObjectFactory();
-    private ArrayList<StackPane> GameObjList = new ArrayList<>();
+    private ArrayList<GameObject> GameObjList = new ArrayList<>();
     private ArrayList<ImageView> BkgdObjList = new ArrayList<>();
-    Timeline cloudTimer, floatLandTimer;
+    Timeline cloudTimer, floatLandTimer, platTimer;
     private Hero h;
     private int userScore = 0;
+    private Random rand = new Random();
 
     @FXML
     protected void clicked_pause(ActionEvent event) throws IOException {
@@ -88,19 +88,51 @@ public class gameController implements Initializable {
 
         floatLandTimer = new Timeline(new KeyFrame(Duration.millis(3000), e -> {
             boolean genFloatPlat = true;
-            for (ImageView i : this.BkgdObjList){
+            for (ImageView i : this.BkgdObjList){   //BUG
                 if (floatPane.equals(i.getParent()) && i.getLayoutX() > 2200){
                     genFloatPlat = false;
                     break;
                 }
+                if (i.getLayoutX() < -500){
+                    this.killBkgdObj(i);
+                }
             }
             if (genFloatPlat) this.generateBkgdObj(2);
+
+//            System.out.println("------------------------------------------------------------");
+//            System.out.println("Game Object List : " + GameObjList.size());
+////            System.out.println(GameObjList);
+//            System.out.println("Bkgd List : " + BkgdObjList.size());
+////            System.out.println(BkgdObjList);
+//            System.out.println("Cloud Pane " + cloudPane.getChildren().size());
+////            System.out.println(cloudPane.getChildren());
+//            System.out.println("Float Pane " + floatPane.getChildren().size());
+////            System.out.println(floatPane.getChildren());
+//            System.out.println("Game Pane " + gamePane.getChildren().size());
+////            System.out.println(gamePane.getChildren());
         }));
         floatLandTimer.setCycleCount(TranslateTransition.INDEFINITE);
         floatLandTimer.play();
 
+        platTimer = new Timeline(new KeyFrame(Duration.millis(1000), e -> {
+            boolean genPlat = true;
+            for (GameObject o : this.GameObjList){
+                if (o.getClass().equals(Platform.class) && o.getPane().getLayoutX() > rand.nextInt(2200, 2300)){
+                    genPlat = false;
+                    break;
+                }
+                if (o.getPane().getLayoutX() < -500){   //Possible BUG
+                    this.killGameObj(o);
+                }
+            }
+            if (genPlat) this.generateGameObj(5,400);
+        }));
+        platTimer.setCycleCount(TranslateTransition.INDEFINITE);
+        platTimer.play();
+
         generateBkgdObj(1);
         generateBkgdObj(2);
+        generateGameObj(5, 400);
         h = new Hero(hero.getLayoutX(), hero.getLayoutY());
         h.jump();
     }
@@ -110,8 +142,8 @@ public class gameController implements Initializable {
 //        h.getUser().setScore(h.getUser().getScore() + 1);
         this.userScore++;
         score_text.setText("" + this.userScore);
-        for (StackPane s: GameObjList){
-            s.setLayoutX(s.getLayoutX() - 50);
+        for (GameObject s: GameObjList){
+            s.getPane().setLayoutX(s.getPane().getLayoutX() - 50);
         }
 
         for (ImageView i: BkgdObjList){
@@ -125,11 +157,11 @@ public class gameController implements Initializable {
         //        System.runFinalization();
     }
 
-    private void generateGameObj(int objno) {
-        StackPane obj = factory.createObject(objno,400 + hero.getLayoutX(),314);
+    private void generateGameObj(int objno, double y) {
+        GameObject obj = factory.createObject(objno,2700,y);
         GameObjList.add(obj);
-        gamePane.getChildren().add(obj);
-        System.out.println(obj.getId());
+        gamePane.getChildren().add(obj.getPane());
+//        System.out.println(obj.getId());
 //        obj = null;   ERROR
     }
 
@@ -156,9 +188,9 @@ public class gameController implements Initializable {
         translate1.setOnFinished(actionEvent -> {killBkgdObj(cloud);});
     }
 
-    private void killGameObj(StackPane obj){
+    private void killGameObj(GameObject obj){ //Possible BUG
         // Deleting node of obj from scene
-        gamePane.getChildren().remove(obj);
+        gamePane.getChildren().remove(obj.getPane());
         // Removing from ArrayList
         GameObjList.remove(obj);
         // Setting Reference to null

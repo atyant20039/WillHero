@@ -21,18 +21,21 @@ public class CoinChest extends Chest{
 
     }
 
-    public StackPane generateCchest(){
+    public GameObject generateCchest(){
         StackPane Cchest = new StackPane();
         Cchest.setPrefWidth(100.0);
         Cchest.setPrefHeight(100.0);
-        Cchest.setLayoutX(this.x_coordinate);
-        Cchest.setLayoutY(this.y_coordinate);
+        Cchest.setLayoutX(this.get_X());
+        Cchest.setLayoutY(this.get_Y());
         Rectangle C_rec = new Rectangle(100,100);
         Cchest.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
         C_rec.setStyle("-fx-fill:transparent");
-        Cchest.setId((String)("cchest" + count));
+        this.setId("cchest" + count);
+        Cchest.setId(this.getId());
         Cchest.getStyleClass().add("Cchest");
         Cchest.getChildren().add(C_rec);
-        return Cchest;
+
+        this.setPane(Cchest);
+        return this;
     }
 }
