@@ -1,12 +1,16 @@
 package com.example.willhero;
 
 /*TODO:
+    Cloud Generator generating clouds at regular time interval
     Move hero
     Kill instances
     Hero Orc collision overlapping
 */
 import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +26,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class gameController implements Initializable {
     @FXML
@@ -42,14 +48,16 @@ public class gameController implements Initializable {
     private GameObjectFactory factory = new GameObjectFactory();
     private ArrayList<StackPane> GameObjList = new ArrayList<>();
     private ArrayList<ImageView> BkgdObjList = new ArrayList<>();
+    Timeline cloudTimer = new Timeline(new KeyFrame(Duration.millis(1500), e -> generateBkgdObj(1)));
+    private Hero h;
 
     @FXML
     protected void clicked_pause(ActionEvent event) throws IOException {
+        //TODO: cloudTimer is paused here. It needed to be resumed when the game is resumed/deserialized
         System.out.println("pause clicked");
+        cloudTimer.pause();
         pause_button.getScene().setRoot(FXMLLoader.load(getClass().getResource("pause_menu.fxml")));
     }
-
-    private Hero h;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -60,6 +68,9 @@ public class gameController implements Initializable {
         translate2.setAutoReverse(true);
         translate2.setByY(floatPane.getLayoutY() + 10);
         translate2.play();
+
+        cloudTimer.setCycleCount(TranslateTransition.INDEFINITE);
+        cloudTimer.play();
 
         h = new Hero(hero.getLayoutX(), hero.getLayoutY());
         h.jump();
@@ -77,20 +88,9 @@ public class gameController implements Initializable {
                 move_cloud(i);
             }
         }
-//        cloudPane.setLayoutX(cloudPane.getLayoutX() - 50);
-//        floatPane.setLayoutX(floatPane.getLayoutX() - 50);
-//        gamePane.setLayoutX(gamePane.getLayoutX() - 50);
-//        hero.setLayoutX(hero.getLayoutX() + 50);
 
-//        generateObject(1);
-//        generateGameObj(2);
-//        for(int i = 0; i < 1000; i++){
-            generateBkgdObj(1);
-//        }
-//        System.gc();
-//        System.runFinalization();
-//        System.out.println(this.BkgdObjList.size());
-//        System.out.println(this.cloudPane.getChildren());
+        //        System.gc();
+        //        System.runFinalization();
     }
 
     private void generateGameObj(int objno) {
@@ -105,6 +105,7 @@ public class gameController implements Initializable {
         ImageView obj = factory.create_bkgd_obj(objno);
         BkgdObjList.add(obj);
         if (objno == 1){
+            System.out.println("cloud created");
             cloudPane.getChildren().add(obj);
             move_cloud(obj);
         }
@@ -115,7 +116,7 @@ public class gameController implements Initializable {
     private void move_cloud(ImageView cloud) {
         TranslateTransition translate1 = new TranslateTransition();
         translate1.setNode(cloud);
-        translate1.setDuration(Duration.millis(100000));
+        translate1.setDuration(Duration.millis(1000000));
         translate1.setCycleCount(1);
         translate1.setInterpolator(Interpolator.LINEAR);
         translate1.setToX((1000 + cloud.getLayoutX()) * -1);
