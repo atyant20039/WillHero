@@ -75,11 +75,11 @@ public class gameController implements Initializable {
         gamePane.setLayoutX(gamePane.getLayoutX() - 50);
         hero.setLayoutX(hero.getLayoutX() + 50);
 
-        generateObject(1);
+        generateObject(4);
     }
 
     public void generateObject(int objno) throws InterruptedException {
-        StackPane obj = factory.createObject(1,400 + (float)hero.getLayoutX(),0);
+        StackPane obj = factory.createObject(objno,400 + (float)hero.getLayoutX(),0);
         gamePane.getChildren().add(obj);
         System.out.println(obj.getId());
     }

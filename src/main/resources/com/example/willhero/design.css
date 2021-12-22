@@ -33,6 +33,16 @@
     -fx-background-size: 100% 100%;
 }
 
+.Wchest {
+    -fx-background-image:url('WeaponChest(C).png');
+    -fx-background-size: 100% 100%;
+}
+
+.Cchest {
+    -fx-background-image:url('CoinChest(F).png');
+    -fx-background-size: 100% 100%;
+}
+
 .fg1 {
     -fx-background-image:url('fg1.png');
     -fx-background-size: 100% 100%;
