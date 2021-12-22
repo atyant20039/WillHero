@@ -4,11 +4,12 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="loadingPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="680.0" styleClass="loadbg" stylesheets="@design.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willhero.loadingController">
+<AnchorPane fx:id="loadingPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="loadbg" stylesheets="@design.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willhero.loadingController">
    <children>
       <Text fill="WHITE" fontSmoothingType="LCD" layoutX="507.0" layoutY="47.0" stroke="#4974e5" strokeType="OUTSIDE" strokeWidth="4.0" text="Group 42" textAlignment="CENTER" AnchorPane.rightAnchor="14.97265625" AnchorPane.topAnchor="14.41015625">
          <font>
@@ -29,10 +30,19 @@
             </Text>
          </children>
       </VBox>
-      <Button fx:id="loadingButton" disable="true" mnemonicParsing="false" onAction="#click_to_start" prefHeight="402.0" prefWidth="680.0" text="Click to Start" textFill="WHITE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Button fx:id="loadingButton" disable="true" mnemonicParsing="false" onAction="#click_to_start" prefHeight="402.0" prefWidth="680.0" textFill="WHITE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font name="Arial Black" size="24.0" />
          </font>
       </Button>
+      <HBox alignment="CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Text fx:id="start_text" fill="WHITE" fontSmoothingType="LCD" stroke="#4974e5" strokeType="OUTSIDE" strokeWidth="4.0" text="Click to Start" textAlignment="CENTER" visible="false" wrappingWidth="235.55557250976562" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="36.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
