@@ -51,7 +51,7 @@ public class gameController implements Initializable {
     private GameObjectFactory factory = new GameObjectFactory();
     private ArrayList<StackPane> GameObjList = new ArrayList<>();
     private ArrayList<ImageView> BkgdObjList = new ArrayList<>();
-    Timeline cloudTimer;
+    Timeline cloudTimer, floatLandTimer;
     private Hero h;
     private int userScore = 0;
 
@@ -76,19 +76,31 @@ public class gameController implements Initializable {
         cloudTimer = new Timeline(new KeyFrame(Duration.millis(1000), e -> {
             boolean genCloud = true;
             for (ImageView i : this.BkgdObjList){
-                if (i.getLayoutX() + i.getTranslateX() > 2400){
+                if (cloudPane.equals(i.getParent()) && i.getLayoutX() + i.getTranslateX() > 2400){
                     genCloud = false;
                     break;
                 }
             }
-            if (genCloud){
-                this.generateBkgdObj(1);
-            }
+            if (genCloud) this.generateBkgdObj(1);
         }));
         cloudTimer.setCycleCount(TranslateTransition.INDEFINITE);
         cloudTimer.play();
 
+        floatLandTimer = new Timeline(new KeyFrame(Duration.millis(3000), e -> {
+            boolean genFloatPlat = true;
+            for (ImageView i : this.BkgdObjList){
+                if (floatPane.equals(i.getParent()) && i.getLayoutX() > 2200){
+                    genFloatPlat = false;
+                    break;
+                }
+            }
+            if (genFloatPlat) this.generateBkgdObj(2);
+        }));
+        floatLandTimer.setCycleCount(TranslateTransition.INDEFINITE);
+        floatLandTimer.play();
+
         generateBkgdObj(1);
+        generateBkgdObj(2);
         h = new Hero(hero.getLayoutX(), hero.getLayoutY());
         h.jump();
     }
