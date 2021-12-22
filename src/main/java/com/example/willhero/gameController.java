@@ -1,7 +1,6 @@
 package com.example.willhero;
 
 /*TODO:
-    Cloud Generator generating clouds at regular time interval
     Move hero
     Kill instances
     Hero Orc collision overlapping
@@ -20,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -45,11 +45,15 @@ public class gameController implements Initializable {
     @FXML
     private Button move_hero_button;
 
+    @FXML
+    private Text score_text;
+
     private GameObjectFactory factory = new GameObjectFactory();
     private ArrayList<StackPane> GameObjList = new ArrayList<>();
     private ArrayList<ImageView> BkgdObjList = new ArrayList<>();
-    Timeline cloudTimer = new Timeline(new KeyFrame(Duration.millis(1500), e -> generateBkgdObj(1)));
+    Timeline cloudTimer;
     private Hero h;
+    private int userScore = 0;
 
     @FXML
     protected void clicked_pause(ActionEvent event) throws IOException {
@@ -69,15 +73,31 @@ public class gameController implements Initializable {
         translate2.setByY(floatPane.getLayoutY() + 10);
         translate2.play();
 
+        cloudTimer = new Timeline(new KeyFrame(Duration.millis(1000), e -> {
+            boolean genCloud = true;
+            for (ImageView i : this.BkgdObjList){
+                if (i.getLayoutX() + i.getTranslateX() > 2400){
+                    genCloud = false;
+                    break;
+                }
+            }
+            if (genCloud){
+                this.generateBkgdObj(1);
+            }
+        }));
         cloudTimer.setCycleCount(TranslateTransition.INDEFINITE);
         cloudTimer.play();
 
+        generateBkgdObj(1);
         h = new Hero(hero.getLayoutX(), hero.getLayoutY());
         h.jump();
     }
 
     public void move_hero(ActionEvent event) {
         System.out.println("hero moved");
+//        h.getUser().setScore(h.getUser().getScore() + 1);
+        this.userScore++;
+        score_text.setText("" + this.userScore);
         for (StackPane s: GameObjList){
             s.setLayoutX(s.getLayoutX() - 50);
         }
@@ -116,7 +136,7 @@ public class gameController implements Initializable {
     private void move_cloud(ImageView cloud) {
         TranslateTransition translate1 = new TranslateTransition();
         translate1.setNode(cloud);
-        translate1.setDuration(Duration.millis(1000000));
+        translate1.setDuration(Duration.millis(Math.abs((1000 + cloud.getLayoutX())/0.03)));
         translate1.setCycleCount(1);
         translate1.setInterpolator(Interpolator.LINEAR);
         translate1.setToX((1000 + cloud.getLayoutX()) * -1);

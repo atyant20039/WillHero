@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class Hero extends GameObject{
     private ArrayList<Weapon> myWeapons = new ArrayList<>();
-    private Weapon myWeapon;
+    private Weapon myWeapon = null;
     private User myUser;
     private String myHelmet;
     private int myCoins = 0, lives = 1;
@@ -22,7 +22,7 @@ public class Hero extends GameObject{
 
     Hero(double x, double y){
         super(x,y);
-
+//        this.myUser = user;
     }
 
     @Override
