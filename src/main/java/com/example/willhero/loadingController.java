@@ -53,9 +53,11 @@ public class loadingController implements Initializable {
         rotate.setCycleCount(5);
         rotate.setByAngle(360);
         rotate.play();
-        loadingVbox.setVisible(false);
-        loadingButton.setDisable(false);
-        loadingButton.setVisible(true);
+        rotate.setOnFinished(actionEvent -> {
+            loadingVbox.setVisible(false);
+            loadingButton.setDisable(false);
+            loadingButton.setVisible(true);
+        });
     }
 
 
