@@ -1,8 +1,6 @@
 package com.example.willhero;
 
 /*TODO:
-    Cloud Generation
-    Floating land generation
     Move hero
     Kill instances
     Hero Orc collision overlapping
@@ -21,6 +19,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class gameController implements Initializable {
@@ -40,6 +39,8 @@ public class gameController implements Initializable {
     private Button move_hero_button;
 
     private GameObjectFactory factory = new GameObjectFactory();
+    private ArrayList<StackPane> GameObjList = new ArrayList<>();
+    private ArrayList<ImageView> BkgdObjList = new ArrayList<>();
 
     @FXML
     protected void clicked_pause(ActionEvent event) throws IOException {
@@ -73,6 +74,13 @@ public class gameController implements Initializable {
 
     public void move_hero(ActionEvent event) {
         System.out.println("hero moved");
+//        for (StackPane s: GameObjList){
+//
+//        }
+//
+//        for (ImageView i: BkgdObjList){
+//
+//        }
 //        cloudPane.setLayoutX(cloudPane.getLayoutX() - 50);
 //        floatPane.setLayoutX(floatPane.getLayoutX() - 50);
 //        gamePane.setLayoutX(gamePane.getLayoutX() - 50);
@@ -80,17 +88,19 @@ public class gameController implements Initializable {
 
 //        generateObject(1);
 //        generateGameObj(2);
-        generateBkgdObj(2);
+        generateBkgdObj(1);
     }
 
     private void generateGameObj(int objno) {
         StackPane obj = factory.createObject(objno,400 + hero.getLayoutX(),314);
+        GameObjList.add(obj);
         gamePane.getChildren().add(obj);
         System.out.println(obj.getId());
     }
 
     private void generateBkgdObj(int objno){
         ImageView obj = factory.create_bkgd_obj(objno);
+        BkgdObjList.add(obj);
         if (objno == 1){
             cloudPane.getChildren().add(obj);
             move_cloud(obj);
@@ -101,9 +111,9 @@ public class gameController implements Initializable {
     private void move_cloud(ImageView cloud) {
         TranslateTransition translate1 = new TranslateTransition();
         translate1.setNode(cloud);
-        translate1.setDuration(Duration.millis(100000));
+        translate1.setDuration(Duration.millis(1000));
         translate1.setCycleCount(1);
-        translate1.setByX(-2800);
+        translate1.setToX(-1 * cloud.getLayoutX());
         translate1.play();
     }
 }

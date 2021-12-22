@@ -12,7 +12,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="sky" stylesheets="@design.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willhero.gameController">
    <children>
-      <Pane fx:id="cloudPane" layoutX="-1000.0" prefHeight="402.0" prefWidth="3000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="cloudPane" prefHeight="402.0" prefWidth="3000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="55.0" fitWidth="146.0" layoutX="1733.0" layoutY="83.0" pickOnBounds="true">
                <image>
