@@ -5,6 +5,7 @@ package com.example.willhero;
     Kill instances
     Hero Orc collision overlapping
 */
+import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -52,14 +53,6 @@ public class gameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //TODO: Cloud pane rotation is a problem. Needed to fix it later
-//        TranslateTransition translate1 = new TranslateTransition();
-//        translate1.setNode(cloudPane);
-//        translate1.setDuration(Duration.millis(100000));
-//        translate1.setCycleCount(TranslateTransition.INDEFINITE);
-//        translate1.setByX((cloudPane.getLayoutX() + cloudPane.getPrefWidth()) * -1);
-//        translate1.play();
-//
         TranslateTransition translate2 = new TranslateTransition();
         translate2.setNode(floatPane);
         translate2.setDuration(Duration.millis(5000));
@@ -74,13 +67,16 @@ public class gameController implements Initializable {
 
     public void move_hero(ActionEvent event) {
         System.out.println("hero moved");
-//        for (StackPane s: GameObjList){
-//
-//        }
-//
-//        for (ImageView i: BkgdObjList){
-//
-//        }
+        for (StackPane s: GameObjList){
+            s.setLayoutX(s.getLayoutX() - 50);
+        }
+
+        for (ImageView i: BkgdObjList){
+            i.setLayoutX(i.getLayoutX() - 50);
+            if (i.getParent().equals(cloudPane)){
+                move_cloud(i);
+            }
+        }
 //        cloudPane.setLayoutX(cloudPane.getLayoutX() - 50);
 //        floatPane.setLayoutX(floatPane.getLayoutX() - 50);
 //        gamePane.setLayoutX(gamePane.getLayoutX() - 50);
@@ -88,7 +84,13 @@ public class gameController implements Initializable {
 
 //        generateObject(1);
 //        generateGameObj(2);
-        generateBkgdObj(1);
+//        for(int i = 0; i < 1000; i++){
+            generateBkgdObj(1);
+//        }
+//        System.gc();
+//        System.runFinalization();
+//        System.out.println(this.BkgdObjList.size());
+//        System.out.println(this.cloudPane.getChildren());
     }
 
     private void generateGameObj(int objno) {
@@ -96,6 +98,7 @@ public class gameController implements Initializable {
         GameObjList.add(obj);
         gamePane.getChildren().add(obj);
         System.out.println(obj.getId());
+//        obj = null;   ERROR
     }
 
     private void generateBkgdObj(int objno){
@@ -106,14 +109,36 @@ public class gameController implements Initializable {
             move_cloud(obj);
         }
         else floatPane.getChildren().add(obj);
+//        obj = null;   ERROR
     }
 
     private void move_cloud(ImageView cloud) {
         TranslateTransition translate1 = new TranslateTransition();
         translate1.setNode(cloud);
-        translate1.setDuration(Duration.millis(1000));
+        translate1.setDuration(Duration.millis(100000));
         translate1.setCycleCount(1);
-        translate1.setToX(-1 * cloud.getLayoutX());
+        translate1.setInterpolator(Interpolator.LINEAR);
+        translate1.setToX((1000 + cloud.getLayoutX()) * -1);
         translate1.play();
+        translate1.setOnFinished(actionEvent -> {killBkgdObj(cloud);});
+    }
+
+    private void killGameObj(StackPane obj){
+        // Deleting node of obj from scene
+        gamePane.getChildren().remove(obj);
+        // Removing from ArrayList
+        GameObjList.remove(obj);
+        // Setting Reference to null
+        obj = null;
+    }
+
+    private void killBkgdObj(ImageView obj){
+        // Deleting node of obj from scene
+        floatPane.getChildren().remove(obj);
+        cloudPane.getChildren().remove(obj);
+        // Removing from ArrayList
+        BkgdObjList.remove(obj);
+        // Setting Reference to null
+        obj = null;
     }
 }

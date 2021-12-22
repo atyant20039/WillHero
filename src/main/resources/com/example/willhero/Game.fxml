@@ -12,30 +12,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="sky" stylesheets="@design.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willhero.gameController">
    <children>
-      <Pane fx:id="cloudPane" prefHeight="402.0" prefWidth="3000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <ImageView fitHeight="55.0" fitWidth="146.0" layoutX="1733.0" layoutY="83.0" pickOnBounds="true">
-               <image>
-                  <Image url="@cloud1.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="55.0" fitWidth="146.0" layoutX="1291.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@cloud2.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="55.0" fitWidth="146.0" layoutX="2182.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@cloud2.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="55.0" fitWidth="146.0" layoutX="2717.0" layoutY="83.0" pickOnBounds="true">
-               <image>
-                  <Image url="@cloud1.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
+      <Pane fx:id="cloudPane" layoutX="-1000.0" prefHeight="402.0" prefWidth="3000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Pane fx:id="floatPane" layoutX="-1000.0" layoutY="11.0" opacity="0.75" prefHeight="402.0" prefWidth="3000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="55.0" fitWidth="53.0" layoutX="1130.0" layoutY="241.0" pickOnBounds="true">

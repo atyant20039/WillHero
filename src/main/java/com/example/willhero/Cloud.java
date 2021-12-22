@@ -14,19 +14,17 @@ public class Cloud {
         switch (no){
             case 0:
                 img = new Image(String.valueOf(getClass().getResource("cloud1.png")));
-                 //= new ImageView(String.valueOf(getClass().getResource("cloud1.png")));
                 break;
             case 1:
                 img = new Image(String.valueOf(getClass().getResource("cloud2.png")));
-//                cloud = new ImageView(String.valueOf(getClass().getResource("cloud2.png")));
                 break;
             default:
-//                cloud = new ImageView(String.valueOf(getClass().getResource("cloud1.png")));
+                img = new Image(String.valueOf(getClass().getResource("cloud1.png")));
         }
         cloud.setImage(img);
         cloud.setFitWidth(150);
         cloud.setFitHeight(55);
-        cloud.setLayoutY(rand.nextInt(20, 100));
+        cloud.setLayoutY((rand.nextInt(2, 10)) * 10);
         cloud.setLayoutX(2800);
         return cloud;
     }
