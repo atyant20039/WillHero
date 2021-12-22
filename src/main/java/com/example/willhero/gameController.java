@@ -1,26 +1,26 @@
 package com.example.willhero;
 
-import javafx.animation.RotateTransition;
+/*TODO:
+    Move hero
+    Kill instances
+    Hero Orc collision overlapping
+*/
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import static java.lang.Thread.sleep;
 
 public class gameController implements Initializable {
     @FXML
@@ -39,6 +39,8 @@ public class gameController implements Initializable {
     private Button move_hero_button;
 
     private GameObjectFactory factory = new GameObjectFactory();
+    private ArrayList<StackPane> GameObjList = new ArrayList<>();
+    private ArrayList<ImageView> BkgdObjList = new ArrayList<>();
 
     @FXML
     protected void clicked_pause(ActionEvent event) throws IOException {
@@ -46,16 +48,18 @@ public class gameController implements Initializable {
         pause_button.getScene().setRoot(FXMLLoader.load(getClass().getResource("pause_menu.fxml")));
     }
 
+    private Hero h;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //TODO: Cloud pane rotation is a problem. Needed to fix it later
-        TranslateTransition translate1 = new TranslateTransition();
-        translate1.setNode(cloudPane);
-        translate1.setDuration(Duration.millis(100000));
-        translate1.setCycleCount(TranslateTransition.INDEFINITE);
-        translate1.setByX((cloudPane.getLayoutX() + cloudPane.getPrefWidth()) * -1);
-        translate1.play();
-
+//        TranslateTransition translate1 = new TranslateTransition();
+//        translate1.setNode(cloudPane);
+//        translate1.setDuration(Duration.millis(100000));
+//        translate1.setCycleCount(TranslateTransition.INDEFINITE);
+//        translate1.setByX((cloudPane.getLayoutX() + cloudPane.getPrefWidth()) * -1);
+//        translate1.play();
+//
         TranslateTransition translate2 = new TranslateTransition();
         translate2.setNode(floatPane);
         translate2.setDuration(Duration.millis(5000));
@@ -64,23 +68,52 @@ public class gameController implements Initializable {
         translate2.setByY(floatPane.getLayoutY() + 10);
         translate2.play();
 
-        Hero h = new Hero(hero,hero.getLayoutX(), hero.getLayoutY());
+        h = new Hero(hero.getLayoutX(), hero.getLayoutY());
         h.jump();
     }
 
-    public void move_hero(ActionEvent event) throws InterruptedException {
+    public void move_hero(ActionEvent event) {
         System.out.println("hero moved");
-        cloudPane.setLayoutX(cloudPane.getLayoutX() - 50);
-        floatPane.setLayoutX(floatPane.getLayoutX() - 50);
-        gamePane.setLayoutX(gamePane.getLayoutX() - 50);
-        hero.setLayoutX(hero.getLayoutX() + 50);
+//        for (StackPane s: GameObjList){
+//
+//        }
+//
+//        for (ImageView i: BkgdObjList){
+//
+//        }
+//        cloudPane.setLayoutX(cloudPane.getLayoutX() - 50);
+//        floatPane.setLayoutX(floatPane.getLayoutX() - 50);
+//        gamePane.setLayoutX(gamePane.getLayoutX() - 50);
+//        hero.setLayoutX(hero.getLayoutX() + 50);
 
-        generateObject(4);
+//        generateObject(1);
+//        generateGameObj(2);
+        generateBkgdObj(1);
     }
 
-    public void generateObject(int objno) throws InterruptedException {
-        StackPane obj = factory.createObject(objno,400 + (float)hero.getLayoutX(),0);
+    private void generateGameObj(int objno) {
+        StackPane obj = factory.createObject(objno,400 + hero.getLayoutX(),314);
+        GameObjList.add(obj);
         gamePane.getChildren().add(obj);
         System.out.println(obj.getId());
+    }
+
+    private void generateBkgdObj(int objno){
+        ImageView obj = factory.create_bkgd_obj(objno);
+        BkgdObjList.add(obj);
+        if (objno == 1){
+            cloudPane.getChildren().add(obj);
+            move_cloud(obj);
+        }
+        else floatPane.getChildren().add(obj);
+    }
+
+    private void move_cloud(ImageView cloud) {
+        TranslateTransition translate1 = new TranslateTransition();
+        translate1.setNode(cloud);
+        translate1.setDuration(Duration.millis(1000));
+        translate1.setCycleCount(1);
+        translate1.setToX(-1 * cloud.getLayoutX());
+        translate1.play();
     }
 }

@@ -7,36 +7,40 @@ import java.util.Random;
 
 public class Orcs extends GameObject{
     protected int health, coin_reward;
+    protected String orcId;
     private static int count = 0;
+    Random rand = new Random();
+
     {
         count++;
     }
 
-    Orcs(/*Object fxid, */double x, double y, int health, int coin_reward){
-        super(/*fxid, */x, y);
+    Orcs(double x, double y, int health, int coin_reward){
+        super(x, y);
         this.health = health;
         this.coin_reward = coin_reward;
+        this.orcId = null;
     }
 
     public StackPane generateOrc(){
-        Random rand = new Random();
         int no = rand.nextInt(2);
         StackPane orc = new StackPane();
         orc.setPrefWidth(50.0);
         orc.setPrefHeight(50.0);
         orc.setLayoutX(this.x_coordinate);
         orc.setLayoutY(this.y_coordinate);
-        Rectangle hid = new Rectangle(50,50);
+        Rectangle detector = new Rectangle(50,50);
         orc.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
-        hid.setStyle("-fx-fill:transparent");
-        orc.setId((String)("orc" + count));
+        detector.setStyle("-fx-fill:transparent");
+        this.orcId = "orc" + count;
+        orc.setId(this.orcId);
         if (no == 1){
             orc.getStyleClass().add("greenOrc");
 //            orc.setStyle("-fx-background-image:url('greenOrc.jpg')");
         } else {
             orc.getStyleClass().add("redOrc");
         }
-        orc.getChildren().add(hid);
+        orc.getChildren().add(detector);
         return orc;
     }
 
@@ -51,6 +55,10 @@ public class Orcs extends GameObject{
 
     public void die(){
 
+    }
+
+    public String getOrcId(){
+        return this.orcId;
     }
 
 }
