@@ -13,9 +13,9 @@ public class WeaponChest extends Chest{
         count++;
     }
 
-    WeaponChest(/*Object fxid, */double x, double y /*Weapon weapon*/) {
-        super(/*fxid, */x, y);
-//        this.weapon = weapon;
+    WeaponChest(double x, double y)
+    {
+        super(x, y);
     }
 
     @Override

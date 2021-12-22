@@ -2,8 +2,8 @@ package com.example.willhero;
 
 public class ThrowingKnives extends Weapon{
     private int damage, range;
-    ThrowingKnives(Object fxid, double x, double y){
-        super(fxid, x, y);
+    ThrowingKnives(double x, double y){
+        super(x, y);
     }
 
     @Override

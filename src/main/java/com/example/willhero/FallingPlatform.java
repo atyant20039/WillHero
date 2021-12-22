@@ -2,9 +2,9 @@ package com.example.willhero;
 
 public class FallingPlatform extends Obstacle{
     private int num_tiles;
-    FallingPlatform(Object fxid, double x, double y, int tiles)
+    FallingPlatform(double x, double y, int tiles)
     {
-        super(fxid, x, y);
+        super(x, y);
         this.num_tiles = tiles;
     }
 

@@ -5,13 +5,15 @@ import javafx.scene.shape.Rectangle;
 
 public class CoinChest extends Chest{
     private int num_coins;
+//    CoinChest(double x, double y)
 
     private static int count = 0;
     {
+//        super(x, y);
         count++;
     }
-        CoinChest(/*Object fxid, */double x, double y, int num_coins) {
-        super(/*fxid,*/x, y);
+    CoinChest(double x, double y, int num_coins) {
+        super(x, y);
         this.num_coins = num_coins;
     }
 

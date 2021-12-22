@@ -6,7 +6,7 @@ import javafx.scene.shape.Rectangle;
 import java.util.Stack;
 
 public class Boss extends Orcs{
-    Boss(/*Object fxid, */double x, double y, int health, int reward){
+    Boss(double x, double y, int health, int reward){
         super(/*fxid, */x, y, health, reward);
     }
 

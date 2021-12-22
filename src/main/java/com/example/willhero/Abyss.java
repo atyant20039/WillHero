@@ -1,9 +1,9 @@
 package com.example.willhero;
 
 public class Abyss extends GameObject{
-    Abyss(Object fxid, double x, double y)
+    Abyss(double x, double y)
     {
-        super(/*fxid,*/ x, y);
+        super(x, y);
     }
 
     @Override
