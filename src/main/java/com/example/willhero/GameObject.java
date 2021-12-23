@@ -17,10 +17,9 @@ public abstract class GameObject {
         this.y_coordinate = y;
     }
 
-//    public double[] get_coord(){
-////        double[] coord = {this.x_coordinate , this.y_coordinate};
-//        return new double[]{this.x_coordinate, this.y_coordinate};
-//    }
+    public double[] get_coord(){
+        return new double[]{this.x_coordinate, this.y_coordinate};
+    }
 
     public double get_X(){
         return this.x_coordinate;

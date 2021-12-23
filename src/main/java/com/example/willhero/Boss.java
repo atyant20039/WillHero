@@ -6,6 +6,7 @@ import javafx.scene.shape.Rectangle;
 public class Boss extends Orcs{
     Boss(double x, double y, int health, int reward){
         super(x, y, health, reward);
+        generateBoss();
     }
 
     public void attack(){
@@ -18,22 +19,20 @@ public class Boss extends Orcs{
 
     }
 
-    public GameObject generateBoss(){
-        StackPane Borc = new StackPane();
-        Borc.setPrefWidth(100.0);
-        Borc.setPrefHeight(100.0);
-        Borc.setLayoutX(this.get_X());
-        Borc.setLayoutY(this.get_Y());
+    public void generateBoss(){
+        StackPane bossPane = new StackPane();
+        bossPane.setPrefWidth(100.0);
+        bossPane.setPrefHeight(100.0);
+        bossPane.setLayoutX(this.get_X());
+        bossPane.setLayoutY(this.get_Y());
         Rectangle Borc_rec = new Rectangle(100,100);
-        Borc.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
+        bossPane.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
+        // Boss Orc Pic Needs to be Uploaded.
         Borc_rec.setStyle("-fx-fill:transparent");
-        this.setId("Boss");
-        Borc.setId(this.getId());
-        // TODO: Boss Orc Pic Needs to be Uploaded.
-        Borc.getStyleClass().add("redOrc");
-        Borc.getChildren().add(Borc_rec);
-
-        this.setPane(Borc);
-        return this;
+        bossPane.setId((String)("Boss"));
+        bossPane.getStyleClass().add("redOrc");
+        bossPane.getChildren().add(Borc_rec);
+        super.setPane(bossPane);
     }
+
 }

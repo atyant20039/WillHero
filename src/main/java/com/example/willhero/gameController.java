@@ -4,10 +4,8 @@ package com.example.willhero;
     Move hero
     Kill instances
     Hero Orc collision overlapping
-    Move temp pre defined platform
-    resize generated platforms (generated platforms are very small)
-    generated platforms not working with changing window sizes
 */
+import javafx.animation.AnimationTimer;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -25,6 +23,7 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.*;
 
@@ -48,7 +47,11 @@ public class gameController implements Initializable {
     private Text score_text;
 
     private GameObjectFactory factory = new GameObjectFactory();
-    private ArrayList<GameObject> GameObjList = new ArrayList<>();
+
+    private ArrayList<GameObject> GameObjList = new ArrayList<GameObject>();
+    private ArrayList<Orcs> orcList = new ArrayList<Orcs>();
+    private ArrayList<Platform> platformList = new ArrayList<Platform>();
+    private ArrayList<Chest> chestList = new ArrayList<Chest>();
     private ArrayList<ImageView> BkgdObjList = new ArrayList<>();
     Timeline cloudTimer, floatLandTimer, platTimer;
     private Hero h;
@@ -62,6 +65,8 @@ public class gameController implements Initializable {
         cloudTimer.pause();
         pause_button.getScene().setRoot(FXMLLoader.load(getClass().getResource("pause_menu.fxml")));
     }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -163,12 +168,17 @@ public class gameController implements Initializable {
         //        System.runFinalization();
     }
 
-    private void generateGameObj(int objno, double y) {
+    private void generateGameObj(int objno, float y) {
         GameObject obj = factory.createObject(objno,2700,y);
+
+
         GameObjList.add(obj);
+        checkCategory(obj);
+
+        applyGravity(obj);
         gamePane.getChildren().add(obj.getPane());
-//        System.out.println(obj.getId());
-//        obj = null;   ERROR
+
+        System.out.println(obj.getPane().getId());
     }
 
     private void generateBkgdObj(int objno){
@@ -211,5 +221,89 @@ public class gameController implements Initializable {
         BkgdObjList.remove(obj);
         // Setting Reference to null
         obj = null;
+    }
+
+    private void applyGravity(GameObject gameItem){
+        AnimationTimer timer = new AnimationTimer() {
+            double time = 0;
+            double velocityY = 0;
+            double gravity = 15.8;
+            double prevVelocityY = 0;
+            @Override
+            public void handle(long l) {
+                double currY = gameItem.getPane().getLayoutY();
+                velocityY += gravity*(0.5)*Math.pow(time,2);
+                double deltaY = velocityY;
+                double newY = currY + deltaY;
+                double[] tempArray = checkCollision(gameItem,velocityY,time);
+                if(tempArray[0] == 1){
+                    velocityY = tempArray[1];
+                    time = tempArray[2];
+                }
+                gameItem.getPane().setLayoutY(newY);
+                gameItem.set_coord(gameItem.getPane().getLayoutX(),gameItem.getPane().getLayoutY());
+//                if(condition2){
+//                    this.stop();
+//                }
+                prevVelocityY = velocityY;
+                time += 0.001;
+            }
+        };
+        timer.start();
+    }
+
+    private double[] checkCollision(GameObject object, double velocityY, double time){
+        double collision = 0;
+        if (object instanceof Orcs){
+            Orcs orc = (Orcs) object;
+            for(int i = 0; i < platformList.size(); i++){
+                if (orc.getPane().getBoundsInParent().intersects(platformList.get(i).getPane().getBoundsInParent())){
+                    velocityY = -3.5;
+                    time = 0.13;
+                    collision = 1;
+                    return new double[]{collision,velocityY,time};
+                }
+            }
+
+        }
+        else if (object instanceof Boss){
+
+        }
+        else if (object instanceof WeaponChest){
+            WeaponChest wChest =  (WeaponChest) object;
+            chestList.add(wChest);
+        }
+        else if (object instanceof CoinChest){
+            CoinChest cChest = (CoinChest) object;
+            chestList.add(cChest);
+        }
+        else if (object instanceof Platform){
+            Platform platform = (Platform) object;
+            platformList.add(platform);
+        }
+        return new double[]{0,velocityY,time};
+    }
+
+    private void checkCategory(GameObject object){
+        if (object instanceof Orcs){
+            Orcs orc = (Orcs) object;
+            orcList.add(orc);
+        }
+        else if (object instanceof Boss){
+
+        }
+        else if (object instanceof WeaponChest){
+            WeaponChest wChest =  (WeaponChest) object;
+            chestList.add(wChest);
+        }
+        else if (object instanceof CoinChest){
+            CoinChest cChest = (CoinChest) object;
+            chestList.add(cChest);
+        }
+        else if (object instanceof Platform){
+            Platform platform = (Platform) object;
+            platformList.add(platform);
+        }
+
     }
 }

@@ -1,9 +1,9 @@
 package com.example.willhero;
 
 public abstract class Chest extends GameObject{
-    Chest(double x, double y)
+    Chest(/*Object fxid, */double x, double y)
     {
-        super(x, y);
+        super(/*fxid, */x, y);
     }
 
     @Override

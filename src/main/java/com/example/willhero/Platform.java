@@ -14,41 +14,40 @@ public class Platform extends GameObject{
     }
     Platform(double x, double y){
         super(x, y);
+        generatePlatform();
     }
 
-    public GameObject generatePlatform(){
-        int no = rand.nextInt(4);
-        StackPane myplatform = new StackPane();
-        myplatform.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
-        switch (no){
+    public void generatePlatform(){
+        int rand_num = rand.nextInt(4);
+        StackPane platformPane = new StackPane();
+        platformPane.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
+        switch (rand_num){
             case 0:
-                myplatform.getStyleClass().add("platform1");
+                platformPane.getStyleClass().add("platform1");
                 break;
             case 1:
-                myplatform.getStyleClass().add("platform2");
+                platformPane.getStyleClass().add("platform2");
                 break;
             case 2:
-                myplatform.getStyleClass().add("platform3");
+                platformPane.getStyleClass().add("platform3");
                 break;
             case 3:
-                myplatform.getStyleClass().add("platform4");
+                platformPane.getStyleClass().add("platform4");
                 break;
             default:
-                myplatform.getStyleClass().add("platform1");
+                platformPane.getStyleClass().add("platform1");
         }
 
-        myplatform.setPrefHeight(150);
-        myplatform.setPrefWidth(200);
-        myplatform.setLayoutX(this.get_X());
-        myplatform.setLayoutY(this.get_Y());
-        Rectangle detector = new Rectangle(200,150);
-        detector.setStyle("-fx-fill:transparent");
+        platformPane.setPrefHeight(150);
+        platformPane.setPrefWidth(200);
+        platformPane.setLayoutX(this.get_X());
+        platformPane.setLayoutY(this.get_Y());
+        Rectangle platform_rec = new Rectangle(200,150);
+        platform_rec.setStyle("-fx-fill:transparent");
         this.setId("plat" + count);
-        myplatform.setId(this.getId());
-        myplatform.getChildren().add(detector);
-
-        this.setPane(myplatform);
-        return this;
+        platformPane.setId(this.getId());
+        platformPane.getChildren().add(platform_rec);
+        super.setPane(platformPane);
     }
 
     @Override
