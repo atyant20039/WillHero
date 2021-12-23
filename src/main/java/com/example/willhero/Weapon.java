@@ -2,7 +2,7 @@ package com.example.willhero;
 
 public abstract class Weapon extends GameObject{
     Weapon(double x, double y){
-        super(x, y);
+        super(x, y,null);
     }
 
     @Override

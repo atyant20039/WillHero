@@ -6,8 +6,10 @@ import javafx.scene.shape.Rectangle;
 import java.util.Random;
 
 public class Orcs extends GameObject{
+
     protected int health, coin_reward;
     protected String orcId;
+
     private static int count = 0;
     Random rand = new Random();
 
@@ -16,32 +18,32 @@ public class Orcs extends GameObject{
     }
 
     Orcs(double x, double y, int health, int coin_reward){
-        super(x, y);
+        super(x, y,null);
         this.health = health;
         this.coin_reward = coin_reward;
         this.orcId = null;
+        generateOrc();
     }
 
-    public StackPane generateOrc(){
-        int no = rand.nextInt(2);
-        StackPane orc = new StackPane();
-        orc.setPrefWidth(50.0);
-        orc.setPrefHeight(50.0);
-        orc.setLayoutX(this.x_coordinate);
-        orc.setLayoutY(this.y_coordinate);
-        Rectangle detector = new Rectangle(50,50);
-        orc.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
-        detector.setStyle("-fx-fill:transparent");
+    private void generateOrc(){
+        int rand_num = rand.nextInt(2);
+        StackPane orcPane = new StackPane();;
+        orcPane.setPrefWidth(50.0);
+        orcPane.setPrefHeight(50.0);
+        orcPane.setLayoutX(this.x_coordinate);
+        orcPane.setLayoutY(this.y_coordinate);
+        Rectangle orc_rec = new Rectangle(50,50);
+        orcPane.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
+        orc_rec.setStyle("-fx-fill:transparent");
         this.orcId = "orc" + count;
-        orc.setId(this.orcId);
-        if (no == 1){
-            orc.getStyleClass().add("greenOrc");
-//            orc.setStyle("-fx-background-image:url('greenOrc.jpg')");
+        orcPane.setId(this.orcId);
+        if (rand_num == 1){
+            orcPane.getStyleClass().add("greenOrc");
         } else {
-            orc.getStyleClass().add("redOrc");
+            orcPane.getStyleClass().add("redOrc");
         }
-        orc.getChildren().add(detector);
-        return orc;
+        orcPane.getChildren().add(orc_rec);
+        super.setObjectPane(orcPane);
     }
 
     @Override
@@ -60,5 +62,6 @@ public class Orcs extends GameObject{
     public String getOrcId(){
         return this.orcId;
     }
+
 
 }

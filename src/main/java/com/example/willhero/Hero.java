@@ -21,7 +21,7 @@ public class Hero extends GameObject{
 //    private double x,y;
 
     Hero(double x, double y){
-        super(x,y);
+        super(x,y,null);
 
     }
 

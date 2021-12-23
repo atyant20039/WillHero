@@ -3,7 +3,7 @@ package com.example.willhero;
 public abstract class Chest extends GameObject{
     Chest(/*Object fxid, */double x, double y)
     {
-        super(/*fxid, */x, y);
+        super(/*fxid, */x, y,null);
     }
 
     @Override

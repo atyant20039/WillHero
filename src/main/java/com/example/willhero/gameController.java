@@ -5,6 +5,7 @@ package com.example.willhero;
     Kill instances
     Hero Orc collision overlapping
 */
+import javafx.animation.AnimationTimer;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +19,7 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -38,8 +40,15 @@ public class gameController implements Initializable {
     @FXML
     private Button move_hero_button;
 
+    @FXML
+    private StackPane platform4;
+
     private GameObjectFactory factory = new GameObjectFactory();
-    private ArrayList<StackPane> GameObjList = new ArrayList<>();
+
+    private ArrayList<GameObject> GameObjList = new ArrayList<GameObject>();
+    private ArrayList<Orcs> orcList = new ArrayList<Orcs>();
+    private ArrayList<Platform> platformList = new ArrayList<Platform>();
+    private ArrayList<Chest> chestList = new ArrayList<Chest>();
     private ArrayList<ImageView> BkgdObjList = new ArrayList<>();
 
     @FXML
@@ -82,20 +91,32 @@ public class gameController implements Initializable {
 //
 //        }
 //        cloudPane.setLayoutX(cloudPane.getLayoutX() - 50);
-//        floatPane.setLayoutX(floatPane.getLayoutX() - 50);
-//        gamePane.setLayoutX(gamePane.getLayoutX() - 50);
-//        hero.setLayoutX(hero.getLayoutX() + 50);
+        floatPane.setLayoutX(floatPane.getLayoutX() - 50);
+        gamePane.setLayoutX(gamePane.getLayoutX() - 50);
+        hero.setLayoutX(hero.getLayoutX() + 50);
 
 //        generateObject(1);
-//        generateGameObj(2);
-        generateBkgdObj(1);
+
+        GameObject obj2 = factory.createObject(5, platform4.getLayoutX(),325);
+        GameObjList.add(obj2);
+        checkCategory(obj2);
+        gamePane.getChildren().add(obj2.getObjectPane());
+        generateGameObj(1);
+
+//        generateBkgdObj(1);
     }
 
     private void generateGameObj(int objno) {
-        StackPane obj = factory.createObject(objno,400 + hero.getLayoutX(),314);
+        GameObject obj = factory.createObject(objno,100 + hero.getLayoutX(),200);
+
+
         GameObjList.add(obj);
-        gamePane.getChildren().add(obj);
-        System.out.println(obj.getId());
+        checkCategory(obj);
+
+        applyGravity(obj);
+        gamePane.getChildren().add(obj.getObjectPane());
+
+        System.out.println(obj.getObjectPane().getId());
     }
 
     private void generateBkgdObj(int objno){
@@ -115,5 +136,89 @@ public class gameController implements Initializable {
         translate1.setCycleCount(1);
         translate1.setToX(-1 * cloud.getLayoutX());
         translate1.play();
+    }
+
+    private void applyGravity(GameObject object){
+        AnimationTimer timer = new AnimationTimer() {
+            double time = 0;
+            double velocityY = 0;
+            double gravity = 15.8;
+            double prevVelocityY = 0;
+            @Override
+            public void handle(long l) {
+                double currY = object.getObjectPane().getLayoutY();
+                velocityY += gravity*(0.5)*Math.pow(time,2);
+                double deltaY = velocityY;
+                double newY = currY + deltaY;
+                double[] tempArray = checkCollision(object,velocityY,time);
+                if(tempArray[0] == 1){
+                    velocityY = tempArray[1];
+                    time = tempArray[2];
+                }
+                object.getObjectPane().setLayoutY(newY);
+                object.set_coord();
+//                if(condition2){
+//                    this.stop();
+//                }
+                prevVelocityY = velocityY;
+                time += 0.001;
+            }
+        };
+        timer.start();
+    }
+
+    private double[] checkCollision(GameObject object, double velocityY, double time){
+        double collision = 0;
+        if (object instanceof Orcs){
+            Orcs orc = (Orcs) object;
+            for(int i = 0; i < platformList.size(); i++){
+                if (orc.getObjectPane().getBoundsInParent().intersects(platformList.get(i).getObjectPane().getBoundsInParent())){
+                    velocityY = -3.5;
+                    time = 0.13;
+                    collision = 1;
+                    return new double[]{collision,velocityY,time};
+                }
+            }
+
+        }
+        else if (object instanceof Boss){
+
+        }
+        else if (object instanceof WeaponChest){
+            WeaponChest wChest =  (WeaponChest) object;
+            chestList.add(wChest);
+        }
+        else if (object instanceof CoinChest){
+            CoinChest cChest = (CoinChest) object;
+            chestList.add(cChest);
+        }
+        else if (object instanceof Platform){
+            Platform platform = (Platform) object;
+            platformList.add(platform);
+        }
+        return new double[]{0,velocityY,time};
+    }
+
+    private void checkCategory(GameObject object){
+        if (object instanceof Orcs){
+            Orcs orc = (Orcs) object;
+            orcList.add(orc);
+        }
+        else if (object instanceof Boss){
+
+        }
+        else if (object instanceof WeaponChest){
+            WeaponChest wChest =  (WeaponChest) object;
+            chestList.add(wChest);
+        }
+        else if (object instanceof CoinChest){
+            CoinChest cChest = (CoinChest) object;
+            chestList.add(cChest);
+        }
+        else if (object instanceof Platform){
+            Platform platform = (Platform) object;
+            platformList.add(platform);
+        }
+
     }
 }

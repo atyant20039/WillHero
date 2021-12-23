@@ -1,20 +1,34 @@
 package com.example.willhero;
 
+import javafx.scene.layout.StackPane;
+
 public abstract class GameObject {
     protected double x_coordinate, y_coordinate;
+    protected StackPane objectPane;
 
-    GameObject(double x, double y){
+    GameObject(double x, double y, StackPane objectPane){
         this.x_coordinate = x;
         this.y_coordinate = y;
+        this.objectPane = objectPane;
     }
 
-    public void set_coord(double x, double y){
-        this.x_coordinate = x;
-        this.y_coordinate = y;
+
+    public StackPane getObjectPane() {
+        return objectPane;
+    }
+
+    public void setObjectPane(StackPane objectPane) {
+        this.objectPane = objectPane;
+    }
+
+
+
+    public void set_coord(){
+        this.x_coordinate = this.objectPane.getLayoutX();
+        this.y_coordinate = this.objectPane.getLayoutY();
     }
 
     public double[] get_coord(){
-//        double[] coord = {this.x_coordinate , this.y_coordinate};
         return new double[]{this.x_coordinate, this.y_coordinate};
     }
 

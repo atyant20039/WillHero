@@ -4,8 +4,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 
 import java.util.Random;
+import java.util.Stack;
 
 public class Platform extends GameObject{
+
+
     private String platformId;
     private static int count = 0;
     Random rand = new Random();
@@ -14,41 +17,42 @@ public class Platform extends GameObject{
         count++;
     }
     Platform(double x, double y){
-        super(x, y);
+        super(x, y, null);
         this.platformId = null;
+        generatePlatform();
     }
 
-    public StackPane generatePlatform(){
-        int no = rand.nextInt(4);
-        StackPane platform = new StackPane();
-        platform.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
-        switch (no){
-            case 0:
-                platform.getStyleClass().add("platform1");
-                break;
+    public void generatePlatform(){
+        int rand_num = rand.nextInt(4);
+        StackPane platformPane = new StackPane();
+        platformPane.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
+        switch (rand_num){
+//            case 0:
+//                platformPane.getStyleClass().add("platform1");
+//                break;
             case 1:
-                platform.getStyleClass().add("platform2");
+                platformPane.getStyleClass().add("platform2");
                 break;
             case 2:
-                platform.getStyleClass().add("platform3");
+                platformPane.getStyleClass().add("platform3");
                 break;
             case 3:
-                platform.getStyleClass().add("platform4");
+                platformPane.getStyleClass().add("platform4");
                 break;
             default:
-                platform.getStyleClass().add("platform1");
+                platformPane.getStyleClass().add("platform1");
         }
 
-        platform.setPrefHeight(150);
-        platform.setPrefWidth(200);
-        platform.setLayoutX(this.x_coordinate);
-        platform.setLayoutY(this.y_coordinate);
-        Rectangle detector = new Rectangle(200,150);
-        detector.setStyle("-fx-fill:transparent");
+        platformPane.setPrefHeight(150);
+        platformPane.setPrefWidth(200);
+        platformPane.setLayoutX(this.x_coordinate);
+        platformPane.setLayoutY(this.y_coordinate);
+        Rectangle platform_rec = new Rectangle(200,150);
+        platform_rec.setStyle("-fx-fill:transparent");
         this.platformId = "plat" + count;
-        platform.setId(this.platformId);
-        platform.getChildren().add(detector);
-        return platform;
+        platformPane.setId(this.platformId);
+        platformPane.getChildren().add(platform_rec);
+        super.setObjectPane(platformPane);
     }
 
     @Override
@@ -59,5 +63,7 @@ public class Platform extends GameObject{
     public String getPlatformId(){
         return this.platformId;
     }
+
+
 
 }
