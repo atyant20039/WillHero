@@ -22,6 +22,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -155,7 +156,7 @@ public class gameController implements Initializable {
             }
             if (genOrc) this.generateGameObj(1,400);
 
-            int rand_count = rand.nextInt(10);
+            int rand_count = rand.nextInt(20);
             if (rand_count%2 == 0 /*&& orc_per_plat != 0*/ && !(orcList.get(orcList.size() - 1).getPane().getLayoutX() > 2650)){
                 System.out.println("Generating Orc Copy ");
                 this.generateGameObj(1,400);
@@ -174,7 +175,7 @@ public class gameController implements Initializable {
         generateBkgdObj(1);
         generateBkgdObj(2);
         generateGameObj(5, 400);
-        generateGameObj(1,300);
+        generateGameObj(1,100);
         h = new Hero(hero.getLayoutX(), hero.getLayoutY());
         h.setPane(hero);
     }
@@ -285,12 +286,24 @@ public class gameController implements Initializable {
         if (object instanceof Orcs){
             Orcs orc = (Orcs) object;
             for(int i = 0; i < platformList.size(); i++){
-                if (orc.getPane().getBoundsInParent().intersects(platformList.get(i).getPane().getBoundsInParent())){
+//                CODE 1: Checking Collision using Rectangle inside StackPane
+
+                Shape intersection = Shape.intersect(orc.getDetector(), platformList.get(i).getDetector());
+                if (intersection.getBoundsInLocal().getWidth() > 0 && intersection.getBoundsInLocal().getHeight() > 0){
                     velocityY = -5.5;
                     time = 0.13;
                     collision = 1;
                     return new double[]{collision,velocityY,time};
                 }
+
+//                  CODE 2: Checking Collision using StackPane
+
+//                if (orc.getPane().getBoundsInParent().intersects(platformList.get(i).getPane().getBoundsInParent())){
+//                    velocityY = -5.5;
+//                    time = 0.13;
+//                    collision = 1;
+//                    return new double[]{collision,velocityY,time};
+//                }
             }
 
         }
