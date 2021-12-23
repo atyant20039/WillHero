@@ -6,10 +6,7 @@ import javafx.scene.shape.Rectangle;
 import java.util.Random;
 
 public class Orcs extends GameObject{
-
     protected int health, coin_reward;
-    protected String orcId;
-
     private static int count = 0;
     Random rand = new Random();
 
@@ -18,10 +15,9 @@ public class Orcs extends GameObject{
     }
 
     Orcs(double x, double y, int health, int coin_reward){
-        super(x, y,null);
+        super(x, y);
         this.health = health;
         this.coin_reward = coin_reward;
-        this.orcId = null;
         generateOrc();
     }
 
@@ -58,10 +54,5 @@ public class Orcs extends GameObject{
     public void die(){
 
     }
-
-    public String getOrcId(){
-        return this.orcId;
-    }
-
 
 }

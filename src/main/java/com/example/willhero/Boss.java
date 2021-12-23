@@ -3,15 +3,9 @@ package com.example.willhero;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 
-import java.util.Stack;
-
 public class Boss extends Orcs{
-
-    protected StackPane bossPane;
-
-    Boss(/*Object fxid, */double x, double y, int health, int reward){
-        super(/*fxid, */x, y, health, reward);
-        this.bossPane = new StackPane();
+    Boss(double x, double y, int health, int reward){
+        super(x, y, health, reward);
         generateBoss();
     }
 
@@ -22,7 +16,6 @@ public class Boss extends Orcs{
     @Override
     public void collision(GameObject o1, GameObject o2) {
         super.collision(o1, o2);
-
 
     }
 
@@ -40,7 +33,4 @@ public class Boss extends Orcs{
         bossPane.getChildren().add(Borc_rec);
     }
 
-    public StackPane getBossPane(){
-        return this.bossPane;
-    }
 }

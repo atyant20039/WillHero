@@ -25,11 +25,11 @@ public class GameObjectFactory {
     public ImageView create_bkgd_obj(int objno){
         ImageView obj = null;
         switch (objno){
-            case 1:
+            case 1: // Cloud
                 obj = new Cloud().generateCloud();
                 break;
-            case 2:
-                obj = new FloatingLand().generateFlaotLand();
+            case 2: // Floating Land
+                obj = new FloatingLand().generateFloatLand();
                 break;
             default:
                 break;

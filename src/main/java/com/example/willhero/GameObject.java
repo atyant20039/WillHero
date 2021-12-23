@@ -3,33 +3,31 @@ package com.example.willhero;
 import javafx.scene.layout.StackPane;
 
 public abstract class GameObject {
-    protected double x_coordinate, y_coordinate;
-    protected StackPane objectPane;
+    private double x_coordinate, y_coordinate;
+    private StackPane myPane = null;
+    private String myId = null;
 
-    GameObject(double x, double y, StackPane objectPane){
+    GameObject(double x, double y){
         this.x_coordinate = x;
         this.y_coordinate = y;
-        this.objectPane = objectPane;
     }
 
-
-    public StackPane getObjectPane() {
-        return objectPane;
-    }
-
-    public void setObjectPane(StackPane objectPane) {
-        this.objectPane = objectPane;
-    }
-
-
-
-    public void set_coord(){
-        this.x_coordinate = this.objectPane.getLayoutX();
-        this.y_coordinate = this.objectPane.getLayoutY();
+    public void set_coord(double x, double y){
+        this.x_coordinate = x;
+        this.y_coordinate = y;
     }
 
     public double[] get_coord(){
+//        double[] coord = {this.x_coordinate , this.y_coordinate};
         return new double[]{this.x_coordinate, this.y_coordinate};
+    }
+
+    public double get_X(){
+        return this.x_coordinate;
+    }
+
+    public double get_Y(){
+        return this.y_coordinate;
     }
 
     public boolean if_collision(GameObject o1, GameObject o2){
@@ -39,4 +37,20 @@ public abstract class GameObject {
     }
 
     public abstract void collision(GameObject o1, GameObject o2);
+
+    public StackPane getPane(){
+        return this.myPane;
+    }
+
+    public void setPane(StackPane pane){
+        this.myPane = pane;
+    }
+
+    public String getId(){
+        return this.myId;
+    }
+
+    public void setId(String id){
+        this.myId = id;
+    }
 }

@@ -8,7 +8,7 @@ import java.util.Random;
 public class FloatingLand {
     Random rand = new Random();
 
-    public ImageView generateFlaotLand(){
+    public ImageView generateFloatLand(){
         int no = rand.nextInt(4);
         ImageView land = new ImageView();
         Image img = null;
@@ -34,7 +34,7 @@ public class FloatingLand {
         land.setFitWidth(55);
         land.setFitHeight(55);
         land.setLayoutX(2900);
-        land.setLayoutY(rand.nextInt(100, 250));
+        land.setLayoutY((rand.nextInt(10, 25)) * 10);
         return land;
     }
 }

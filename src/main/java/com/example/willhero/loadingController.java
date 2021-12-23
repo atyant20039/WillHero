@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import javafx.animation.RotateTransition;
@@ -20,7 +21,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
-import org.w3c.dom.Text;
 
 
 import java.io.IOException;
@@ -36,9 +36,11 @@ public class loadingController implements Initializable {
     @FXML
     private Button loadingButton;
 
-
     @FXML
     private VBox loadingVbox;
+
+    @FXML
+    private Text start_text;
 
     @FXML
     private void click_to_start(ActionEvent event) throws IOException{
@@ -57,6 +59,7 @@ public class loadingController implements Initializable {
             loadingVbox.setVisible(false);
             loadingButton.setDisable(false);
             loadingButton.setVisible(true);
+            start_text.setVisible(true);
         });
     }
 

@@ -4,12 +4,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 
 import java.util.Random;
-import java.util.Stack;
 
 public class Platform extends GameObject{
-
-
-    private String platformId;
     private static int count = 0;
     Random rand = new Random();
 
@@ -17,8 +13,7 @@ public class Platform extends GameObject{
         count++;
     }
     Platform(double x, double y){
-        super(x, y, null);
-        this.platformId = null;
+        super(x, y);
         generatePlatform();
     }
 
@@ -59,11 +54,4 @@ public class Platform extends GameObject{
     public void collision(GameObject o1, GameObject o2) {
 
     }
-
-    public String getPlatformId(){
-        return this.platformId;
-    }
-
-
-
 }
