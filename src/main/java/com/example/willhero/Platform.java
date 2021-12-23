@@ -38,8 +38,8 @@ public class Platform extends GameObject{
                 platformPane.getStyleClass().add("platform1");
         }
 
-        platformPane.setPrefHeight(150);
-        platformPane.setPrefWidth(200);
+        platformPane.setPrefHeight(200);
+        platformPane.setPrefWidth(300);
         platformPane.setLayoutX(this.get_X());
         platformPane.setLayoutY(this.get_Y());
         Rectangle platform_rec = new Rectangle(200,150);

@@ -125,7 +125,7 @@ public class gameController implements Initializable {
         platTimer = new Timeline(new KeyFrame(Duration.millis(1000), e -> {
             boolean genPlat = true;
             for (GameObject o : GameObjList){
-                if (o.getClass().equals(Platform.class) && o.getPane().getLayoutX() > rand.nextInt(2200, 2300)){
+                if (o.getClass().equals(Platform.class) && o.getPane().getLayoutX() > rand.nextInt(2150, 2200)){
                     genPlat = false;
                     break;
                 }
@@ -165,11 +165,13 @@ public class gameController implements Initializable {
         generateGameObj(5, 400);
         generateGameObj(1,300);
         h = new Hero(hero.getLayoutX(), hero.getLayoutY());
-        h.jump();
+        h.setPane(hero);
     }
 
     public void move_hero(ActionEvent event) {
         System.out.println("hero moved");
+//        applyGravity(h);
+
 //        h.getUser().setScore(h.getUser().getScore() + 1);
         this.userScore++;
         score_text.setText("" + this.userScore);
@@ -273,7 +275,7 @@ public class gameController implements Initializable {
             Orcs orc = (Orcs) object;
             for(int i = 0; i < platformList.size(); i++){
                 if (orc.getPane().getBoundsInParent().intersects(platformList.get(i).getPane().getBoundsInParent())){
-                    velocityY = -3.5;
+                    velocityY = -5.5;
                     time = 0.13;
                     collision = 1;
                     return new double[]{collision,velocityY,time};
@@ -295,6 +297,7 @@ public class gameController implements Initializable {
         else if (object instanceof Platform){
             Platform platform = (Platform) object;
             platformList.add(platform);
+            gamePane.setBottomAnchor(platform.getPane(), 0.0);
         }
         return new double[]{0,velocityY,time};
     }

@@ -22,22 +22,22 @@
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="34.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: transparent;" width="40.0" StackPane.alignment="BOTTOM_CENTER" />
                </children>
             </StackPane>
-            <StackPane fx:id="temp_plat1" layoutX="1200.0" layoutY="400.0" prefHeight="150.0" prefWidth="200.0" styleClass="platform1" stylesheets="@design.css" AnchorPane.bottomAnchor="0.0">
+            <StackPane fx:id="temp_plat1" layoutX="1200.0" layoutY="400.0" prefHeight="150.0" prefWidth="200.0" styleClass="platform1" stylesheets="@design.css" visible="false" AnchorPane.bottomAnchor="0.0">
                <children>
                   <Rectangle fx:id="r1" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="200.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: transparent;" width="271.0" />
                </children>
             </StackPane>
-            <StackPane fx:id="temp_plat2" layoutX="1600.0" prefHeight="150.0" prefWidth="200.0" styleClass="platform2" stylesheets="@design.css" AnchorPane.bottomAnchor="0.0">
+            <StackPane fx:id="temp_plat2" layoutX="1600.0" prefHeight="150.0" prefWidth="200.0" styleClass="platform2" stylesheets="@design.css" visible="false" AnchorPane.bottomAnchor="0.0">
                <children>
                   <Rectangle fx:id="r16" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="200.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: transparent;" width="272.0" />
                </children>
             </StackPane>
-            <StackPane fx:id="temp_plat3" layoutX="2200.0" prefHeight="150.0" prefWidth="200.0" styleClass="platform4" stylesheets="@design.css" AnchorPane.bottomAnchor="0.0">
+            <StackPane fx:id="temp_plat3" layoutX="2200.0" prefHeight="150.0" prefWidth="200.0" styleClass="platform4" stylesheets="@design.css" visible="false" AnchorPane.bottomAnchor="0.0">
                <children>
                   <Rectangle fx:id="r11" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="200.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: transparent;" width="266.0" />
                </children>
             </StackPane>
-            <StackPane fx:id="temp_plat4" layoutX="2700.0" prefHeight="150.0" prefWidth="200.0" styleClass="platform3" stylesheets="@design.css" AnchorPane.bottomAnchor="0.0">
+            <StackPane fx:id="temp_plat4" layoutX="2700.0" prefHeight="150.0" prefWidth="200.0" styleClass="platform3" stylesheets="@design.css" visible="false" AnchorPane.bottomAnchor="0.0">
                <children>
                   <Rectangle fx:id="r161" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="200.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: transparent;" width="231.0" />
                </children>
