@@ -53,7 +53,7 @@ public class gameController implements Initializable {
     private ArrayList<Platform> platformList = new ArrayList<Platform>();
     private ArrayList<Chest> chestList = new ArrayList<Chest>();
     private ArrayList<ImageView> BkgdObjList = new ArrayList<>();
-    Timeline cloudTimer, floatLandTimer, platTimer;
+    Timeline cloudTimer, floatLandTimer, platTimer, orcTimer;
     private Hero h;
     private int userScore = 0;
     private Random rand = new Random();
@@ -141,9 +141,29 @@ public class gameController implements Initializable {
         platTimer.setCycleCount(TranslateTransition.INDEFINITE);
         platTimer.play();
 
+        orcTimer = new Timeline(new KeyFrame(Duration.millis(1000), e -> {
+            boolean genOrc = true;
+            for (GameObject o : GameObjList){
+                if (o.getClass().equals(Orcs.class) && o.getPane().getLayoutX() > rand.nextInt(2200, 2300)){
+                    genOrc = false;
+                    break;
+                }
+            }
+            if (genOrc) this.generateGameObj(1,300);
+
+            for (int o = 0; o < GameObjList.size(); o++){
+                if (GameObjList.get(o).getPane().getLayoutX() < -500){   //Possible BUG
+                    this.killGameObj(GameObjList.get(o));
+                }
+            }
+        }));
+        orcTimer.setCycleCount(TranslateTransition.INDEFINITE);
+        orcTimer.play();
+
         generateBkgdObj(1);
         generateBkgdObj(2);
         generateGameObj(5, 400);
+        generateGameObj(1,300);
         h = new Hero(hero.getLayoutX(), hero.getLayoutY());
         h.jump();
     }
@@ -170,14 +190,9 @@ public class gameController implements Initializable {
 
     private void generateGameObj(int objno, float y) {
         GameObject obj = factory.createObject(objno,2700,y);
-
-
         GameObjList.add(obj);
         checkCategory(obj);
-
-        applyGravity(obj);
         gamePane.getChildren().add(obj.getPane());
-
         System.out.println(obj.getPane().getId());
     }
 
@@ -288,6 +303,7 @@ public class gameController implements Initializable {
         if (object instanceof Orcs){
             Orcs orc = (Orcs) object;
             orcList.add(orc);
+            applyGravity(orc);
         }
         else if (object instanceof Boss){
 
