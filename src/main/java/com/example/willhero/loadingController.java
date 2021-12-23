@@ -52,7 +52,7 @@ public class loadingController implements Initializable {
         RotateTransition rotate = new RotateTransition();
         rotate.setNode(loadingClock);
         rotate.setDuration(Duration.millis(1000));
-        rotate.setCycleCount(5);
+        rotate.setCycleCount(10);
         rotate.setByAngle(360);
         rotate.play();
         rotate.setOnFinished(actionEvent -> {

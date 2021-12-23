@@ -4,6 +4,9 @@ package com.example.willhero;
     Move hero
     Kill instances
     Hero Orc collision overlapping
+    Move temp pre defined platform
+    resize generated platforms (generated platforms are very small)
+    generated platforms not working with changing window sizes
 */
 import javafx.animation.AnimationTimer;
 import javafx.animation.Interpolator;
@@ -44,7 +47,7 @@ public class gameController implements Initializable {
     private Button move_hero_button;
 
     @FXML
-    private Text score_text;
+    private Text score_text, coin_text;
 
     private GameObjectFactory factory = new GameObjectFactory();
 
@@ -55,7 +58,7 @@ public class gameController implements Initializable {
     private ArrayList<ImageView> BkgdObjList = new ArrayList<>();
     Timeline cloudTimer, floatLandTimer, platTimer, orcTimer;
     private Hero h;
-    private int userScore = 0;
+    private int userScore = 0, userCoin = 0;
     private Random rand = new Random();
 
     @FXML
@@ -102,7 +105,7 @@ public class gameController implements Initializable {
             if (genFloatPlat) this.generateBkgdObj(2);
 
             for (int i = 0; i < BkgdObjList.size(); i++){
-                if (BkgdObjList.get(i).getLayoutX() < -500){
+                if (BkgdObjList.get(i).getLayoutX() < 500){
                     this.killBkgdObj(BkgdObjList.get(i));
                 }
             }
@@ -133,7 +136,7 @@ public class gameController implements Initializable {
             if (genPlat) this.generateGameObj(5,400);
 
             for (int o = 0; o < GameObjList.size(); o++){
-                if (GameObjList.get(o).getPane().getLayoutX() < -500){   //Possible BUG
+                if (GameObjList.get(o).getPane().getLayoutX() < 500){   //Possible BUG
                     this.killGameObj(GameObjList.get(o));
                 }
             }
@@ -141,6 +144,7 @@ public class gameController implements Initializable {
         platTimer.setCycleCount(TranslateTransition.INDEFINITE);
         platTimer.play();
 
+//        int orc_per_plat = 3;
         orcTimer = new Timeline(new KeyFrame(Duration.millis(1000), e -> {
             boolean genOrc = true;
             for (GameObject o : GameObjList){
@@ -149,10 +153,17 @@ public class gameController implements Initializable {
                     break;
                 }
             }
-            if (genOrc) this.generateGameObj(1,300);
+            if (genOrc) this.generateGameObj(1,400);
+
+            int rand_count = rand.nextInt(10);
+            if (rand_count%2 == 0 /*&& orc_per_plat != 0*/ && !(orcList.get(orcList.size() - 1).getPane().getLayoutX() > 2650)){
+                System.out.println("Generating Orc Copy ");
+                this.generateGameObj(1,400);
+//                orc_per_plat--;
+            }
 
             for (int o = 0; o < GameObjList.size(); o++){
-                if (GameObjList.get(o).getPane().getLayoutX() < -500){   //Possible BUG
+                if (GameObjList.get(o).getPane().getLayoutX() < 500){   //Possible BUG
                     this.killGameObj(GameObjList.get(o));
                 }
             }
