@@ -88,16 +88,19 @@ public class gameController implements Initializable {
 
         floatLandTimer = new Timeline(new KeyFrame(Duration.millis(3000), e -> {
             boolean genFloatPlat = true;
-            for (ImageView i : this.BkgdObjList){   //BUG
+            for (ImageView i : BkgdObjList){   //BUG
                 if (floatPane.equals(i.getParent()) && i.getLayoutX() > 2200){
                     genFloatPlat = false;
                     break;
                 }
-                if (i.getLayoutX() < -500){
-                    this.killBkgdObj(i);
-                }
             }
             if (genFloatPlat) this.generateBkgdObj(2);
+
+            for (int i = 0; i < BkgdObjList.size(); i++){
+                if (BkgdObjList.get(i).getLayoutX() < -500){
+                    this.killBkgdObj(BkgdObjList.get(i));
+                }
+            }
 
 //            System.out.println("------------------------------------------------------------");
 //            System.out.println("Game Object List : " + GameObjList.size());
@@ -116,16 +119,19 @@ public class gameController implements Initializable {
 
         platTimer = new Timeline(new KeyFrame(Duration.millis(1000), e -> {
             boolean genPlat = true;
-            for (GameObject o : this.GameObjList){
+            for (GameObject o : GameObjList){
                 if (o.getClass().equals(Platform.class) && o.getPane().getLayoutX() > rand.nextInt(2200, 2300)){
                     genPlat = false;
                     break;
                 }
-                if (o.getPane().getLayoutX() < -500){   //Possible BUG
-                    this.killGameObj(o);
-                }
             }
             if (genPlat) this.generateGameObj(5,400);
+
+            for (int o = 0; o < GameObjList.size(); o++){
+                if (GameObjList.get(o).getPane().getLayoutX() < -500){   //Possible BUG
+                    this.killGameObj(GameObjList.get(o));
+                }
+            }
         }));
         platTimer.setCycleCount(TranslateTransition.INDEFINITE);
         platTimer.play();
