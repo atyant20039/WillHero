@@ -3,7 +3,7 @@ package com.example.willhero;
 public class Abyss extends GameObject{
     Abyss(double x, double y)
     {
-        super(x, y,null);
+        super(x, y);
     }
 
     @Override

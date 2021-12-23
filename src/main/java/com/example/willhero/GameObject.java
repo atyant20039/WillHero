@@ -18,7 +18,6 @@ public abstract class GameObject {
     }
 
     public double[] get_coord(){
-//        double[] coord = {this.x_coordinate , this.y_coordinate};
         return new double[]{this.x_coordinate, this.y_coordinate};
     }
 

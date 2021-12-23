@@ -12,7 +12,7 @@ public class CoinChest extends Chest{
     CoinChest(double x, double y, int num_coins) {
         super(x, y);
         this.num_coins = num_coins;
-        generateC_chest();
+        generateCchest();
     }
 
     @Override
@@ -20,7 +20,7 @@ public class CoinChest extends Chest{
 
     }
 
-    public GameObject generateCchest(){
+    private void generateCchest(){
         StackPane Cchest = new StackPane();
         Cchest.setPrefWidth(100.0);
         Cchest.setPrefHeight(100.0);
@@ -33,9 +33,7 @@ public class CoinChest extends Chest{
         Cchest.setId(this.getId());
         Cchest.getStyleClass().add("Cchest");
         Cchest.getChildren().add(C_rec);
-
         this.setPane(Cchest);
-        return this;
     }
 
     public int getNum_coins(){

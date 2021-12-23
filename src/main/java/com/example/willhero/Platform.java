@@ -22,9 +22,9 @@ public class Platform extends GameObject{
         StackPane platformPane = new StackPane();
         platformPane.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
         switch (rand_num){
-//            case 0:
-//                platformPane.getStyleClass().add("platform1");
-//                break;
+            case 0:
+                platformPane.getStyleClass().add("platform1");
+                break;
             case 1:
                 platformPane.getStyleClass().add("platform2");
                 break;
@@ -40,14 +40,14 @@ public class Platform extends GameObject{
 
         platformPane.setPrefHeight(150);
         platformPane.setPrefWidth(200);
-        platformPane.setLayoutX(this.x_coordinate);
-        platformPane.setLayoutY(this.y_coordinate);
+        platformPane.setLayoutX(this.get_X());
+        platformPane.setLayoutY(this.get_Y());
         Rectangle platform_rec = new Rectangle(200,150);
         platform_rec.setStyle("-fx-fill:transparent");
-        this.platformId = "plat" + count;
-        platformPane.setId(this.platformId);
+        this.setId("plat" + count);
+        platformPane.setId(this.getId());
         platformPane.getChildren().add(platform_rec);
-        super.setObjectPane(platformPane);
+        super.setPane(platformPane);
     }
 
     @Override

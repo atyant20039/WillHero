@@ -93,7 +93,7 @@ public class gameController implements Initializable {
 
         floatLandTimer = new Timeline(new KeyFrame(Duration.millis(3000), e -> {
             boolean genFloatPlat = true;
-            for (ImageView i : this.BkgdObjList){   //BUG
+            for (ImageView i : BkgdObjList){   //BUG
                 if (floatPane.equals(i.getParent()) && i.getLayoutX() > 2200){
                     genFloatPlat = false;
                     break;
@@ -121,7 +121,7 @@ public class gameController implements Initializable {
 
         platTimer = new Timeline(new KeyFrame(Duration.millis(1000), e -> {
             boolean genPlat = true;
-            for (GameObject o : this.GameObjList){
+            for (GameObject o : GameObjList){
                 if (o.getClass().equals(Platform.class) && o.getPane().getLayoutX() > rand.nextInt(2200, 2300)){
                     genPlat = false;
                     break;
@@ -162,17 +162,17 @@ public class gameController implements Initializable {
         //        System.runFinalization();
     }
 
-    private void generateGameObj(int objno) {
-        GameObject obj = factory.createObject(objno,100 + hero.getLayoutX(),200);
+    private void generateGameObj(int objno, float y) {
+        GameObject obj = factory.createObject(objno,2700,y);
 
 
         GameObjList.add(obj);
         checkCategory(obj);
 
         applyGravity(obj);
-        gamePane.getChildren().add(obj.getObjectPane());
+        gamePane.getChildren().add(obj.getPane());
 
-        System.out.println(obj.getObjectPane().getId());
+        System.out.println(obj.getPane().getId());
     }
 
     private void generateBkgdObj(int objno){
@@ -217,7 +217,7 @@ public class gameController implements Initializable {
         obj = null;
     }
 
-    private void applyGravity(GameObject object){
+    private void applyGravity(GameObject gameItem){
         AnimationTimer timer = new AnimationTimer() {
             double time = 0;
             double velocityY = 0;
@@ -225,17 +225,17 @@ public class gameController implements Initializable {
             double prevVelocityY = 0;
             @Override
             public void handle(long l) {
-                double currY = object.getObjectPane().getLayoutY();
+                double currY = gameItem.getPane().getLayoutY();
                 velocityY += gravity*(0.5)*Math.pow(time,2);
                 double deltaY = velocityY;
                 double newY = currY + deltaY;
-                double[] tempArray = checkCollision(object,velocityY,time);
+                double[] tempArray = checkCollision(gameItem,velocityY,time);
                 if(tempArray[0] == 1){
                     velocityY = tempArray[1];
                     time = tempArray[2];
                 }
-                object.getObjectPane().setLayoutY(newY);
-                object.set_coord();
+                gameItem.getPane().setLayoutY(newY);
+                gameItem.set_coord(gameItem.getPane().getLayoutX(),gameItem.getPane().getLayoutY());
 //                if(condition2){
 //                    this.stop();
 //                }
@@ -251,7 +251,7 @@ public class gameController implements Initializable {
         if (object instanceof Orcs){
             Orcs orc = (Orcs) object;
             for(int i = 0; i < platformList.size(); i++){
-                if (orc.getObjectPane().getBoundsInParent().intersects(platformList.get(i).getObjectPane().getBoundsInParent())){
+                if (orc.getPane().getBoundsInParent().intersects(platformList.get(i).getPane().getBoundsInParent())){
                     velocityY = -3.5;
                     time = 0.13;
                     collision = 1;

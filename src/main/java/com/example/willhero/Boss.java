@@ -20,10 +20,11 @@ public class Boss extends Orcs{
     }
 
     public void generateBoss(){
+        StackPane bossPane = new StackPane();
         bossPane.setPrefWidth(100.0);
         bossPane.setPrefHeight(100.0);
-        bossPane.setLayoutX(this.x_coordinate);
-        bossPane.setLayoutY(this.y_coordinate);
+        bossPane.setLayoutX(this.get_X());
+        bossPane.setLayoutY(this.get_Y());
         Rectangle Borc_rec = new Rectangle(100,100);
         bossPane.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
         // Boss Orc Pic Needs to be Uploaded.
@@ -31,6 +32,7 @@ public class Boss extends Orcs{
         bossPane.setId((String)("Boss"));
         bossPane.getStyleClass().add("redOrc");
         bossPane.getChildren().add(Borc_rec);
+        super.setPane(bossPane);
     }
 
 }

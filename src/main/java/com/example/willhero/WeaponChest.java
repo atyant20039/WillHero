@@ -24,7 +24,7 @@ public class WeaponChest extends Chest{
 
     }
 
-    public GameObject generateWchest(){
+    private void generateWchest(){
         StackPane Wchest = new StackPane();
         Wchest.setPrefWidth(100.0);
         Wchest.setPrefHeight(100.0);
@@ -39,6 +39,5 @@ public class WeaponChest extends Chest{
         Wchest.getChildren().add(W_rec);
 
         this.setPane(Wchest);
-
     }
 }

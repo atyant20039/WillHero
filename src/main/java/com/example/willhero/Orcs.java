@@ -26,20 +26,20 @@ public class Orcs extends GameObject{
         StackPane orcPane = new StackPane();;
         orcPane.setPrefWidth(50.0);
         orcPane.setPrefHeight(50.0);
-        orcPane.setLayoutX(this.x_coordinate);
-        orcPane.setLayoutY(this.y_coordinate);
+        orcPane.setLayoutX(this.get_X());
+        orcPane.setLayoutY(this.get_Y());
         Rectangle orc_rec = new Rectangle(50,50);
         orcPane.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
         orc_rec.setStyle("-fx-fill:transparent");
-        this.orcId = "orc" + count;
-        orcPane.setId(this.orcId);
+        this.setId("orc" + count);
+        orcPane.setId(this.getId());
         if (rand_num == 1){
             orcPane.getStyleClass().add("greenOrc");
         } else {
             orcPane.getStyleClass().add("redOrc");
         }
         orcPane.getChildren().add(orc_rec);
-        super.setObjectPane(orcPane);
+        super.setPane(orcPane);
     }
 
     @Override
