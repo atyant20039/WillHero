@@ -39,7 +39,7 @@ public class gameController implements Initializable {
     private AnchorPane gamePane;
 
     @FXML
-    private StackPane hero, temp_plat1, temp_plat2, temp_plat3, temp_plat4;
+    private StackPane hero, temp_plat1, temp_plat2/*, temp_plat3, temp_plat4*/;
 
     @FXML
     private Button pause_button;
@@ -58,7 +58,7 @@ public class gameController implements Initializable {
     private ArrayList<Chest> chestList = new ArrayList<Chest>();
     private ArrayList<ImageView> BkgdObjList = new ArrayList<>();
     Timeline cloudTimer, floatLandTimer, platTimer, orcTimer;
-    private Hero h;
+    private Hero gameHero;
     private int userScore = 0, userCoin = 0;
     private Random rand = new Random();
 
@@ -129,7 +129,7 @@ public class gameController implements Initializable {
         platTimer = new Timeline(new KeyFrame(Duration.millis(1000), e -> {
             boolean genPlat = true;
             for (GameObject o : GameObjList){
-                if (o.getClass().equals(Platform.class) && o.getPane().getLayoutX() > rand.nextInt(2150, 2200)){
+                if (o.getClass().equals(Platform.class) && o.getPane().getLayoutX() > rand.nextInt(2100, 2150)){
                     genPlat = false;
                     break;
                 }
@@ -176,8 +176,19 @@ public class gameController implements Initializable {
         generateBkgdObj(2);
         generateGameObj(5, 400);
         generateGameObj(1,100);
-        h = new Hero(hero.getLayoutX(), hero.getLayoutY());
-        h.setPane(hero);
+        /* x_coordinate = 1300
+           y_coordinate = 100*/
+        this.gameHero = new Hero(1300, 100);
+        gamePane.getChildren().add(gameHero.getPane());
+        applyGravity(gameHero);
+        for (int i = 0; i < 3; i++){
+            GameObject obj = factory.createObject(5,1200 + 500*i,400);
+            GameObjList.add(obj);
+            checkCategory(obj);
+            gamePane.getChildren().add(obj.getPane());
+        }
+
+
     }
 
     public void move_hero(ActionEvent event) {
@@ -305,7 +316,20 @@ public class gameController implements Initializable {
 //                    return new double[]{collision,velocityY,time};
 //                }
             }
+        }
+        else if (object instanceof Hero){
+            gameHero = (Hero) object;
+            for(int i = 0; i < platformList.size(); i++){
+//                CODE 1: Checking Collision using Rectangle inside StackPane
 
+                Shape intersection = Shape.intersect(gameHero.getDetector(), platformList.get(i).getDetector());
+                if (intersection.getBoundsInLocal().getWidth() > 0 && intersection.getBoundsInLocal().getHeight() > 0){
+                    velocityY = -5.5;
+                    time = 0.13;
+                    collision = 1;
+                    return new double[]{collision,velocityY,time};
+                }
+            }
         }
         else if (object instanceof Boss){
 

@@ -5,7 +5,9 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ public class Hero extends GameObject{
 
     Hero(double x, double y){
         super(x,y);
+        generateHero();
 //        this.myUser = user;
     }
 
@@ -32,6 +35,23 @@ public class Hero extends GameObject{
 
     public User getUser() {
         return myUser;
+    }
+
+    private void generateHero(){
+        StackPane heroPane = new StackPane();;
+        heroPane.setPrefWidth(50.0);
+        heroPane.setPrefHeight(50.0);
+        heroPane.setLayoutX(this.get_X());
+        heroPane.setLayoutY(this.get_Y());
+        Rectangle hero_rec = new Rectangle(heroPane.getPrefWidth(),heroPane.getPrefHeight());
+        heroPane.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
+        hero_rec.setStyle("-fx-fill:transparent");
+        this.setId("hero");
+        heroPane.setId(this.getId());
+        heroPane.getStyleClass().add("hero");
+        this.setDetector(hero_rec);
+        heroPane.getChildren().add(hero_rec);
+        super.setPane(heroPane);
     }
 
     public void jump(){
