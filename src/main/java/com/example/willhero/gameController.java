@@ -129,7 +129,7 @@ public class gameController implements Initializable {
         platTimer = new Timeline(new KeyFrame(Duration.millis(1000), e -> {
             boolean genPlat = true;
             for (GameObject o : GameObjList){
-                if (o.getClass().equals(Platform.class) && o.getPane().getLayoutX() > rand.nextInt(2100, 2150)){
+                if (o.getClass().equals(Platform.class) && o.getPane().getLayoutX() > rand.nextInt(2300, 2350)){
                     genPlat = false;
                     break;
                 }
@@ -175,10 +175,10 @@ public class gameController implements Initializable {
         generateBkgdObj(1);
         generateBkgdObj(2);
         generateGameObj(5, 400);
-        generateGameObj(1,100);
+        generateGameObj(1,300);
         /* x_coordinate = 1300
            y_coordinate = 100*/
-        this.gameHero = new Hero(1300, 100);
+        this.gameHero = new Hero(1300, 300);
         gamePane.getChildren().add(gameHero.getPane());
         applyGravity(gameHero);
         for (int i = 0; i < 3; i++){
@@ -187,12 +187,10 @@ public class gameController implements Initializable {
             checkCategory(obj);
             gamePane.getChildren().add(obj.getPane());
         }
-
-
     }
 
     public void move_hero(ActionEvent event) {
-        System.out.println("hero moved");
+//        System.out.println("hero moved");
 //        applyGravity(h);
 
 //        h.getUser().setScore(h.getUser().getScore() + 1);
