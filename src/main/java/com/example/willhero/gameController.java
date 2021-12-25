@@ -346,8 +346,18 @@ public class gameController implements Initializable {
                     return new double[]{collision,velocityY,time};
                 }
                 else if (gameHero.getPane().getBoundsInParent().intersects(orcList.get(o).getPane().getBoundsInParent()) && ((orcList.get(o).get_Y() - gameHero.get_Y()) < 10)){
-                    orcList.get(o).getPane().setLayoutX(orcList.get(o).getPane().getLayoutX() + 100);
-                    checkOrctoOrcCollision(orcList.get(o));
+                    boolean oCollision = false;
+                    int shiftX = 0;
+                    int totalShift = 0;
+                    while(!oCollision){
+                        shiftX++;
+                        totalShift += shiftX;
+                        if (totalShift >= 100){
+                            break;
+                        }
+                        orcList.get(o).getPane().setLayoutX(orcList.get(o).getPane().getLayoutX() + shiftX);
+                        oCollision = checkOrctoOrcCollision(orcList.get(o));
+                    }
                 }
 //                else if (intersection.getBoundsInLocal().getWidth() > 0 && intersection.getBoundsInLocal().getHeight() < 25){
 //                    velocityY = -7;//5.5 (just for testing)
@@ -403,14 +413,16 @@ public class gameController implements Initializable {
 
     }
 
-    private void checkOrctoOrcCollision(Orcs orc){
+    private boolean checkOrctoOrcCollision(Orcs orc){
         for (int o = 0; o < orcList.size(); o++){
             if (orc.getId().equals(orcList.get(o).getId())){
                 continue;
             }
             else if (orc.getPane().getBoundsInParent().intersects(orcList.get(o).getPane().getBoundsInParent())){
                 orcList.get(o).getPane().setLayoutX(orcList.get(o).getPane().getLayoutX() + 100);
+                return true;
             }
         }
+        return false;
     }
 }
