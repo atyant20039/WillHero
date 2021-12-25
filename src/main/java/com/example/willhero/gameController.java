@@ -423,6 +423,13 @@ public class gameController implements Initializable {
                 return true;
             }
         }
+
+        for(int c = 0; c < chestList.size(); c++){
+            if(orc.getPane().getBoundsInParent().intersects(chestList.get(c).getPane().getBoundsInParent())){
+                chestList.get(c).getPane().setLayoutX(chestList.get(c).getPane().getLayoutX() + 100);
+                return true;
+            }
+        }
         return false;
     }
 }
