@@ -1,5 +1,6 @@
 package com.example.willhero;
 
+import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 
@@ -39,6 +40,7 @@ public class Orcs extends GameObject{
             orcPane.getStyleClass().add("redOrc");
         }
         this.setDetector(orc_rec);
+//        orcPane.setAlignment(Pos.CENTER_RIGHT);
         orcPane.getChildren().add(orc_rec);
         super.setPane(orcPane);
     }
