@@ -268,7 +268,7 @@ public class gameController implements Initializable {
         AnimationTimer timer = new AnimationTimer() {
             double time = 0;
             double velocityY = 0;
-            double gravity = 15.8;
+            final double gravity = 15.8;
             double prevVelocityY = 0;
             @Override
             public void handle(long l) {
@@ -303,21 +303,14 @@ public class gameController implements Initializable {
             for(int i = 0; i < platformList.size(); i++){
 //                CODE 1: Checking Collision using Rectangle inside StackPane
 
-                if (orc.getPane().getBoundsInParent().intersects(platformList.get(i).getPane().getBoundsInParent()) && ((platformList.get(i).get_Y() - gameHero.get_Y()) > 40)){
+                if (orc.getPane().getBoundsInParent().intersects(platformList.get(i).getPane().getBoundsInParent())){
                     velocityY = -5.5;
                     time = 0.13;
                     collision = 1;
                     return new double[]{collision,velocityY,time};
                 }
 
-//                  CODE 2: Checking Collision using StackPane
-
-//                if (orc.getPane().getBoundsInParent().intersects(platformList.get(i).getPane().getBoundsInParent()) && ((platformList.get(i).get_Y() - gameHero.get_Y()) > 40)){
-//                    velocityY = -5.5;
-//                    time = 0.13;
-//                    collision = 1;
-//                    return new double[]{collision,velocityY,time};
-//                }
+//                CODE 2: Checking Collision using StackPane
 //                Shape intersection = Shape.intersect(gameHero.getDetector(), platformList.get(i).getDetector());
 //                if (intersection.getBoundsInLocal().getWidth() > 0 && intersection.getBoundsInLocal().getHeight() > 0 && ((platformList.get(i).get_Y() - gameHero.get_Y()) > 40)){
 //                    velocityY = -4;//5.5 (just for testing)
@@ -354,12 +347,12 @@ public class gameController implements Initializable {
                     System.out.println(gameHero.getPane().getLayoutY()+ " " + orcList.get(o).getPane().getLayoutY());
                     orcList.get(o).getPane().setLayoutX(orcList.get(o).getPane().getLayoutX() + 100);
                 }
-                else if (intersection.getBoundsInLocal().getWidth() > 0 && intersection.getBoundsInLocal().getHeight() < 25){
-                    velocityY = -7;//5.5 (just for testing)
-                    time = 0.13;
-                    collision = 1;
-                    return new double[]{collision,velocityY,time};
-                }
+//                else if (intersection.getBoundsInLocal().getWidth() > 0 && intersection.getBoundsInLocal().getHeight() < 25){
+//                    velocityY = -7;//5.5 (just for testing)
+//                    time = 0.13;
+//                    collision = 1;
+//                    return new double[]{collision,velocityY,time};
+//                }
 //                else if (intersection.getBoundsInLocal().getWidth() > 0){
 //                    applyGravity(gameHero,true);
 //                }
