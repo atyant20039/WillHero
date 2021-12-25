@@ -22,7 +22,7 @@
                </font></Text>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="42.0" prefWidth="108.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0">
+      <HBox alignment="CENTER" prefHeight="42.0" prefWidth="69.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0">
          <children>
             <ImageView fitHeight="40.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
                <image>
@@ -50,5 +50,27 @@
             </ImageView>
          </graphic>
       </Button>
+      <HBox alignment="CENTER" prefHeight="63.0" prefWidth="143.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="40.0" styleClass="weaponButton" stylesheets="@design.css" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Sword.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="weaponButton" stylesheets="@design.css" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@ThrowingKnife.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

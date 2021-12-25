@@ -75,3 +75,14 @@
     -fx-background-color: transparent;
     -fx-text-fill: #000000;
 }
+
+.weaponButton{
+    -fx-border-color: #4974e5;
+    -fx-border-width: 2.5;
+}
+
+weaponButton:pressed{
+    -fx-background-color: #4974e5;
+}
+
+.
