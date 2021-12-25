@@ -24,12 +24,12 @@
 }
 
 .greenOrc {
-    -fx-background-image:url('greenOrc.jpg');
+    -fx-background-image:url('greenOrc.png');
     -fx-background-size: 100% 100%;
 }
 
 .redOrc {
-    -fx-background-image:url('redOrc.jpg');
+    -fx-background-image:url('redOrc.png');
     -fx-background-size: 100% 100%;
 }
 
@@ -76,6 +76,7 @@
     -fx-text-fill: #000000;
 }
 
+/*
 .weaponButton{
     -fx-border-color: #4974e5;
     -fx-border-width: 2.5;
@@ -84,5 +85,4 @@
 weaponButton:pressed{
     -fx-background-color: #4974e5;
 }
-
-.
+*/

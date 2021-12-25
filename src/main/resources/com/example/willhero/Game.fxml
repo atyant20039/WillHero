@@ -22,7 +22,7 @@
                </font></Text>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="42.0" prefWidth="69.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0">
+      <HBox alignment="CENTER" prefHeight="42.0" prefWidth="69.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
          <children>
             <ImageView fitHeight="40.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
                <image>
@@ -50,22 +50,23 @@
             </ImageView>
          </graphic>
       </Button>
-      <HBox alignment="CENTER" prefHeight="63.0" prefWidth="143.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+      <HBox alignment="CENTER" prefHeight="60.0" prefWidth="150.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0">
          <children>
-            <Button fx:id="swordButton" mnemonicParsing="false" prefHeight="63.0" prefWidth="40.0" styleClass="weaponButton" stylesheets="@design.css" HBox.hgrow="ALWAYS">
+            <Button fx:id="swordButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#sword_action" prefHeight="60.0" prefWidth="60.0" styleClass="weaponButton" stylesheets="@design.css" HBox.hgrow="ALWAYS">
                <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true">
                      <image>
-                        <Image url="@Sword.png" />
+                        <Image url="@SwordButton.jpg" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="weaponButton" stylesheets="@design.css" HBox.hgrow="ALWAYS">
+            <Pane prefHeight="60.0" prefWidth="60.0" HBox.hgrow="ALWAYS" />
+            <Button fx:id="knifeButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#knife_action" prefHeight="60.0" prefWidth="60.0" styleClass="weaponButton" stylesheets="@design.css" HBox.hgrow="ALWAYS">
                <graphic>
-                  <ImageView fx:id="knifeButton" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true">
                      <image>
-                        <Image url="@ThrowingKnife.png" />
+                        <Image url="@KnifeButton.jpg" />
                      </image>
                   </ImageView>
                </graphic>

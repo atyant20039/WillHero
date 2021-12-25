@@ -42,7 +42,7 @@ public class Platform extends GameObject{
         platformPane.setPrefWidth(300);
         platformPane.setLayoutX(this.get_X());
         platformPane.setLayoutY(this.get_Y());
-        Rectangle platform_rec = new Rectangle(platformPane.getPrefWidth() - 10,platformPane.getPrefHeight());
+        Rectangle platform_rec = new Rectangle(platformPane.getPrefWidth() - 20,platformPane.getPrefHeight());
         platform_rec.setStyle("-fx-fill:transparent");
         this.setId("plat" + count);
         platformPane.setId(this.getId());

@@ -6,6 +6,8 @@ import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
@@ -39,20 +41,34 @@ public class Hero extends GameObject{
     }
 
     private void generateHero(){
-        StackPane heroPane = new StackPane();;
+        StackPane heroPane = new StackPane();
         heroPane.setPrefWidth(43.0);
         heroPane.setPrefHeight(55.0);
+//        heroPane.setMaxWidth(43.0);
+//        heroPane.setMaxHeight(55.0);
         heroPane.setLayoutX(this.get_X());
         heroPane.setLayoutY(this.get_Y());
-        Rectangle hero_rec = new Rectangle(40,34);
-        hero_rec.setStyle("-fx-fill:transparent");
+//        Rectangle hero_rec = new Rectangle(40,34);
+//        hero_rec.setStyle("-fx-fill:transparent");
         this.setId("hero");
         heroPane.setId(this.getId());
-        heroPane.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
-        heroPane.getStyleClass().add("hero");
-        this.setDetector(hero_rec);
-        heroPane.setAlignment(Pos.BOTTOM_CENTER);
-        heroPane.getChildren().add(hero_rec);
+        Image heroImg = new Image(String.valueOf(getClass().getResource("hero.png")));
+        ImageView hero_image = new ImageView(heroImg);
+        hero_image.setFitWidth(43.0);
+        hero_image.setFitHeight(55.0);
+
+//        Image knifeImg = new Image(String.valueOf(getClass().getResource("ThrowingKnife.png")));
+//        ImageView knife_image = new ImageView(knifeImg);
+//        knife_image.setFitWidth(45);
+//        knife_image.setFitHeight(10);
+//        knife_image.setVisible(false);
+//        heroPane.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
+//        heroPane.getStyleClass().add("hero");
+//        this.setDetector(hero_rec);
+//        heroPane.setStyle("-fx-background:#000000");
+        heroPane.setAlignment(Pos.BOTTOM_RIGHT);
+        heroPane.getChildren().add(hero_image);
+//        heroPane.getChildren().add(knife_image);
         super.setPane(heroPane);
     }
 

@@ -31,7 +31,7 @@ public abstract class GameObject {
         return this.y_coordinate;
     }
 
-    public boolean if_collision(GameObject o1, GameObject o2){
+    public boolean check_collision(GameObject o1, GameObject o2){
         //TODO : Check collision code
         
         return true;

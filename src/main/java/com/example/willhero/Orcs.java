@@ -1,6 +1,7 @@
 package com.example.willhero;
 
 import javafx.geometry.Pos;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 
@@ -32,6 +33,7 @@ public class Orcs extends GameObject{
         Rectangle orc_rec = new Rectangle(orcPane.getPrefWidth(),orcPane.getPrefHeight());
         orcPane.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
         orc_rec.setStyle("-fx-fill:transparent");
+//        orcPane.setBorder(Border.EMPTY);
         this.setId("orc" + count);
         orcPane.setId(this.getId());
         if (rand_num == 1){
