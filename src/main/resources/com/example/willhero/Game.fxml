@@ -52,7 +52,7 @@
       </Button>
       <HBox alignment="CENTER" prefHeight="63.0" prefWidth="143.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="40.0" styleClass="weaponButton" stylesheets="@design.css" HBox.hgrow="ALWAYS">
+            <Button fx:id="swordButton" mnemonicParsing="false" prefHeight="63.0" prefWidth="40.0" styleClass="weaponButton" stylesheets="@design.css" HBox.hgrow="ALWAYS">
                <graphic>
                   <ImageView fitHeight="50.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -63,7 +63,7 @@
             </Button>
             <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="weaponButton" stylesheets="@design.css" HBox.hgrow="ALWAYS">
                <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="knifeButton" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@ThrowingKnife.png" />
                      </image>
