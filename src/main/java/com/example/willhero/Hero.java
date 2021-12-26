@@ -57,18 +57,18 @@ public class Hero extends GameObject{
         hero_image.setFitWidth(43.0);
         hero_image.setFitHeight(55.0);
 
-//        Image knifeImg = new Image(String.valueOf(getClass().getResource("ThrowingKnife.png")));
-//        ImageView knife_image = new ImageView(knifeImg);
-//        knife_image.setFitWidth(45);
-//        knife_image.setFitHeight(10);
-//        knife_image.setVisible(false);
+        Image knifeImg = new Image(String.valueOf(getClass().getResource("ThrowingKnife.png")));
+        ImageView knife_image = new ImageView(knifeImg);
+        knife_image.setFitWidth(45);
+        knife_image.setFitHeight(10);
+        knife_image.setVisible(false);
 //        heroPane.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
 //        heroPane.getStyleClass().add("hero");
 //        this.setDetector(hero_rec);
 //        heroPane.setStyle("-fx-background:#000000");
         heroPane.setAlignment(Pos.BOTTOM_RIGHT);
         heroPane.getChildren().add(hero_image);
-//        heroPane.getChildren().add(knife_image);
+        heroPane.getChildren().add(knife_image);
         super.setPane(heroPane);
     }
 

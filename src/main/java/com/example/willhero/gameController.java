@@ -180,7 +180,7 @@ public class gameController implements Initializable {
 //            }
 //
 //            int rand_count = rand.nextInt(20);
-//            if (rand_count%2 == 0 && coin_per_plat > 0 && !(coinList.get(coinList.size() - 1).getPane().getLayoutX() > 2650)){
+//            if (rand_count%2 == 0 && coin_per_plat > 0 && !(coinList.get(coinList.size() - 1).getPane().getLayoutX() > 2680)){
 //                System.out.println("Generating Orc Copy ");
 //                this.generateGameObj(1,400);
 //                coin_per_plat--;
@@ -290,10 +290,20 @@ public class gameController implements Initializable {
             translate.setNode(gameHero.getPane().getChildren().get(1));
             translate.setDuration(Duration.millis(100));
             translate.setCycleCount(1);
-            translate.setByX(50);
+            translate.setByX(500);
             translate.setInterpolator(Interpolator.LINEAR);
             translate.play();
-            translate.setOnFinished(ActionEvent -> {gameHero.getPane().getChildren().get(1).setVisible(false);});
+            translate.setOnFinished(ActionEvent -> {
+                gameHero.getPane().getChildren().get(1).setVisible(false);
+                TranslateTransition returnBack = new TranslateTransition();
+//                gameHero.getPane().getChildren().get(1).setVisible(true);
+                returnBack.setNode(gameHero.getPane().getChildren().get(1));
+                returnBack.setDuration(Duration.millis(0.1));
+                returnBack.setCycleCount(1);
+                returnBack.setByX(-500);
+//                returnBack.setInterpolator(Interpolator.LINEAR);
+                returnBack.play();
+            });
         }
 
         //        System.gc();
