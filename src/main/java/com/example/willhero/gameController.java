@@ -32,7 +32,7 @@ public class gameController implements Initializable {
     private AnchorPane gamePane;
 
     @FXML
-    private StackPane hero, temp_plat1, temp_plat2/*, temp_plat3, temp_plat4*/;
+    private StackPane hero, abyss;
 
     @FXML
     private Button pause_button, move_hero_button, swordButton, knifeButton;
@@ -405,6 +405,13 @@ public class gameController implements Initializable {
         if (object instanceof Orcs){
             Orcs orc = (Orcs) object;
             if (!orc.isDisableCollision()){
+
+                if (orc.getPane().getBoundsInParent().intersects(abyss.getBoundsInParent())){
+                    userCoin++;
+                    coin_text.setText("" + userCoin);
+                    killGameObj(orc);
+                }
+
                 for(int i = 0; i < platformList.size(); i++){
 //                CODE 1: Checking Collision using Rectangle inside StackPane
 
@@ -430,6 +437,8 @@ public class gameController implements Initializable {
                         orc.die();
                     }
                 }
+            } else {
+                killGameObj(orc);
             }
         }
         else if (object instanceof Hero){

@@ -1,9 +1,12 @@
 package com.example.willhero;
 
+import javafx.scene.layout.StackPane;
+
 public class Abyss extends GameObject{
-    Abyss(double x, double y)
+    Abyss(StackPane pane, double x, double y)
     {
         super(x, y);
+        this.setPane(pane);
     }
 
     @Override
