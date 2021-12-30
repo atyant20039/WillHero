@@ -156,39 +156,34 @@ public class gameController implements Initializable {
         orcTimer.setCycleCount(TranslateTransition.INDEFINITE);
         orcTimer.play();
 
-//        coinTimer = new Timeline(new KeyFrame(Duration.millis(1000), e -> {
-//            boolean genCoin = true;
-//            for (GameObject o : GameObjList){
-//                if (o.getClass().equals(Coin.class) && o.getPane().getLayoutX() > rand.nextInt(2250, 2300)){
-//                    genCoin = false;
-//                    break;
-//                }
-//            }
-//            if (genCoin) {
-//                coin_per_plat = 2;
-//                this.generateGameObj(1,400);
-//            }
-//
-//            int rand_count = rand.nextInt(20);
-//            if (rand_count%2 == 0 && coin_per_plat > 0 && !(coinList.get(coinList.size() - 1).getPane().getLayoutX() > 2680)){
-//                System.out.println("Generating Orc Copy ");
-//                this.generateGameObj(1,400);
-//                coin_per_plat--;
-//            }
-//
-//            for (int o = 0; o < GameObjList.size(); o++){
-//                if (GameObjList.get(o).getPane().getLayoutX() < 500){   //Possible BUG
-//                    this.killGameObj(GameObjList.get(o));
-//                }
-//            }
-//        }));
-//        coinTimer.setCycleCount(TranslateTransition.INDEFINITE);
-//        coinTimer.play();
+        coinTimer = new Timeline(new KeyFrame(Duration.millis(1000), e -> {
+            boolean genCoin = true;
+            for (GameObject o : GameObjList){
+                if (o.getClass().equals(Coin.class) && o.getPane().getLayoutX() > rand.nextInt(2300, 2400)){
+                    genCoin = false;
+                    break;
+                }
+            }
+            int depth = ((rand.nextInt(3)) * 33);
+            if (genCoin) {
+                coin_per_plat = 2;
+                this.generateGameObj(7, 2700,300 + depth);
+            }
+
+            int rand_count = rand.nextInt(2);
+            if (rand_count%2 == 0 && coin_per_plat > 0 && !(coinList.get(coinList.size() - 1).getPane().getLayoutX() > 2680)){
+                this.generateGameObj(7, 2700,300 + depth);
+                coin_per_plat--;
+            }
+        }));
+        coinTimer.setCycleCount(TranslateTransition.INDEFINITE);
+        coinTimer.play();
 
         generateBkgdObj(1);
         generateBkgdObj(2);
         generateGameObj(5, 2700, 400);
         generateGameObj(1, 2700, 300);
+        generateGameObj(7,2700,300);
         //Initial Work//
         /* x_coordinate = 1300
            y_coordinate = 100*/
@@ -355,6 +350,10 @@ public class gameController implements Initializable {
         gamePane.getChildren().remove(obj.getPane());
         // Removing from ArrayList
         GameObjList.remove(obj);
+        orcList.remove(obj);
+        chestList.remove(obj);
+        platformList.remove(obj);
+        coinList.remove(obj);
         // Setting Reference to null
         obj = null;
     }
@@ -427,7 +426,7 @@ public class gameController implements Initializable {
                 }
 
                 for (int i = 0; i < weaponList.size(); i++){
-                    if (weaponList.get(i).getPane().getBoundsInParent().intersects(orc.getPane().getBoundsInParent())){
+                    if (weaponList.get(i).getPane().isVisible() && weaponList.get(i).getPane().getBoundsInParent().intersects(orc.getPane().getBoundsInParent())){
                         orc.die();
                     }
                 }
@@ -484,6 +483,14 @@ public class gameController implements Initializable {
                     //                }
                 }
             }
+
+            for (int i = 0; i < coinList.size(); i++){
+                if (coinList.get(i).getPane().isVisible() && coinList.get(i).getPane().getBoundsInParent().intersects(gameHero.getPane().getBoundsInParent())){
+                    coinList.get(i).getPane().setVisible(false);
+                    userCoin++;
+                    coin_text.setText("" + this.userCoin);
+                }
+            }
         }
         else if (object instanceof Boss){
 
@@ -529,7 +536,8 @@ public class gameController implements Initializable {
 
         }
         else if (object instanceof Coin){
-
+            Coin coin = (Coin) object;
+            coinList.add(coin);
         }
 
     }

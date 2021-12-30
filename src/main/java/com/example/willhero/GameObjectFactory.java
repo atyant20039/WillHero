@@ -12,15 +12,17 @@ public class GameObjectFactory {
             case 1: //Orc
                 return (new Orcs(x,y,100,10));
             case 2: //Boss
-                return (new Boss(x,y,100,10));
+                return (new Boss(x,y,1000,100));
             case 3: //WeaponChest
                 return (new WeaponChest(x,y));
             case 4: //CoinChest
                 return (new CoinChest(x,y,10));
             case 5: //Platform
                 return (new Platform(x,y));
-            case 6:
+            case 6: //Throwing Knives
                 return ThrowingKnives.getInstance(x, y);
+            case 7: //Coin
+                return (new Coin(x,y));
             default: // Attention required: returning null in case of default!
                 return null;
         }

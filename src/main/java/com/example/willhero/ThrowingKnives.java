@@ -2,17 +2,14 @@ package com.example.willhero;
 
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ThrowingKnives extends Weapon{
-    private int damage, range = 300;
+    private int damage = 100, range = 300;
     private static int count = 0;
     private static Map<Double, ThrowingKnives> instances = new HashMap<Double, ThrowingKnives>();
 
@@ -54,8 +51,6 @@ public class ThrowingKnives extends Weapon{
     @Override
     public void use_weapon() {
         instances.remove(this);
-//        System.out.println(Hero.getHero().getPane().getLayoutY() + "," + Hero.getHero().getPane().getTranslateY());
-//        System.out.println(this.getPane().getLayoutY() + "," + this.getPane().getTranslateY());
         this.getPane().setVisible(true);
         TranslateTransition translate = new TranslateTransition();
         translate.setNode(this.getPane());
