@@ -33,6 +33,11 @@
     -fx-background-size: 100% 100%;
 }
 
+.deadOrc{
+    -fx-background-image:url('dead_orc.png');
+    -fx-background-size: 100% 100%;
+}
+
 .W_chest {
     -fx-background-image:url('WeaponChest(C).png');
     -fx-background-size: 100% 100%;
@@ -40,6 +45,11 @@
 
 .C_chest {
     -fx-background-image:url('CoinChest(F).png');
+    -fx-background-size: 100% 100%;
+}
+
+.knife {
+    -fx-background-image:url('ThrowingKnife.png');
     -fx-background-size: 100% 100%;
 }
 

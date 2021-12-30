@@ -19,6 +19,8 @@ public class GameObjectFactory {
                 return (new CoinChest(x,y,10));
             case 5: //Platform
                 return (new Platform(x,y));
+            case 6:
+                return ThrowingKnives.getInstance(x, y);
             default: // Attention required: returning null in case of default!
                 return null;
         }

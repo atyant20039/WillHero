@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -46,6 +47,7 @@ public class gameController implements Initializable {
     private ArrayList<Platform> platformList = new ArrayList<Platform>();
     private ArrayList<Chest> chestList = new ArrayList<Chest>();
     private ArrayList<Coin> coinList = new ArrayList<Coin>();
+    private ArrayList<Weapon> weaponList = new ArrayList<Weapon>();
     private ArrayList<ImageView> BkgdObjList = new ArrayList<>();
     Timeline cloudTimer, floatLandTimer, platTimer, orcTimer, coinTimer;
     private Hero gameHero;
@@ -101,18 +103,6 @@ public class gameController implements Initializable {
                     this.killBkgdObj(BkgdObjList.get(i));
                 }
             }
-
-//            System.out.println("------------------------------------------------------------");
-//            System.out.println("Game Object List : " + GameObjList.size());
-////            System.out.println(GameObjList);
-//            System.out.println("Bkgd List : " + BkgdObjList.size());
-////            System.out.println(BkgdObjList);
-//            System.out.println("Cloud Pane " + cloudPane.getChildren().size());
-////            System.out.println(cloudPane.getChildren());
-//            System.out.println("Float Pane " + floatPane.getChildren().size());
-////            System.out.println(floatPane.getChildren());
-//            System.out.println("Game Pane " + gamePane.getChildren().size());
-////            System.out.println(gamePane.getChildren());
         }));
         floatLandTimer.setCycleCount(TranslateTransition.INDEFINITE);
         floatLandTimer.play();
@@ -125,7 +115,7 @@ public class gameController implements Initializable {
                     break;
                 }
             }
-            if (genPlat) this.generateGameObj(5,400);
+            if (genPlat) this.generateGameObj(5, 2700,400);
 
             for (int o = 0; o < GameObjList.size(); o++){
                 if (GameObjList.get(o).getPane().getLayoutX() < 500){   //Possible BUG
@@ -147,21 +137,21 @@ public class gameController implements Initializable {
             }
             if (genOrc) {
                 orc_per_plat = 2;
-                this.generateGameObj(1,400);
+                this.generateGameObj(1, 2700,400);
             }
 
             int rand_count = rand.nextInt(20);
             if (rand_count%2 == 0 && orc_per_plat > 0 && !(orcList.get(orcList.size() - 1).getPane().getLayoutX() > 2650)){
-                System.out.println("Generating Orc Copy ");
-                this.generateGameObj(1,400);
+                this.generateGameObj(1, 2700, 400);
                 orc_per_plat--;
             }
 
-            for (int o = 0; o < GameObjList.size(); o++){
-                if (GameObjList.get(o).getPane().getLayoutX() < 500){   //Possible BUG
-                    this.killGameObj(GameObjList.get(o));
-                }
-            }
+
+//            for (int o = 0; o < GameObjList.size(); o++){
+//                if (GameObjList.get(o).getPane().getLayoutX() < 500){   //Possible BUG
+//                    this.killGameObj(GameObjList.get(o));
+//                }
+//            }
         }));
         orcTimer.setCycleCount(TranslateTransition.INDEFINITE);
         orcTimer.play();
@@ -197,25 +187,25 @@ public class gameController implements Initializable {
 
         generateBkgdObj(1);
         generateBkgdObj(2);
-        generateGameObj(5, 400);
-        generateGameObj(1,300);
+        generateGameObj(5, 2700, 400);
+        generateGameObj(1, 2700, 300);
         //Initial Work//
         /* x_coordinate = 1300
            y_coordinate = 100*/
-        this.gameHero = new Hero(1300, 300);
+        this.gameHero = Hero.getHero();
         gamePane.getChildren().add(gameHero.getPane());
         applyGravity(gameHero, false);
         for (int i = 0; i < 3; i++){
-            GameObject obj = factory.createObject(5,1200 + 500*i,400);
-            GameObjList.add(obj);
-            checkCategory(obj);
-            gamePane.getChildren().add(obj.getPane());
+            generateGameObj(5,1200 + 500*i,400);
         }
     }
 
+    ImageView knife;
+
     public void sword_action(ActionEvent event) {
         if (equiped_knife){
-            gameHero.getPane().getChildren().remove(2);
+//            gameHero.getPane().getChildren().remove(2);
+            knife.setVisible(false);
         }
         if (!equiped_sword){
             equiped_sword = true;
@@ -224,33 +214,41 @@ public class gameController implements Initializable {
             ImageView sword = new ImageView(swordImg);
             sword.setFitWidth(100.0);
             sword.setFitHeight(25.0);
-            gameHero.getPane().getChildren().add(sword);
+            sword.setLayoutX(gameHero.getPane().getLayoutX() - sword.getFitWidth() + 10);
+            sword.setLayoutY(gameHero.getPane().getLayoutY());
+            sword.setTranslateY(gameHero.getPane().getTranslateY());
+//            weaponList.add(0,sword);
+            gamePane.getChildren().add(sword);
         }
+        Hero.getHero().changeWeapon(0);
+
         // TODO: Remove sword image from scene
     }
 
     public void knife_action(ActionEvent event) {
         if (equiped_sword){
-            gameHero.getPane().getChildren().remove(2);
-        }
-        if (!equiped_knife){
+//            gameHero.getPane().getChildren().remove(2);
             equiped_sword = false;
             equiped_knife = true;
-//            System.out.println("throw knife");
+            knife.setVisible(true);
+        }
+        else if (!equiped_knife){
+            equiped_sword = false;
+            equiped_knife = true;
             Image knifeImg = new Image(String.valueOf(getClass().getResource("knife_eq.png")));
-            ImageView knife = new ImageView(knifeImg);
-            knife.setFitWidth(30.0);
-            knife.setFitHeight(30.0);
+            knife = new ImageView(knifeImg);
+            knife.setFitWidth(20.0);
+            knife.setFitHeight(20.0);
+            gameHero.getPane().setAlignment(knife, Pos.BOTTOM_LEFT);
             gameHero.getPane().getChildren().add(knife);
         }
+        Hero.getHero().changeWeapon(1);
         // TODO: Remove sword image from scene
     }
 
-    public void move_hero(ActionEvent event) {
-//        System.out.println("hero moved");
-//        applyGravity(h);
+//    ThrowingKnives t1 = ThrowingKnives.getInstance();
 
-//        h.getUser().setScore(h.getUser().getScore() + 1);
+    public void move_hero(ActionEvent event) {
         this.userScore++;
         score_text.setText("" + this.userScore);
         for (GameObject s: GameObjList){
@@ -285,44 +283,55 @@ public class gameController implements Initializable {
         }
 
         if (equiped_knife){
-            TranslateTransition translate = new TranslateTransition();
-            gameHero.getPane().getChildren().get(1).setVisible(true);
-            translate.setNode(gameHero.getPane().getChildren().get(1));
-            translate.setDuration(Duration.millis(100));
-            translate.setCycleCount(1);
-            translate.setByX(500);
-            translate.setInterpolator(Interpolator.LINEAR);
-            translate.play();
-            translate.setOnFinished(ActionEvent -> {
-                gameHero.getPane().getChildren().get(1).setVisible(false);
-                TranslateTransition returnBack = new TranslateTransition();
-//                gameHero.getPane().getChildren().get(1).setVisible(true);
-                returnBack.setNode(gameHero.getPane().getChildren().get(1));
-                returnBack.setDuration(Duration.millis(0.1));
-                returnBack.setCycleCount(1);
-                returnBack.setByX(-500);
-//                returnBack.setInterpolator(Interpolator.LINEAR);
-                returnBack.play();
-            });
+            Weapon kn = (Weapon) factory.createObject(6,gameHero.getPane().getLayoutX() + (gameHero.getPane().getWidth() / 2), Hero.getHero().getPane().getLayoutY() + (Hero.getHero().getPane().getHeight()/2));
+            if (!(gamePane.getChildren().contains(kn.getPane()))){
+                gamePane.getChildren().add(kn.getPane());
+                weaponList.add(kn);
+            }
+//            try {
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+            kn.use_weapon();
+//            checkCollision(kn,0,0);
+//            TranslateTransition translate = new TranslateTransition();
+//            gameHero.getPane().getChildren().get(1).setVisible(true);
+//            translate.setNode(gameHero.getPane().getChildren().get(1));
+//            translate.setDuration(Duration.millis(100));
+//            translate.setCycleCount(1);
+//            translate.setByX(500);
+//            translate.setInterpolator(Interpolator.LINEAR);
+//            translate.play();
+//            translate.setOnFinished(ActionEvent -> {
+//                gameHero.getPane().getChildren().get(1).setVisible(false);
+//                TranslateTransition returnBack = new TranslateTransition();
+////                gameHero.getPane().getChildren().get(1).setVisible(true);
+//                returnBack.setNode(gameHero.getPane().getChildren().get(1));
+//                returnBack.setDuration(Duration.millis(0.1));
+//                returnBack.setCycleCount(1);
+//                returnBack.setByX(-500);
+////                returnBack.setInterpolator(Interpolator.LINEAR);
+//                returnBack.play();
+//            });
+
+
         }
 
         //        System.gc();
         //        System.runFinalization();
     }
 
-    private void generateGameObj(int objno, float y) {
-        GameObject obj = factory.createObject(objno,2700,y);
+    private void generateGameObj(int objno, double x, double y) {
+        GameObject obj = factory.createObject(objno,x,y);
         GameObjList.add(obj);
         checkCategory(obj);
         gamePane.getChildren().add(obj.getPane());
-        System.out.println(obj.getPane().getId());
     }
 
     private void generateBkgdObj(int objno){
         ImageView obj = factory.create_bkgd_obj(objno);
         BkgdObjList.add(obj);
         if (objno == 1){
-            System.out.println("cloud created");
             cloudPane.getChildren().add(obj);
             move_cloud(obj);
         }
@@ -396,15 +405,16 @@ public class gameController implements Initializable {
         double collision = 0;
         if (object instanceof Orcs){
             Orcs orc = (Orcs) object;
-            for(int i = 0; i < platformList.size(); i++){
+            if (!orc.isDisableCollision()){
+                for(int i = 0; i < platformList.size(); i++){
 //                CODE 1: Checking Collision using Rectangle inside StackPane
 
-                if (orc.getPane().getBoundsInParent().intersects(platformList.get(i).getPane().getBoundsInParent())) {
-                    velocityY = -5.5;
-                    time = 0.13;
-                    collision = 1;
-                    return new double[]{collision,velocityY,time};
-                }
+                    if (orc.getPane().getBoundsInParent().intersects(platformList.get(i).getPane().getBoundsInParent())) {
+                        velocityY = -5.5;
+                        time = 0.13;
+                        collision = 1;
+                        return new double[]{collision,velocityY,time};
+                    }
 
 //                CODE 2: Checking Collision using StackPane
 //                Shape intersection = Shape.intersect(gameHero.getDetector(), platformList.get(i).getDetector());
@@ -414,6 +424,13 @@ public class gameController implements Initializable {
 //                    collision = 1;
 //                    return new double[]{collision,velocityY,time};
 //                }
+                }
+
+                for (int i = 0; i < weaponList.size(); i++){
+                    if (weaponList.get(i).getPane().getBoundsInParent().intersects(orc.getPane().getBoundsInParent())){
+                        orc.die();
+                    }
+                }
             }
         }
         else if (object instanceof Hero){
@@ -436,7 +453,7 @@ public class gameController implements Initializable {
 //                    collision = 1;
 //                    return new double[]{collision,velocityY,time};
 //                }
-                if (!(orcList.get(o).getPane().getLayoutX() < gameHero.get_X() - 200 && orcList.get(o).getPane().getLayoutX() > gameHero.get_X() + 200)) {
+                if ((!orcList.get(o).isDisableCollision()) && !(orcList.get(o).getPane().getLayoutX() < gameHero.get_X() - 200 && orcList.get(o).getPane().getLayoutX() > gameHero.get_X() + 200)) {
                     if (gameHero.getPane().getBoundsInParent().intersects(orcList.get(o).getPane().getBoundsInParent()) && ((orcList.get(o).get_Y() - gameHero.get_Y()) > 25)) {
                         velocityY = -5.5;//5.5 (just for testing)
                         time = 0.13;
@@ -507,6 +524,12 @@ public class gameController implements Initializable {
         else if (object instanceof Platform){
             Platform platform = (Platform) object;
             platformList.add(platform);
+        }
+        else if (object instanceof ThrowingKnives){
+
+        }
+        else if (object instanceof Coin){
+
         }
 
     }

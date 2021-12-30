@@ -10,6 +10,7 @@ import java.util.Random;
 public class Orcs extends GameObject{
     protected int health, coin_reward;
     private static int count = 0;
+    private boolean disableCollision = false;
     Random rand = new Random();
 
     {
@@ -56,8 +57,13 @@ public class Orcs extends GameObject{
 
     }
 
-    public void die(){
+    public boolean isDisableCollision() {
+        return disableCollision;
+    }
 
+    public void die(){
+        disableCollision = true;
+        this.getPane().getStyleClass().add("deadOrc");
     }
 
 }
