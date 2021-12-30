@@ -16,6 +16,7 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 public class Hero extends GameObject{
+    private static Hero hero = null;
     private ArrayList<Weapon> myWeapons = new ArrayList<>();
     private Weapon myWeapon = null;
     private User myUser;
@@ -25,10 +26,17 @@ public class Hero extends GameObject{
 //    private Object fxid;
 //    private double x,y;
 
-    Hero(double x, double y){
+    private Hero(double x, double y){
         super(x,y);
         generateHero();
 //        this.myUser = user;
+    }
+
+    public static Hero getHero(){
+        if (hero == null){
+            hero = new Hero(1300,300);
+        }
+        return hero;
     }
 
     @Override
@@ -52,23 +60,25 @@ public class Hero extends GameObject{
 //        hero_rec.setStyle("-fx-fill:transparent");
         this.setId("hero");
         heroPane.setId(this.getId());
-        Image heroImg = new Image(String.valueOf(getClass().getResource("hero.png")));
-        ImageView hero_image = new ImageView(heroImg);
-        hero_image.setFitWidth(43.0);
-        hero_image.setFitHeight(55.0);
+//        Image heroImg = new Image(String.valueOf(getClass().getResource("hero.png")));
+//        ImageView hero_image = new ImageView(heroImg);
+//        hero_image.setFitWidth(43.0);
+//        hero_image.setFitHeight(55.0);
 
-        Image knifeImg = new Image(String.valueOf(getClass().getResource("ThrowingKnife.png")));
-        ImageView knife_image = new ImageView(knifeImg);
-        knife_image.setFitWidth(45);
-        knife_image.setFitHeight(10);
-        knife_image.setVisible(false);
-//        heroPane.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
-//        heroPane.getStyleClass().add("hero");
+//        Image knifeImg = new Image(String.valueOf(getClass().getResource("ThrowingKnife.png")));
+//        ImageView knife_image = new ImageView(knifeImg);
+//        knife_image.setFitWidth(45);
+//        knife_image.setFitHeight(10);
+//        knife_image.setVisible(false);
+
+        heroPane.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
+        heroPane.getStyleClass().add("hero");
+
 //        this.setDetector(hero_rec);
 //        heroPane.setStyle("-fx-background:#000000");
-        heroPane.setAlignment(Pos.BOTTOM_RIGHT);
-        heroPane.getChildren().add(hero_image);
-        heroPane.getChildren().add(knife_image);
+//        heroPane.setAlignment(Pos.BOTTOM_RIGHT);
+//        heroPane.getChildren().add(hero_image);
+//        heroPane.getChildren().add(knife_image);
         super.setPane(heroPane);
     }
 
@@ -103,7 +113,7 @@ public class Hero extends GameObject{
     }
 
     public void changeWeapon(int index){
-
+//        myWeapon = myWeapons.get(index);
     }
 
     public boolean revive(){
