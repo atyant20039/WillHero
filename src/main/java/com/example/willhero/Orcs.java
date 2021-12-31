@@ -64,6 +64,8 @@ public class Orcs extends GameObject{
     public void die(){
         disableCollision = true;
         this.getPane().getStyleClass().add("deadOrc");
+
+        //TODO: Orc death gives coins to hero
     }
 
 

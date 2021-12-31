@@ -51,7 +51,7 @@ public class gameController implements Initializable {
     private ArrayList<ImageView> BkgdObjList = new ArrayList<>();
     Timeline cloudTimer, floatLandTimer, platTimer, orcTimer, coinTimer;
     private Hero gameHero;
-    private int userScore = 0, userCoin = 0, orc_per_plat = 2, coin_per_plat = 3;
+    private int userScore = 0, userCoin = 0, orc_per_plat = 2, coin_per_plat = 3, coinDepth = 0;
     private Random rand = new Random();
     private boolean equiped_sword = false, equiped_knife = false;
 
@@ -164,15 +164,16 @@ public class gameController implements Initializable {
                     break;
                 }
             }
-            int depth = ((rand.nextInt(3)) * 33);
+
             if (genCoin) {
                 coin_per_plat = 2;
-                this.generateGameObj(7, 2700,300 + depth);
+                coinDepth = ((rand.nextInt(2)) * 66);
+                this.generateGameObj(7, 2700,300 + coinDepth);
             }
 
             int rand_count = rand.nextInt(2);
-            if (rand_count%2 == 0 && coin_per_plat > 0 && !(coinList.get(coinList.size() - 1).getPane().getLayoutX() > 2680)){
-                this.generateGameObj(7, 2700,300 + depth);
+            if (rand_count%2 == 0 && coin_per_plat > 0 && !(coinList.get(coinList.size() - 1).getPane().getLayoutX() > 2675)){
+                this.generateGameObj(7, 2700,300 + coinDepth);
                 coin_per_plat--;
             }
         }));
@@ -409,7 +410,7 @@ public class gameController implements Initializable {
                 if (orc.getPane().getBoundsInParent().intersects(abyss.getBoundsInParent())){
                     System.out.println(orc.getId() + " fell in Abyss!");
                     orc.die();
-                    this.userCoin+=3;
+                    this.userCoin++;
                     coin_text.setText("" + this.userCoin);
                     killGameObj(orc);
 
@@ -438,9 +439,13 @@ public class gameController implements Initializable {
                 for (int i = 0; i < weaponList.size(); i++){
                     if (weaponList.get(i).getPane().isVisible() && weaponList.get(i).getPane().getBoundsInParent().intersects(orc.getPane().getBoundsInParent())){
                         orc.die();
+                        this.userCoin++;
+                        coin_text.setText("" + userCoin);
+                        weaponList.get(i).getPane().setVisible(false);
+                        //TODO: Kill instance of orc and remove from scene one dead orc touches abyss
                     }
                 }
-            } else {
+            } else if (orc.getPane().getBoundsInParent().intersects(abyss.getBoundsInParent())){
                 killGameObj(orc);
             }
         }
