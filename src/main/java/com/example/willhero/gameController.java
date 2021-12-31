@@ -407,9 +407,12 @@ public class gameController implements Initializable {
             if (!orc.isDisableCollision()){
 
                 if (orc.getPane().getBoundsInParent().intersects(abyss.getBoundsInParent())){
-                    userCoin++;
-                    coin_text.setText("" + userCoin);
+                    System.out.println(orc.getId() + " fell in Abyss!");
+                    orc.die();
+                    this.userCoin+=3;
+                    coin_text.setText("" + this.userCoin);
                     killGameObj(orc);
+
                 }
 
                 for(int i = 0; i < platformList.size(); i++){
