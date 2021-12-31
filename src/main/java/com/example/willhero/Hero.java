@@ -22,6 +22,7 @@ public class Hero extends GameObject{
     private User myUser;
     private String myHelmet;
     private int myCoins = 0, lives = 1;
+    private boolean disableCollision = false;
     private Timeline gravity;
 //    private Object fxid;
 //    private double x,y;
@@ -108,10 +109,6 @@ public class Hero extends GameObject{
 
     }
 
-    public void die(){
-
-    }
-
     public void changeWeapon(int index){
 //        myWeapon = myWeapons.get(index);
     }
@@ -127,5 +124,14 @@ public class Hero extends GameObject{
 
     public void setCoins(int myCoins) {
         this.myCoins = myCoins;
+    }
+
+    public boolean isDisableCollision() {
+        return disableCollision;
+    }
+
+    public void die(){
+        disableCollision = true;
+        this.getPane().getStyleClass().add("deadOrc");
     }
 }

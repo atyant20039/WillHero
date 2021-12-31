@@ -32,7 +32,7 @@ public class gameController implements Initializable {
     private AnchorPane gamePane;
 
     @FXML
-    private StackPane hero, abyss;
+    private StackPane abyss;
 
     @FXML
     private Button pause_button, move_hero_button, swordButton, knifeButton;
@@ -419,7 +419,7 @@ public class gameController implements Initializable {
 //                CODE 1: Checking Collision using Rectangle inside StackPane
 
                     if (orc.getPane().getBoundsInParent().intersects(platformList.get(i).getPane().getBoundsInParent())) {
-                        velocityY = -5.5;
+                        velocityY = -7.5;
                         time = 0.13;
                         collision = 1;
                         return new double[]{collision,velocityY,time};
@@ -446,61 +446,51 @@ public class gameController implements Initializable {
         }
         else if (object instanceof Hero){
             gameHero = (Hero) object;
-            for(int i = 0; i < platformList.size(); i++){
+            if (!gameHero.isDisableCollision()) {
+                for (int i = 0; i < platformList.size(); i++) {
 //                CODE 1: Checking Collision using Rectangle inside StackPane
-                if (gameHero.getPane().getBoundsInParent().intersects(platformList.get(i).getPane().getBoundsInParent()) && ((platformList.get(i).get_Y() - gameHero.get_Y()) > 40)){
-                    velocityY = -8.5;
-                    time = 0.13;
-                    collision = 1;
-                    return new double[]{collision,velocityY,time};
-                }
-            }
-
-            for(int o = 0; o < orcList.size(); o++){
-//                Shape intersection = Shape.intersect(gameHero.getDetector(), orcList.get(o).getDetector());
-//                if (intersection.getBoundsInLocal().getWidth() > 0 && intersection.getBoundsInLocal().getHeight() < 25){
-//                    velocityY = -4;//5.5 (just for testing)
-//                    time = 0.13;
-//                    collision = 1;
-//                    return new double[]{collision,velocityY,time};
-//                }
-                if ((!orcList.get(o).isDisableCollision()) && !(orcList.get(o).getPane().getLayoutX() < gameHero.get_X() - 200 && orcList.get(o).getPane().getLayoutX() > gameHero.get_X() + 200)) {
-                    if (gameHero.getPane().getBoundsInParent().intersects(orcList.get(o).getPane().getBoundsInParent()) && ((orcList.get(o).get_Y() - gameHero.get_Y()) > 25)) {
-                        velocityY = -5.5;//5.5 (just for testing)
+                    if (gameHero.getPane().getBoundsInParent().intersects(platformList.get(i).getPane().getBoundsInParent()) && ((platformList.get(i).get_Y() - gameHero.get_Y()) > 40)) {
+                        velocityY = -4.5;
                         time = 0.13;
                         collision = 1;
                         return new double[]{collision, velocityY, time};
-                    } else if (gameHero.getPane().getBoundsInParent().intersects(orcList.get(o).getPane().getBoundsInParent()) && ((orcList.get(o).get_Y() - gameHero.get_Y()) < 10)) {
-                        boolean oCollision = false;
-                        int shiftX = 0;
-                        int totalShift = 0;
-                        while (!oCollision) {
-                            shiftX++;
-                            totalShift += shiftX;
-                            if (totalShift >= 100) {
-                                break;
+                    }
+                }
+
+                for (int o = 0; o < orcList.size(); o++) {
+                    if ((!orcList.get(o).isDisableCollision()) && !(orcList.get(o).getPane().getLayoutX() < gameHero.get_X() - 200 && orcList.get(o).getPane().getLayoutX() > gameHero.get_X() + 200)) {
+                        if (gameHero.getPane().getBoundsInParent().intersects(orcList.get(o).getPane().getBoundsInParent()) && ((orcList.get(o).get_Y() - gameHero.get_Y()) > 25)) {
+                            velocityY = -5.5;//5.5 (just for testing)
+                            time = 0.13;
+                            collision = 1;
+                            return new double[]{collision, velocityY, time};
+                        } else if (gameHero.getPane().getBoundsInParent().intersects(orcList.get(o).getPane().getBoundsInParent()) && ((gameHero.get_Y()) - orcList.get(o).get_Y() < 42)) {
+                            System.out.println("orcY: " + orcList.get(o).get_Y() + "\norcX: " + orcList.get(o).get_X() + "\nheroY: " + gameHero.get_Y() + "\nheroX: " + gameHero.get_X());
+                            boolean oCollision = false;
+                            int shiftX = 0;
+                            int totalShift = 0;
+                            while (!oCollision) {
+                                shiftX++;
+                                totalShift += shiftX;
+                                if (totalShift >= 100) {
+                                    break;
+                                }
+                                orcList.get(o).getPane().setLayoutX(orcList.get(o).getPane().getLayoutX() + shiftX);
+                                oCollision = checkOrctoObjCollision(orcList.get(o));
                             }
-                            orcList.get(o).getPane().setLayoutX(orcList.get(o).getPane().getLayoutX() + shiftX);
-                            oCollision = checkOrctoObjCollision(orcList.get(o));
+                        }
+                        else if (gameHero.getPane().getBoundsInParent().intersects(orcList.get(o).getPane().getBoundsInParent())){
+                            gameHero.die();
                         }
                     }
-                    //                else if (intersection.getBoundsInLocal().getWidth() > 0 && intersection.getBoundsInLocal().getHeight() < 25){
-                    //                    velocityY = -7;//5.5 (just for testing)
-                    //                    time = 0.13;
-                    //                    collision = 1;
-                    //                    return new double[]{collision,velocityY,time};
-                    //                }
-                    //                else if (intersection.getBoundsInLocal().getWidth() > 0){
-                    //                    applyGravity(gameHero,true);
-                    //                }
                 }
-            }
 
-            for (int i = 0; i < coinList.size(); i++){
-                if (coinList.get(i).getPane().isVisible() && coinList.get(i).getPane().getBoundsInParent().intersects(gameHero.getPane().getBoundsInParent())){
-                    coinList.get(i).getPane().setVisible(false);
-                    userCoin++;
-                    coin_text.setText("" + this.userCoin);
+                for (int i = 0; i < coinList.size(); i++) {
+                    if (coinList.get(i).getPane().isVisible() && coinList.get(i).getPane().getBoundsInParent().intersects(gameHero.getPane().getBoundsInParent())) {
+                        coinList.get(i).getPane().setVisible(false);
+                        userCoin++;
+                        coin_text.setText("" + this.userCoin);
+                    }
                 }
             }
         }
