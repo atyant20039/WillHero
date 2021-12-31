@@ -51,7 +51,7 @@ public class gameController implements Initializable {
     private ArrayList<ImageView> BkgdObjList = new ArrayList<>();
     Timeline cloudTimer, floatLandTimer, platTimer, orcTimer, coinTimer;
     private Hero gameHero;
-    private int userScore = 0, userCoin = 0, orc_per_plat = 2, coin_per_plat = 3;
+    private int userScore = 0, userCoin = 0, orc_per_plat = 2, coin_per_plat = 3, coinDepth = 0;
     private Random rand = new Random();
     private boolean equiped_sword = false, equiped_knife = false;
 
@@ -67,6 +67,7 @@ public class gameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         TranslateTransition translate2 = new TranslateTransition();
         translate2.setNode(floatPane);
         translate2.setDuration(Duration.millis(5000));
@@ -156,7 +157,7 @@ public class gameController implements Initializable {
         orcTimer.setCycleCount(TranslateTransition.INDEFINITE);
         orcTimer.play();
 
-        coinTimer = new Timeline(new KeyFrame(Duration.millis(1000), e -> {
+        coinTimer = new Timeline(new KeyFrame(Duration.millis(100), e -> {
             boolean genCoin = true;
             for (GameObject o : GameObjList){
                 if (o.getClass().equals(Coin.class) && o.getPane().getLayoutX() > rand.nextInt(2300, 2400)){
@@ -164,15 +165,16 @@ public class gameController implements Initializable {
                     break;
                 }
             }
-            int depth = ((rand.nextInt(3)) * 33);
+
             if (genCoin) {
                 coin_per_plat = 2;
-                this.generateGameObj(7, 2700,300 + depth);
+                coinDepth = ((rand.nextInt(2)) * 66);
+                this.generateGameObj(7, 2700,300 + coinDepth);
             }
 
             int rand_count = rand.nextInt(2);
-            if (rand_count%2 == 0 && coin_per_plat > 0 && !(coinList.get(coinList.size() - 1).getPane().getLayoutX() > 2680)){
-                this.generateGameObj(7, 2700,300 + depth);
+            if (rand_count%2 == 0 && coin_per_plat > 0 && !(coinList.get(coinList.size() - 1).getPane().getLayoutX() > 2675)){
+                this.generateGameObj(7, 2700,300 + coinDepth);
                 coin_per_plat--;
             }
         }));
@@ -409,7 +411,7 @@ public class gameController implements Initializable {
                 if (orc.getPane().getBoundsInParent().intersects(abyss.getBoundsInParent())){
                     System.out.println(orc.getId() + " fell in Abyss!");
                     orc.die();
-                    this.userCoin+=3;
+                    this.userCoin++;
                     coin_text.setText("" + this.userCoin);
                     killGameObj(orc);
 
@@ -438,9 +440,13 @@ public class gameController implements Initializable {
                 for (int i = 0; i < weaponList.size(); i++){
                     if (weaponList.get(i).getPane().isVisible() && weaponList.get(i).getPane().getBoundsInParent().intersects(orc.getPane().getBoundsInParent())){
                         orc.die();
+                        this.userCoin++;
+                        coin_text.setText("" + userCoin);
+                        weaponList.get(i).getPane().setVisible(false);
+                        //TODO: Kill instance of orc and remove from scene one dead orc touches abyss
                     }
                 }
-            } else {
+            } else if (orc.getPane().getBoundsInParent().intersects(abyss.getBoundsInParent())){
                 killGameObj(orc);
             }
         }
@@ -449,7 +455,7 @@ public class gameController implements Initializable {
             for(int i = 0; i < platformList.size(); i++){
 //                CODE 1: Checking Collision using Rectangle inside StackPane
                 if (gameHero.getPane().getBoundsInParent().intersects(platformList.get(i).getPane().getBoundsInParent()) && ((platformList.get(i).get_Y() - gameHero.get_Y()) > 40)){
-                    velocityY = -8.5;
+                    velocityY = -5.5;
                     time = 0.13;
                     collision = 1;
                     return new double[]{collision,velocityY,time};
