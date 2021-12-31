@@ -449,7 +449,7 @@ public class gameController implements Initializable {
             for(int i = 0; i < platformList.size(); i++){
 //                CODE 1: Checking Collision using Rectangle inside StackPane
                 if (gameHero.getPane().getBoundsInParent().intersects(platformList.get(i).getPane().getBoundsInParent()) && ((platformList.get(i).get_Y() - gameHero.get_Y()) > 40)){
-                    velocityY = -5.5;
+                    velocityY = -8.5;
                     time = 0.13;
                     collision = 1;
                     return new double[]{collision,velocityY,time};

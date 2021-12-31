@@ -66,4 +66,5 @@ public class Orcs extends GameObject{
         this.getPane().getStyleClass().add("deadOrc");
     }
 
+
 }
