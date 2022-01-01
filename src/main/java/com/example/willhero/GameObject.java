@@ -55,9 +55,9 @@ public abstract class GameObject {
         this.myId = id;
     }
 
-    public Shape getDetector() {
-        return detector;
-    }
+//    public Shape getDetector() {
+//        return detector;
+//    }
 
     public void setDetector(Shape detector) {
         this.detector = detector;

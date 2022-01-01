@@ -23,6 +23,8 @@ public class GameObjectFactory {
                 return ThrowingKnives.getInstance(x, y);
             case 7: //Coin
                 return (new Coin(x,y));
+            case 8: // Abyss
+                return (new Abyss(x,y));
             default: // Attention required: returning null in case of default!
                 return null;
         }

@@ -1,7 +1,7 @@
 package com.example.willhero;
 
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Rectangle;
+
 
 public class CoinChest extends Chest{
     private int num_coins;
@@ -17,26 +17,30 @@ public class CoinChest extends Chest{
 
     @Override
     public void give_hero(Hero h) {
+        super.setDisableCollision(true);
+        this.getPane().getStyleClass().add("deadOrc");
 
+        // TODO: Give 10 Coins to Hero
     }
 
     private void generateCchest(){
         StackPane Cchest = new StackPane();
-        Cchest.setPrefWidth(100.0);
-        Cchest.setPrefHeight(100.0);
+        Cchest.setPrefWidth(80.0);
+        Cchest.setPrefHeight(70.0);
         Cchest.setLayoutX(this.get_X());
         Cchest.setLayoutY(this.get_Y());
-        Rectangle C_rec = new Rectangle(100,100);
         Cchest.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
-        C_rec.setStyle("-fx-fill:transparent");
-        this.setId("cchest" + count);
+        this.setId("cChest" + count);
         Cchest.setId(this.getId());
-        Cchest.getStyleClass().add("Cchest");
-        Cchest.getChildren().add(C_rec);
-        this.setPane(Cchest);
+        Cchest.getStyleClass().add("C_chest");
+        super.setPane(Cchest);
     }
 
     public int getNum_coins(){
         return this.num_coins;
     }
+
+
+
+
 }

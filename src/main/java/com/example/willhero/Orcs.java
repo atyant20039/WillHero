@@ -31,9 +31,9 @@ public class Orcs extends GameObject{
         orcPane.setPrefHeight(50.0);
         orcPane.setLayoutX(this.get_X());
         orcPane.setLayoutY(this.get_Y());
-        Rectangle orc_rec = new Rectangle(orcPane.getPrefWidth(),orcPane.getPrefHeight());
+//        Rectangle orc_rec = new Rectangle(orcPane.getPrefWidth(),orcPane.getPrefHeight());
         orcPane.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
-        orc_rec.setStyle("-fx-fill:transparent");
+//        orc_rec.setStyle("-fx-fill:transparent");
 //        orcPane.setBorder(Border.EMPTY);
         this.setId("orc" + count);
         orcPane.setId(this.getId());
@@ -42,9 +42,9 @@ public class Orcs extends GameObject{
         } else {
             orcPane.getStyleClass().add("redOrc");
         }
-        this.setDetector(orc_rec);
+//        this.setDetector(orc_rec);
 //        orcPane.setAlignment(Pos.CENTER_RIGHT);
-        orcPane.getChildren().add(orc_rec);
+//        orcPane.getChildren().add(orc_rec);
         super.setPane(orcPane);
     }
 

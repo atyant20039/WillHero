@@ -31,7 +31,7 @@ public class Game extends Application {
     public void start(Stage stage) throws IOException {
         music();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Game.class.getResource("loading_screen.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Game.class.getResource("Game.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 600);
         stage.setTitle("WILL HERO");
         stage.getIcons().add(new Image("https://play-lh.googleusercontent.com/Y07T-_5gdE7aUVAgAegAKzeULKTOpXrt4cL9SlKnfnl2qKvBG5oUTNhSb69bEwiLQ4Y"));
