@@ -28,6 +28,11 @@
     -fx-background-size: 100% 100%;
 }
 
+.bossOrc {
+    -fx-background-image:url('armedBoss.png');
+    -fx-background-size: 100% 100%;
+}
+
 .redOrc {
     -fx-background-image:url('redOrc.png');
     -fx-background-size: 100% 100%;
@@ -49,6 +54,16 @@
 }
 .O_chest {
     -fx-background-image:url('openChest.png');
+    -fx-background-size: 100% 100%;
+}
+
+.windmill_tower{
+    -fx-background-image:url('windmill_tower.png');
+    -fx-background-size: 100% 100%;
+}
+
+.windmill_blade{
+    -fx-background-image:url('windmill_blades.png');
     -fx-background-size: 100% 100%;
 }
 

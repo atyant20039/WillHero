@@ -25,7 +25,7 @@ public class Boss extends Orcs{
         bossPane.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
         // Boss Orc Pic Needs to be Uploaded.
         bossPane.setId((String)("Boss"));
-        bossPane.getStyleClass().add("redOrc");
+        bossPane.getStyleClass().add("bossOrc");
         super.setPane(bossPane);
     }
 

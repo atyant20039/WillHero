@@ -18,7 +18,7 @@ public class CoinChest extends Chest{
     @Override
     public void give_hero(Hero h) {
         super.setDisableCollision(true);
-        super.getPane().getStyleClass().add("deadOrc");
+        super.getPane().getStyleClass().add("O_chest");
 
         // TODO: Give 10 Coins to Hero
     }
