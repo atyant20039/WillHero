@@ -143,9 +143,9 @@ public class gameController implements Initializable {
             }
             if(userScore > 70){ // Boss Fight
                 platTimer.stop();
-                generateGameObj(2,3300,300);
+                generateGameObj(2,3300,390);
                 for(int i = 0; i < 2; i++){
-                    generateGameObj(5,3100 + 430*i,400);
+                    generateGameObj(5,3000 + 430*i,400);
                 }
             }
         }));
@@ -228,7 +228,7 @@ public class gameController implements Initializable {
                 generateGameObj(5,1200 + 500*i,400); //For generating first three platforms
             }
             else{
-                generate_fallingPlat(1200 + 500*i,400);
+                generate_fallingPlat(1200 + 500*i,400); // to generate falling platform
             }
 
         }
@@ -537,6 +537,7 @@ public class gameController implements Initializable {
             }
         }
 
+
         else if (object instanceof Hero){
             gameHero = (Hero) object;
             if (!gameHero.isDisableCollision()) {
@@ -552,7 +553,6 @@ public class gameController implements Initializable {
 
                 for (int f = 0; f < fallingPlatList.size(); f++){
                     if (gameHero.getPane().getBoundsInParent().intersects(fallingPlatList.get(f).getPane().getBoundsInParent())){
-
                         if(this.timerCall == 0){
                             this.timerCall++;
                             fallingPlatTimer();
@@ -587,9 +587,9 @@ public class gameController implements Initializable {
                                 oCollision = checkObjtoObjCollision(orcList.get(o));
                             }
                         }
-                        else if (gameHero.getPane().getBoundsInParent().intersects(orcList.get(o).getPane().getBoundsInParent())){
-                            gameHero.die();
-                        }
+//                        else if (gameHero.getPane().getBoundsInParent().intersects(orcList.get(o).getPane().getBoundsInParent())){
+//                            gameHero.die();
+//                        }
                     }
                 }
 
@@ -631,17 +631,13 @@ public class gameController implements Initializable {
                         coin_text.setText("" + this.userCoin);
                     }
                 }
-
-                if (userScore > 90  && /*!(gameHero.getPane().getLayoutY() <= gameBoss.getPane().getLayoutY() + gameBoss.getPane().getHeight())*/(gameHero.getPane().getLayoutY() - gameBoss.getPane().getLayoutY() < 42) && gameHero.getPane().getBoundsInParent().intersects(gameBoss.getPane().getBoundsInParent())){
-//                    gameBoss.getPane().setLayoutX(gameBoss.getPane().getLayoutX() + 30);
-//                    System.out.println("hemro:" + gameHero.getPane().getLayoutY());
-//                    System.out.println("boms:" + gameBoss.getPane().getLayoutY());
-                    gameHero.die();
-                }
-                else if (userScore > 90 && gameHero.getPane().getBoundsInParent().intersects(gameBoss.getPane().getBoundsInParent())){
-//                    gameHero.die();
-//                    System.out.println("YAAAAAAAAAAAAAAAAAAAA");
+                if (userScore > 90 && gameHero.getPane().getBoundsInParent().intersects(gameBoss.getPane().getBoundsInParent()) && ((gameHero.get_Y()) - gameBoss.get_Y() < 105)){
+//                    System.out.println("Side(<42): "+ gameHero.get_Y() + " " + gameBoss.get_Y());
                     gameBoss.getPane().setLayoutX(gameBoss.getPane().getLayoutX() + 30);
+                }
+                else if (userScore > 90  && gameHero.getPane().getBoundsInParent().intersects(gameBoss.getPane().getBoundsInParent())){
+                    gameHero.die();
+//                    System.out.println("Hero Died " + gameHero.get_Y() + " " + gameBoss.get_Y());
                 }
             }
         }
@@ -649,7 +645,7 @@ public class gameController implements Initializable {
             gameBoss = (Boss) object;
             for (int i = 0; i < platformList.size(); i++) {
                 if (gameBoss.getPane().getBoundsInParent().intersects(platformList.get(i).getPane().getBoundsInParent())) {
-                    velocityY = -7.5;
+                    velocityY = -5.5;
                     time = 0.13;
                     collision = 1;
                     return new double[]{collision, velocityY, time};

@@ -29,7 +29,7 @@ public class Game extends Application {
     }
     @Override
     public void start(Stage stage) throws IOException {
-        music();
+//        music();
 
         FXMLLoader fxmlLoader = new FXMLLoader(Game.class.getResource("Game.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 600);
