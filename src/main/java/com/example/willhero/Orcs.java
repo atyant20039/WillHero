@@ -1,9 +1,6 @@
 package com.example.willhero;
 
-import javafx.geometry.Pos;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Rectangle;
 
 import java.util.Random;
 
@@ -56,17 +53,17 @@ public class Orcs extends GameObject{
         return disableCollision;
     }
 
-    public void reduceHealth(int power){
+    public void reduceHealth(int power, Hero hero){
         this.health -= power;
         if (health <=  0){
-            this.die();
+            this.die(hero);
         }
     }
 
-    private void die(){
+    private void die(Hero hero){
         disableCollision = true;
         this.getPane().getStyleClass().add("deadOrc");
-        Hero.getHero().getUser().setMyCoin(Hero.getHero().getUser().getMyCoin() + 1);
+        hero.getUser().setCoin(hero.getUser().getCoin() + 1);
     }
 
 

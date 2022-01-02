@@ -4,14 +4,14 @@ import javafx.scene.image.ImageView;
 
 public class GameObjectFactory {
 
-    public GameObject createObject(int objno, double x, double y){
+    public GameObject createObject(int objno, double x, double y, Hero hero){
         switch (objno){
             case 1: //Orc
                 return (new Orcs(x,y,100,10));
             case 2: //Boss
                 return (new Boss(x,y,1000,100));
             case 3: //WeaponChest
-                return (new WeaponChest(x,y));
+                return (new WeaponChest(x,y,hero));
             case 4: //CoinChest
                 return (new CoinChest(x,y,10));
             case 5: //Platform

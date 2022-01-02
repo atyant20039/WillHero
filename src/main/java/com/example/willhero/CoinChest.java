@@ -15,10 +15,10 @@ public class CoinChest extends Chest{
     }
 
     @Override
-    public void give_hero(Hero h) {
+    public void give_hero(Hero hero) {
         super.setDisableCollision(true);
         super.getPane().getStyleClass().add("O_chest");
-        Hero.getHero().getUser().setMyCoin(Hero.getHero().getUser().getMyCoin() + 10);
+        hero.getUser().setCoin(hero.getUser().getCoin() + 10);
     }
 
     private void generateCchest(){

@@ -13,10 +13,10 @@ public class WeaponChest extends Chest{
         count++;
     }
 
-    WeaponChest(double x, double y)
+    WeaponChest(double x, double y, Hero hero)
     {
         super(x, y);
-        generateWchest();
+        generateWchest(hero);
     }
 
     public Weapon getGiveWeapon(){
@@ -31,7 +31,7 @@ public class WeaponChest extends Chest{
         hero.changeWeapon(this.giveWeapon);
     }
 
-    private void generateWchest(){
+    private void generateWchest(Hero hero){
         int rand_num = rand.nextInt(2);
         StackPane Wchest = new StackPane();
         Wchest.setPrefWidth(80.0);
@@ -39,10 +39,10 @@ public class WeaponChest extends Chest{
         Wchest.setLayoutX(this.get_X());
         Wchest.setLayoutY(this.get_Y());
         if(rand_num==0){
-            this.giveWeapon = ThrowingKnives.getInstance(Hero.getHero().getPane().getLayoutX() + (Hero.getHero().getPane().getWidth() / 2), Hero.getHero().getPane().getLayoutY() + (Hero.getHero().getPane().getHeight()/2));
+            this.giveWeapon = ThrowingKnives.getInstance(hero.getPane().getLayoutX() + (hero.getPane().getWidth() / 2), hero.getPane().getLayoutY() + (hero.getPane().getHeight()/2));
         }
         else{
-            this.giveWeapon = Shuriken.getInstance(Hero.getHero().getPane().getLayoutX() + (Hero.getHero().getPane().getWidth() / 2), Hero.getHero().getPane().getLayoutY() + (Hero.getHero().getPane().getHeight()/2));
+            this.giveWeapon = Shuriken.getInstance(hero.getPane().getLayoutX() + (hero.getPane().getWidth() / 2), hero.getPane().getLayoutY() + (hero.getPane().getHeight()/2));
         }
         Wchest.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
         super.setId("wChest" + count);

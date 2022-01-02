@@ -29,5 +29,5 @@ public abstract class Weapon extends GameObject{
     }
 
     public abstract void upgrade();
-    public abstract void use_weapon();
+    public abstract void use_weapon(Hero hero);
 }

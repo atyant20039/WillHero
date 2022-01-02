@@ -32,13 +32,6 @@ public class Hero extends GameObject{
         generateHero();
         this.myUser = user;
     }
-//
-//    public static Hero getHero(){
-//        if (hero == null){
-//            hero = new Hero(1300,300);
-//        }
-//        return hero;
-//    }
 
     @Override
     public double[] collision(GameObject o1, GameObject o2) {
@@ -82,6 +75,9 @@ public class Hero extends GameObject{
 
     public boolean revive(){
         // TODO : code to check if reviving is possible or not
+        disableCollision = false;
+        this.getPane().getStyleClass().add("hero");
+
         return true;
     }
 
@@ -92,6 +88,7 @@ public class Hero extends GameObject{
     public void die(){
         disableCollision = true;
         this.getPane().getStyleClass().add("deadOrc");
+        //todo
     }
 
     public void addWeapon(GameObject weapon){

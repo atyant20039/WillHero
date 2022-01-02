@@ -46,7 +46,7 @@ public class ThrowingKnives extends Weapon{
     }
 
     @Override
-    public void use_weapon() {
+    public void use_weapon(Hero hero) {
         instances.remove(this);
         this.getPane().setVisible(true);
         TranslateTransition translate = new TranslateTransition();
@@ -59,7 +59,7 @@ public class ThrowingKnives extends Weapon{
         translate.setOnFinished(ActionEvent -> {
             this.getPane().setVisible(false);
             this.getPane().setTranslateX(0);
-            instances.put(Hero.getHero().getPane().getLayoutY(),this);
+            instances.put(hero.getPane().getLayoutY(),this);
         });
     }
 }

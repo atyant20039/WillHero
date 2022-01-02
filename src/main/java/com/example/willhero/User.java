@@ -9,11 +9,11 @@ public class User {
         hero = new Hero(1300,300, this);
     }
 
-    public int getMyCoin() {
+    public int getCoin() {
         return myCoin;
     }
 
-    public void setMyCoin(int myCoin) {
+    public void setCoin(int myCoin) {
         this.myCoin = myCoin;
     }
 
