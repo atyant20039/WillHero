@@ -467,7 +467,7 @@ public class gameController implements Initializable {
                 for (int o = 0; o < orcList.size(); o++) {
                     if ((!orcList.get(o).isDisableCollision()) && !(orcList.get(o).getPane().getLayoutX() < gameHero.get_X() - 200 && orcList.get(o).getPane().getLayoutX() > gameHero.get_X() + 200)) {
                         if (gameHero.check_collision(gameHero, orcList.get(o)) && ((orcList.get(o).get_Y() - gameHero.get_Y()) > 25)) {
-                            gameHero.jump();
+                            return gameHero.jump();
                         } else if (gameHero.check_collision(gameHero, orcList.get(o)) && ((gameHero.get_Y()) - orcList.get(o).get_Y() < 42)) {
                             boolean oCollision = false;
                             int shiftX = 0;
