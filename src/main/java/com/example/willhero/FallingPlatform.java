@@ -4,7 +4,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 public class FallingPlatform extends Obstacle{
-
+    private int noOfTiles = 1;
     private static int count = 0;
 
     {
@@ -18,8 +18,9 @@ public class FallingPlatform extends Obstacle{
     }
 
     @Override
-    public void collision(GameObject o1, GameObject o2) {
+    public double[] collision(GameObject o1, GameObject o2) {
 
+        return new double[0];
     }
 
     public void generate_FallingPlatform() {

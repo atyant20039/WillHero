@@ -2,7 +2,6 @@ package com.example.willhero;
 
 import javafx.scene.layout.StackPane;
 
-
 public class CoinChest extends Chest{
     private int num_coins;
     private static int count = 0;
@@ -19,8 +18,7 @@ public class CoinChest extends Chest{
     public void give_hero(Hero h) {
         super.setDisableCollision(true);
         super.getPane().getStyleClass().add("O_chest");
-
-        // TODO: Give 10 Coins to Hero
+        Hero.getHero().getUser().setMyCoin(Hero.getHero().getUser().getMyCoin() + 10);
     }
 
     private void generateCchest(){

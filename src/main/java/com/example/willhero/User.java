@@ -3,10 +3,18 @@ package com.example.willhero;
 public class User {
     private Hero hero;
     private Game game;
-    private int myScore = 0;
+    private int myScore = 0, myCoin = 0;
 
     User(){
 
+    }
+
+    public int getMyCoin() {
+        return myCoin;
+    }
+
+    public void setMyCoin(int myCoin) {
+        this.myCoin = myCoin;
     }
 
     public int getScore() {

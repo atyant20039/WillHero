@@ -1,7 +1,6 @@
 package com.example.willhero;
 
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Rectangle;
 
 public class Boss extends Orcs{
     Boss(double x, double y, int health, int reward){
@@ -12,8 +11,9 @@ public class Boss extends Orcs{
 
 
     @Override
-    public void collision(GameObject o1, GameObject o2) {
+    public double[] collision(GameObject o1, GameObject o2) {
 
+        return new double[0];
     }
 
     public void generateBoss(){

@@ -1,15 +1,13 @@
 package com.example.willhero;
-
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class ThrowingKnives extends Weapon{
-    private int damage = 100, range = 300;
+    private int damage = 100, range = 200;
     private static int count = 0;
     private static Map<Double, ThrowingKnives> instances = new HashMap<Double, ThrowingKnives>();
 
@@ -45,7 +43,7 @@ public class ThrowingKnives extends Weapon{
 
     @Override
     public void upgrade() {
-
+        this.range += 50;
     }
 
     @Override

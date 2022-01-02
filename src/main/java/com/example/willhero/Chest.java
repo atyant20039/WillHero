@@ -1,17 +1,16 @@
 package com.example.willhero;
 
 public abstract class Chest extends GameObject{
-
     private boolean disableCollision = false;
-
-    Chest(/*Object fxid, */double x, double y)
+    Chest(double x, double y)
     {
-        super(/*fxid, */x, y);
+        super(x, y);
     }
 
     @Override
-    public void collision(GameObject o1, GameObject o2) {
-
+    public double[] collision(GameObject o1, GameObject o2) {
+        double velocityY = -0.1, time = 0.1, collision = 1;
+        return new double[]{collision,velocityY,time};
     }
 
     public boolean isDisableCollision() {

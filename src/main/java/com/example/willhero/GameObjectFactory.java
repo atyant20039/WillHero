@@ -1,14 +1,11 @@
 package com.example.willhero;
 
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
 
 public class GameObjectFactory {
 
     public GameObject createObject(int objno, double x, double y){
         switch (objno){
-//            case 0:
-//                return (new Hero(x,y));
             case 1: //Orc
                 return (new Orcs(x,y,100,10));
             case 2: //Boss

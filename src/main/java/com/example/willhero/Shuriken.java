@@ -9,8 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Shuriken extends Weapon{
-
-    private int damage = 100, range = 300;
+    private int damage = 100, range = 200;
     private static int count = 0;
     private static Map<Double, Shuriken> instances = new HashMap<Double, Shuriken>();
 
@@ -46,7 +45,7 @@ public class Shuriken extends Weapon{
 
     @Override
     public void upgrade() {
-
+        this.damage += 25;
     }
 
     @Override

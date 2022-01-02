@@ -1,22 +1,16 @@
 package com.example.willhero;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Paths;
-import java.util.Objects;
 
 
 public class Game extends Application {
-
     private Stage myStage;
     MediaPlayer mediaPlayer;
 
@@ -29,7 +23,7 @@ public class Game extends Application {
     }
     @Override
     public void start(Stage stage) throws IOException {
-//        music();
+        music();
 
         FXMLLoader fxmlLoader = new FXMLLoader(Game.class.getResource("Game.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 600);

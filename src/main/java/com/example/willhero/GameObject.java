@@ -32,12 +32,14 @@ public abstract class GameObject {
     }
 
     public boolean check_collision(GameObject o1, GameObject o2){
-        //TODO : Check collision code
-        
-        return true;
+        if (o1.getPane().getBoundsInParent().intersects(o2.getPane().getBoundsInParent())){
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public abstract void collision(GameObject o1, GameObject o2);
+    public abstract double[] collision(GameObject o1, GameObject o2);
 
     public StackPane getPane(){
         return this.myPane;

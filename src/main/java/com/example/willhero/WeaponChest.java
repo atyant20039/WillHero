@@ -1,13 +1,11 @@
 package com.example.willhero;
 
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Rectangle;
 
-import java.util.Stack;
 import java.util.Random;
 
 public class WeaponChest extends Chest{
-    private String weapon;
+    private Weapon giveWeapon;
     Random rand = new Random();
 
     private static int count = 0;
@@ -21,14 +19,16 @@ public class WeaponChest extends Chest{
         generateWchest();
     }
 
-    public String getWeapon(){
-        return this.weapon;
+    public Weapon getGiveWeapon(){
+        return this.giveWeapon;
     }
 
     @Override
     public void give_hero(Hero h) {
         super.setDisableCollision(true);
         super.getPane().getStyleClass().add("O_chest");
+        Hero.getHero().addWeapon(this.giveWeapon);
+        Hero.getHero().changeWeapon(this.giveWeapon);
     }
 
     private void generateWchest(){
@@ -39,10 +39,10 @@ public class WeaponChest extends Chest{
         Wchest.setLayoutX(this.get_X());
         Wchest.setLayoutY(this.get_Y());
         if(rand_num==0){
-            this.weapon = "ThrowingKnife";
+            this.giveWeapon = ThrowingKnives.getInstance(Hero.getHero().getPane().getLayoutX() + (Hero.getHero().getPane().getWidth() / 2), Hero.getHero().getPane().getLayoutY() + (Hero.getHero().getPane().getHeight()/2));
         }
         else{
-            this.weapon = "Shuriken";
+            this.giveWeapon = Shuriken.getInstance(Hero.getHero().getPane().getLayoutX() + (Hero.getHero().getPane().getWidth() / 2), Hero.getHero().getPane().getLayoutY() + (Hero.getHero().getPane().getHeight()/2));
         }
         Wchest.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
         super.setId("wChest" + count);

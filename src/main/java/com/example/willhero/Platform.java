@@ -52,7 +52,7 @@ public class Platform extends GameObject{
     }
 
     @Override
-    public void collision(GameObject o1, GameObject o2) {
-
+    public double[] collision(GameObject o1, GameObject o2) {
+        return new double[0];
     }
 }

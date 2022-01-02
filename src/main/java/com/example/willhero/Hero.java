@@ -21,7 +21,7 @@ public class Hero extends GameObject{
     private Weapon myWeapon = null;
     private User myUser;
     private String myHelmet;
-    private int myCoins = 0, lives = 1;
+    private int lives = 1;
     private boolean disableCollision = false;
     private Timeline gravity;
 //    private Object fxid;
@@ -41,8 +41,9 @@ public class Hero extends GameObject{
     }
 
     @Override
-    public void collision(GameObject o1, GameObject o2) {
+    public double[] collision(GameObject o1, GameObject o2) {
 
+        return new double[0];
     }
 
     public User getUser() {
@@ -109,21 +110,13 @@ public class Hero extends GameObject{
 
     }
 
-    public void changeWeapon(int index){
-//        myWeapon = myWeapons.get(index);
+    public void changeWeapon(Weapon weapon){
+        myWeapon = weapon;
     }
 
     public boolean revive(){
         // TODO : code to check if reviving is possible or not
         return true;
-    }
-
-    public int getCoins() {
-        return myCoins;
-    }
-
-    public void setCoins(int myCoins) {
-        this.myCoins = myCoins;
     }
 
     public boolean isDisableCollision() {
@@ -133,5 +126,11 @@ public class Hero extends GameObject{
     public void die(){
         disableCollision = true;
         this.getPane().getStyleClass().add("deadOrc");
+    }
+
+    public void addWeapon(GameObject weapon){
+        if (weapon instanceof Weapon){
+            this.myWeapons.add((Weapon) weapon);
+        }
     }
 }

@@ -31,10 +31,7 @@ public class Orcs extends GameObject{
         orcPane.setPrefHeight(50.0);
         orcPane.setLayoutX(this.get_X());
         orcPane.setLayoutY(this.get_Y());
-//        Rectangle orc_rec = new Rectangle(orcPane.getPrefWidth(),orcPane.getPrefHeight());
         orcPane.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
-//        orc_rec.setStyle("-fx-fill:transparent");
-//        orcPane.setBorder(Border.EMPTY);
         this.setId("orc" + count);
         orcPane.setId(this.getId());
         if (rand_num == 1){
@@ -42,15 +39,12 @@ public class Orcs extends GameObject{
         } else {
             orcPane.getStyleClass().add("redOrc");
         }
-//        this.setDetector(orc_rec);
-//        orcPane.setAlignment(Pos.CENTER_RIGHT);
-//        orcPane.getChildren().add(orc_rec);
         super.setPane(orcPane);
     }
 
     @Override
-    public void collision(GameObject o1, GameObject o2) {
-
+    public double[] collision(GameObject o1, GameObject o2) {
+        return new double[0];
     }
 
     public void jump(){
@@ -64,8 +58,8 @@ public class Orcs extends GameObject{
     public void die(){
         disableCollision = true;
         this.getPane().getStyleClass().add("deadOrc");
-
-        //TODO: Orc death gives coins to hero
+        Hero.getHero().getUser().setMyCoin(Hero.getHero().getUser().getMyCoin() + 1);
+        // complete karna hai
     }
 
 

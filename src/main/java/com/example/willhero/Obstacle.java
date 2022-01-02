@@ -5,4 +5,6 @@ public abstract class Obstacle extends GameObject{
     {
         super(x, y);
     }
+
+    public abstract double[] collision(GameObject o1, GameObject o2);
 }
