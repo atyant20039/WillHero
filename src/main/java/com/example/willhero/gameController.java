@@ -21,6 +21,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.controlsfx.control.action.Action;
 
 import java.io.IOException;
 import java.net.URL;
@@ -37,7 +38,7 @@ public class gameController implements Initializable {
     private StackPane abyss;
 
     @FXML
-    private Button pause_button, move_hero_button, swordButton, knifeButton;
+    private Button pause_button, move_hero_button, shurikenButton, knifeButton;
 
     @FXML
     private Text score_text, coin_text;
@@ -55,7 +56,7 @@ public class gameController implements Initializable {
     private Hero gameHero;
     private int userScore = 0, userCoin = 0, orc_per_plat = 2, coin_per_plat = 3, coinDepth = 0;
     private Random rand = new Random();
-    private boolean equiped_sword = false, equiped_knife = false;
+    private boolean equiped_shuriken = false, equiped_knife = false;
 
     @FXML
     protected void clicked_pause(ActionEvent event) throws IOException {
@@ -69,6 +70,8 @@ public class gameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        shurikenButton.setDisable(true);
+        knifeButton.setDisable(true);
 
         TranslateTransition translate2 = new TranslateTransition();
         translate2.setNode(floatPane);
@@ -206,6 +209,9 @@ public class gameController implements Initializable {
             if(i == 2){
                 this.generateGameObj(4,1250 + 500*i,350);
             }
+            else if(i==1){
+                this.generateGameObj(3,1250 + 500*i, 350);
+            }
         }
 
         /*Generating Abyss*/
@@ -213,39 +219,60 @@ public class gameController implements Initializable {
     }
 
     ImageView knife;
+    ImageView shuriken;
 
-    public void sword_action(ActionEvent event) {
+//    public void sword_action(ActionEvent event) {
+//        if (equiped_knife){
+////            gameHero.getPane().getChildren().remove(2);
+//            knife.setVisible(false);
+//        }
+//        if (!equiped_sword){
+//            equiped_sword = true;
+//            equiped_knife = false;
+//            Image swordImg = new Image(String.valueOf(getClass().getResource("Sword2.png")));
+//            ImageView sword = new ImageView(swordImg);
+//            sword.setFitWidth(100.0);
+//            sword.setFitHeight(25.0);
+//            sword.setLayoutX(gameHero.getPane().getLayoutX() - sword.getFitWidth() + 10);
+//            sword.setLayoutY(gameHero.getPane().getLayoutY());
+//            sword.setTranslateY(gameHero.getPane().getTranslateY());
+////            weaponList.add(0,sword);
+//            gamePane.getChildren().add(sword);
+//        }
+//        Hero.getHero().changeWeapon(0);
+//
+//        // TODO: Remove sword image from scene
+//    }
+
+    public void shuriken_action(ActionEvent event){
         if (equiped_knife){
 //            gameHero.getPane().getChildren().remove(2);
-            knife.setVisible(false);
-        }
-        if (!equiped_sword){
-            equiped_sword = true;
+            equiped_shuriken = true;
             equiped_knife = false;
-            Image swordImg = new Image(String.valueOf(getClass().getResource("Sword2.png")));
-            ImageView sword = new ImageView(swordImg);
-            sword.setFitWidth(100.0);
-            sword.setFitHeight(25.0);
-            sword.setLayoutX(gameHero.getPane().getLayoutX() - sword.getFitWidth() + 10);
-            sword.setLayoutY(gameHero.getPane().getLayoutY());
-            sword.setTranslateY(gameHero.getPane().getTranslateY());
-//            weaponList.add(0,sword);
-            gamePane.getChildren().add(sword);
+            shuriken.setVisible(true);
+        }
+        else if (!equiped_shuriken){
+            equiped_knife = false;
+            equiped_shuriken = true;
+            Image shurikenImg = new Image(String.valueOf(getClass().getResource("Shuriken.png")));
+            shuriken = new ImageView(shurikenImg);
+            shuriken.setFitWidth(20.0);
+            shuriken.setFitHeight(20.0);
+            gameHero.getPane().setAlignment(shuriken, Pos.BOTTOM_LEFT);
+            gameHero.getPane().getChildren().add(shuriken);
         }
         Hero.getHero().changeWeapon(0);
-
-        // TODO: Remove sword image from scene
     }
 
     public void knife_action(ActionEvent event) {
-        if (equiped_sword){
+        if (equiped_shuriken){
 //            gameHero.getPane().getChildren().remove(2);
-            equiped_sword = false;
+            equiped_shuriken = false;
             equiped_knife = true;
             knife.setVisible(true);
         }
         else if (!equiped_knife){
-            equiped_sword = false;
+            equiped_shuriken = false;
             equiped_knife = true;
             Image knifeImg = new Image(String.valueOf(getClass().getResource("knife_eq.png")));
             knife = new ImageView(knifeImg);
@@ -278,24 +305,30 @@ public class gameController implements Initializable {
             }
         }
 
-        if (equiped_sword){
-            RotateTransition rotate = new RotateTransition();
-            rotate.setNode(gameHero.getPane().getChildren().get(2));
-            rotate.setDuration(Duration.millis(100));
-            rotate.setCycleCount(1);
-            rotate.setInterpolator(Interpolator.LINEAR);
-            rotate.setByAngle(180);
-            rotate.play();
-
-            rotate.setOnFinished(ActionEvent -> {
-                RotateTransition rotateBack = new RotateTransition();
-                rotateBack.setNode(gameHero.getPane().getChildren().get(2));
-                rotateBack.setDuration(Duration.millis(1));
-                rotateBack.setCycleCount(10);
-                rotateBack.setInterpolator(Interpolator.LINEAR);
-                rotateBack.setByAngle(-180);
-                rotateBack.play();
-            });
+        if (equiped_shuriken){
+//            RotateTransition rotate = new RotateTransition();
+//            rotate.setNode(gameHero.getPane().getChildren().get(2));
+//            rotate.setDuration(Duration.millis(100));
+//            rotate.setCycleCount(1);
+//            rotate.setInterpolator(Interpolator.LINEAR);
+//            rotate.setByAngle(180);
+//            rotate.play();
+//
+//            rotate.setOnFinished(ActionEvent -> {
+//                RotateTransition rotateBack = new RotateTransition();
+//                rotateBack.setNode(gameHero.getPane().getChildren().get(2));
+//                rotateBack.setDuration(Duration.millis(1));
+//                rotateBack.setCycleCount(10);
+//                rotateBack.setInterpolator(Interpolator.LINEAR);
+//                rotateBack.setByAngle(-180);
+//                rotateBack.play();
+//            });
+            Weapon shuriken = (Weapon) factory.createObject(9,gameHero.getPane().getLayoutX() + (gameHero.getPane().getWidth() / 2), Hero.getHero().getPane().getLayoutY() + (Hero.getHero().getPane().getHeight()/2));
+            if (!(gamePane.getChildren().contains(shuriken.getPane()))){
+                gamePane.getChildren().add(shuriken.getPane());
+                weaponList.add(shuriken);
+            }
+            shuriken.use_weapon();
         }
 
         if (equiped_knife){
@@ -472,6 +505,20 @@ public class gameController implements Initializable {
             }
         }
 
+        else if(object instanceof WeaponChest){
+            WeaponChest w_Chest = (WeaponChest) object;
+            if(!w_Chest.isDisableCollision()){
+                for(int p = 0; p < platformList.size(); p++){
+                    if (w_Chest.getPane().getBoundsInParent().intersects(platformList.get(p).getPane().getBoundsInParent())){
+                        velocityY = -0.1;
+                        time = 0.1;
+                        collision = 1;
+                        return new double[]{collision,velocityY,time};
+                    }
+                }
+            }
+        }
+
         else if (object instanceof Hero){
             gameHero = (Hero) object;
             if (!gameHero.isDisableCollision()) {
@@ -524,7 +571,17 @@ public class gameController implements Initializable {
                             }
                             else{
                                 WeaponChest w_Chest = (WeaponChest) chestList.get(c);
-                                // TODO: Abhi ye krna hae
+
+                                if (w_Chest.getWeapon().equals("ThrowingKnife")){
+                                    knifeButton.setDisable(false);
+                                    equiped_knife = true;
+                                    equiped_shuriken = false;
+                                }
+                                else{
+                                    shurikenButton.setDisable(false);
+                                    equiped_knife = false;
+                                    equiped_shuriken = true;
+                                }
                             }
                         }
                     }
@@ -540,10 +597,6 @@ public class gameController implements Initializable {
             }
         }
         else if (object instanceof Boss){
-
-        }
-        else if (object instanceof WeaponChest){
-            WeaponChest wChest =  (WeaponChest) object;
 
         }
         else if (object instanceof Platform){
@@ -565,6 +618,7 @@ public class gameController implements Initializable {
         else if (object instanceof WeaponChest){
             WeaponChest wChest =  (WeaponChest) object;
             chestList.add(wChest);
+            applyGravity(wChest,false);
         }
         else if (object instanceof CoinChest){
             CoinChest cChest = (CoinChest) object;

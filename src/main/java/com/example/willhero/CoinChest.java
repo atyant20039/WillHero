@@ -18,7 +18,7 @@ public class CoinChest extends Chest{
     @Override
     public void give_hero(Hero h) {
         super.setDisableCollision(true);
-        this.getPane().getStyleClass().add("deadOrc");
+        super.getPane().getStyleClass().add("deadOrc");
 
         // TODO: Give 10 Coins to Hero
     }
@@ -30,7 +30,7 @@ public class CoinChest extends Chest{
         Cchest.setLayoutX(this.get_X());
         Cchest.setLayoutY(this.get_Y());
         Cchest.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
-        this.setId("cChest" + count);
+        super.setId("cChest" + count);
         Cchest.setId(this.getId());
         Cchest.getStyleClass().add("C_chest");
         super.setPane(Cchest);

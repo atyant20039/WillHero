@@ -52,11 +52,11 @@
       </Button>
       <HBox alignment="CENTER" prefHeight="60.0" prefWidth="150.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0">
          <children>
-            <Button fx:id="swordButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#sword_action" prefHeight="60.0" prefWidth="60.0" styleClass="weaponButton" stylesheets="@design.css" HBox.hgrow="ALWAYS">
+            <Button fx:id="shurikenButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#shuriken_action" prefHeight="60.0" prefWidth="60.0" styleClass="weaponButton" stylesheets="@design.css" HBox.hgrow="ALWAYS">
                <graphic>
                   <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true">
                      <image>
-                        <Image url="@SwordButton.jpg" />
+                        <Image url="@ShurikenButton.jpg" />
                      </image>
                   </ImageView>
                </graphic>

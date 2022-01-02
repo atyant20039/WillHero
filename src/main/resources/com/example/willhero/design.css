@@ -62,6 +62,11 @@
     -fx-background-size: 100% 100%;
 }
 
+.shuriken {
+    -fx-background-image:url('Shuriken.png');
+    -fx-background-size: 100% 100%;
+}
+
 .platform1 {
     -fx-background-image:url('p1.png');
     -fx-background-size: 100% 100%;
@@ -95,13 +100,3 @@
     -fx-text-fill: #000000;
 }
 
-/*
-.weaponButton{
-    -fx-border-color: #4974e5;
-    -fx-border-width: 2.5;
-}
-
-weaponButton:pressed{
-    -fx-background-color: #4974e5;
-}
-*/
