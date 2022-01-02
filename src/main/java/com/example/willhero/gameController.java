@@ -330,7 +330,7 @@ public class gameController implements Initializable {
             }
         }
 
-        if (equiped_shuriken){
+        if (equiped_shuriken && !gameHero.isDisableCollision()){
 //            RotateTransition rotate = new RotateTransition();
 //            rotate.setNode(gameHero.getPane().getChildren().get(2));
 //            rotate.setDuration(Duration.millis(100));
@@ -356,7 +356,7 @@ public class gameController implements Initializable {
             shuriken.use_weapon();
         }
 
-        if (equiped_knife){
+        if (equiped_knife && !gameHero.isDisableCollision()){
             Weapon kn = (Weapon) factory.createObject(6,gameHero.getPane().getLayoutX() + (gameHero.getPane().getWidth() / 2), Hero.getHero().getPane().getLayoutY() + (Hero.getHero().getPane().getHeight()/2));
             if (!(gamePane.getChildren().contains(kn.getPane()))){
                 gamePane.getChildren().add(kn.getPane());
@@ -481,7 +481,7 @@ public class gameController implements Initializable {
 
     private double[] checkCollision(GameObject object, double velocityY, double time){
         double collision = 0;
-        if (object.getClass().equals(Orcs.class)){
+        if (object != null && object.getClass().equals(Orcs.class)){
             Orcs orc = (Orcs) object;
             if (!orc.isDisableCollision()){
 
@@ -607,11 +607,16 @@ public class gameController implements Initializable {
                     }
                 }
 
-                if (userScore > 90 && gameHero.getPane().getBoundsInParent().intersects(gameBoss.getPane().getBoundsInParent()) && (gameHero.get_Y() - gameBoss.get_Y() < 42)){
-                    gameBoss.getPane().setLayoutX(gameBoss.getPane().getLayoutX() + 30);
+                if (userScore > 90  && /*!(gameHero.getPane().getLayoutY() <= gameBoss.getPane().getLayoutY() + gameBoss.getPane().getHeight())*/(gameHero.getPane().getLayoutY() - gameBoss.getPane().getLayoutY() < 42) && gameHero.getPane().getBoundsInParent().intersects(gameBoss.getPane().getBoundsInParent())){
+//                    gameBoss.getPane().setLayoutX(gameBoss.getPane().getLayoutX() + 30);
+//                    System.out.println("hemro:" + gameHero.getPane().getLayoutY());
+//                    System.out.println("boms:" + gameBoss.getPane().getLayoutY());
+                    gameHero.die();
                 }
                 else if (userScore > 90 && gameHero.getPane().getBoundsInParent().intersects(gameBoss.getPane().getBoundsInParent())){
-                    gameHero.die();
+//                    gameHero.die();
+//                    System.out.println("YAAAAAAAAAAAAAAAAAAAA");
+                    gameBoss.getPane().setLayoutX(gameBoss.getPane().getLayoutX() + 30);
                 }
             }
         }
@@ -659,41 +664,42 @@ public class gameController implements Initializable {
     }
 
     private void checkCategory(GameObject object){
-        if (object.getClass().equals(Orcs.class)){
-            Orcs orc = (Orcs) object;
-            orcList.add(orc);
-            applyGravity(orc,false);
-        }
-        else if (object instanceof Boss){
-            Boss boss = (Boss) object;
-            applyGravity(boss, false);
-        }
-        else if (object instanceof WeaponChest){
-            WeaponChest wChest =  (WeaponChest) object;
-            chestList.add(wChest);
-            applyGravity(wChest,false);
-        }
-        else if (object instanceof CoinChest){
-            CoinChest cChest = (CoinChest) object;
-            chestList.add(cChest);
-            applyGravity(cChest,false);
-        }
-        else if (object instanceof Platform){
-            Platform platform = (Platform) object;
-            platformList.add(platform);
-        }
-        else if (object instanceof Abyss){
-            Abyss gameAbyss = (Abyss) object;
-            this.abyss = gameAbyss.getPane();
-        }
-        else if (object instanceof ThrowingKnives){
+        if (object != null){
+            if (object.getClass().equals(Orcs.class)){
+                Orcs orc = (Orcs) object;
+                orcList.add(orc);
+                applyGravity(orc,false);
+            }
+            else if (object.getClass().equals(Boss.class)){
+                Boss boss = (Boss) object;
+                applyGravity(boss, false);
+            }
+            else if (object instanceof WeaponChest){
+                WeaponChest wChest =  (WeaponChest) object;
+                chestList.add(wChest);
+                applyGravity(wChest,false);
+            }
+            else if (object instanceof CoinChest){
+                CoinChest cChest = (CoinChest) object;
+                chestList.add(cChest);
+                applyGravity(cChest,false);
+            }
+            else if (object instanceof Platform){
+                Platform platform = (Platform) object;
+                platformList.add(platform);
+            }
+            else if (object instanceof Abyss){
+                Abyss gameAbyss = (Abyss) object;
+                this.abyss = gameAbyss.getPane();
+            }
+            else if (object instanceof ThrowingKnives){
 
+            }
+            else if (object instanceof Coin){
+                Coin coin = (Coin) object;
+                coinList.add(coin);
+            }
         }
-        else if (object instanceof Coin){
-            Coin coin = (Coin) object;
-            coinList.add(coin);
-        }
-
     }
 
     private boolean checkObjtoObjCollision(GameObject object){
