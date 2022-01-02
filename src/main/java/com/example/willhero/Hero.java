@@ -27,18 +27,18 @@ public class Hero extends GameObject{
 //    private Object fxid;
 //    private double x,y;
 
-    private Hero(double x, double y){
+    public Hero(double x, double y, User user){
         super(x,y);
         generateHero();
-//        this.myUser = user;
+        this.myUser = user;
     }
-
-    public static Hero getHero(){
-        if (hero == null){
-            hero = new Hero(1300,300);
-        }
-        return hero;
-    }
+//
+//    public static Hero getHero(){
+//        if (hero == null){
+//            hero = new Hero(1300,300);
+//        }
+//        return hero;
+//    }
 
     @Override
     public double[] collision(GameObject o1, GameObject o2) {

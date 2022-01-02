@@ -4,6 +4,7 @@ package com.example.willhero;
     Add trees to background floating platforms
     Boss fight weapons and collision
     Enable button after getting weapon
+    weapon invisible after boss spawns
 */
 import javafx.animation.*;
 import javafx.event.ActionEvent;
@@ -55,6 +56,7 @@ public class gameController implements Initializable {
     private Random rand = new Random();
     private boolean equiped_shuriken = false, equiped_knife = false;
     private Boss gameBoss;
+    private User user;
 
     @FXML
     protected void clicked_pause(ActionEvent event) throws IOException {
@@ -68,6 +70,8 @@ public class gameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        user = new User();
+
         shurikenButton.setDisable(true);
         knifeButton.setDisable(true);
         /*Generating Abyss*/
@@ -201,13 +205,7 @@ public class gameController implements Initializable {
         generateGameObj(1, 2700, 300);
         generateGameObj(7,2700,300);
 
-
-//        generateGameObj(3,1500,300);
-//        generateGameObj(4,1700,300);
-        //Initial Work//
-        /* x_coordinate = 1300
-           y_coordinate = 100*/
-        this.gameHero = Hero.getHero();
+        this.gameHero = user.getHero();
         gamePane.getChildren().add(gameHero.getPane());
         applyGravity(gameHero, false);
         for (int i = 0; i < 3; i++){
@@ -300,7 +298,7 @@ public class gameController implements Initializable {
         }
 
         if (equiped_shuriken && !gameHero.isDisableCollision()){
-            Weapon shuriken = (Weapon) factory.createObject(9,gameHero.getPane().getLayoutX() + (gameHero.getPane().getWidth() / 2), Hero.getHero().getPane().getLayoutY() + (Hero.getHero().getPane().getHeight()/2));
+            Weapon shuriken = (Weapon) factory.createObject(9,gameHero.getPane().getLayoutX() + (gameHero.getPane().getWidth() / 2), user.getHero().getPane().getLayoutY() + (user.getHero().getPane().getHeight()/2));
             if (!(gamePane.getChildren().contains(shuriken.getPane()))){
                 gamePane.getChildren().add(shuriken.getPane());
                 weaponList.add(shuriken);
@@ -309,7 +307,7 @@ public class gameController implements Initializable {
         }
 
         if (equiped_knife && !gameHero.isDisableCollision()){
-            Weapon kn = (Weapon) factory.createObject(6,gameHero.getPane().getLayoutX() + (gameHero.getPane().getWidth() / 2), Hero.getHero().getPane().getLayoutY() + (Hero.getHero().getPane().getHeight()/2));
+            Weapon kn = (Weapon) factory.createObject(6,gameHero.getPane().getLayoutX() + (gameHero.getPane().getWidth() / 2), user.getHero().getPane().getLayoutY() + (user.getHero().getPane().getHeight()/2));
             if (!(gamePane.getChildren().contains(kn.getPane()))){
                 gamePane.getChildren().add(kn.getPane());
                 weaponList.add(kn);
@@ -319,6 +317,8 @@ public class gameController implements Initializable {
         //        System.gc();
         //        System.runFinalization();
     }
+
+    //-------------------------------------------------------------------------------------------------------------------
 
     private void generateGameObj(int objno, double x, double y) {
         GameObject obj = factory.createObject(objno,x,y);

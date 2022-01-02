@@ -6,7 +6,6 @@ import javafx.scene.shape.Shape;
 public abstract class GameObject {
     private double x_coordinate, y_coordinate;
     private StackPane myPane = null;
-    private Shape detector = null;
     private String myId = null;
 
     GameObject(double x, double y){
@@ -55,13 +54,5 @@ public abstract class GameObject {
 
     public void setId(String id){
         this.myId = id;
-    }
-
-//    public Shape getDetector() {
-//        return detector;
-//    }
-
-    public void setDetector(Shape detector) {
-        this.detector = detector;
     }
 }

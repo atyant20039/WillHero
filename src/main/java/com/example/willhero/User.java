@@ -6,7 +6,7 @@ public class User {
     private int myScore = 0, myCoin = 0;
 
     User(){
-
+        hero = new Hero(1300,300, this);
     }
 
     public int getMyCoin() {

@@ -67,7 +67,6 @@ public class Orcs extends GameObject{
         disableCollision = true;
         this.getPane().getStyleClass().add("deadOrc");
         Hero.getHero().getUser().setMyCoin(Hero.getHero().getUser().getMyCoin() + 1);
-        // complete karna hai
     }
 
 

@@ -24,11 +24,11 @@ public class WeaponChest extends Chest{
     }
 
     @Override
-    public void give_hero(Hero h) {
+    public void give_hero(Hero hero) {
         super.setDisableCollision(true);
         super.getPane().getStyleClass().add("O_chest");
-        Hero.getHero().addWeapon(this.giveWeapon);
-        Hero.getHero().changeWeapon(this.giveWeapon);
+        hero.addWeapon(this.giveWeapon);
+        hero.changeWeapon(this.giveWeapon);
     }
 
     private void generateWchest(){
