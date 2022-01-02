@@ -27,10 +27,14 @@ public class GameObjectFactory {
                 return (new Abyss(x,y));
             case 9: // Shuriken
                 return (Shuriken.getInstance(x,y));
+            case 10: //Falling Platform
+                return (new FallingPlatform(x,y));
             default: // Attention required: returning null in case of default!
                 return null;
         }
     }
+
+
 
     public ImageView create_bkgd_obj(int objno){
         ImageView obj = null;

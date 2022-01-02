@@ -43,6 +43,8 @@ public class gameController implements Initializable {
     @FXML
     private Text score_text, coin_text;
 
+    private int timerCall = 0;
+
     private GameObjectFactory factory = new GameObjectFactory();
 
     private ArrayList<GameObject> GameObjList = new ArrayList<GameObject>();
@@ -50,9 +52,10 @@ public class gameController implements Initializable {
     private ArrayList<Platform> platformList = new ArrayList<Platform>();
     private ArrayList<Chest> chestList = new ArrayList<Chest>();
     private ArrayList<Coin> coinList = new ArrayList<Coin>();
+    private ArrayList<FallingPlatform> fallingPlatList = new ArrayList<FallingPlatform>();
     private ArrayList<Weapon> weaponList = new ArrayList<Weapon>();
     private ArrayList<ImageView> BkgdObjList = new ArrayList<>();
-    Timeline cloudTimer, floatLandTimer, platTimer, orcTimer, coinTimer;
+    Timeline cloudTimer, floatLandTimer, platTimer, orcTimer, coinTimer, fallingPlatTimer;
     private Hero gameHero;
     private int userScore = 0, userCoin = 0, orc_per_plat = 2, coin_per_plat = 3, coinDepth = 0;
     private Random rand = new Random();
@@ -73,6 +76,8 @@ public class gameController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         shurikenButton.setDisable(true);
         knifeButton.setDisable(true);
+        /*Generating Abyss*/
+        generateGameObj(8,1000,625);
 
         TranslateTransition translate2 = new TranslateTransition();
         translate2.setNode(floatPane);
@@ -219,17 +224,28 @@ public class gameController implements Initializable {
         gamePane.getChildren().add(gameHero.getPane());
         applyGravity(gameHero, false);
         for (int i = 0; i < 3; i++){
-            generateGameObj(5,1200 + 500*i,400); //For generating first three platforms
-            if(i == 2){
-                this.generateGameObj(4,1250 + 500*i,350);
+            if(i <= 1){
+                generateGameObj(5,1200 + 500*i,400); //For generating first three platforms
             }
-            else if(i==1){
-                this.generateGameObj(3,1250 + 500*i, 350);
+            else{
+                generate_fallingPlat(1200 + 500*i,400);
             }
-        }
 
-        /*Generating Abyss*/
-        generateGameObj(8,1000,625);
+        }
+    }
+    private int plat_Count = 0;
+    public void fallingPlatTimer(){
+        fallingPlatTimer = new Timeline(new KeyFrame(Duration.millis(200), e -> {
+            if(plat_Count >= fallingPlatList.size()){
+                fallingPlatTimer.stop();
+            }
+            else if(plat_Count < fallingPlatList.size()){
+                applyGravity(fallingPlatList.get(plat_Count), false);
+            }
+            plat_Count++;
+        }));
+        fallingPlatTimer.setCycleCount(TranslateTransition.INDEFINITE);
+        fallingPlatTimer.play();
     }
 
     ImageView knife;
@@ -257,6 +273,12 @@ public class gameController implements Initializable {
 //
 //        // TODO: Remove sword image from scene
 //    }
+
+    public void generate_fallingPlat(double x, double y){
+        for(int f = 0; f < 6; f++){
+            generateGameObj(10,x + 50*f ,y);
+        }
+    }
 
     public void shuriken_action(ActionEvent event){
         if (equiped_knife){
@@ -536,7 +558,7 @@ public class gameController implements Initializable {
             gameHero = (Hero) object;
             if (!gameHero.isDisableCollision()) {
                 for (int i = 0; i < platformList.size(); i++) {
-//                CODE 1: Checking Collision using Rectangle inside StackPane
+
                     if (gameHero.getPane().getBoundsInParent().intersects(platformList.get(i).getPane().getBoundsInParent()) && ((platformList.get(i).get_Y() - gameHero.get_Y()) > 40)) {
                         velocityY = -5.5;
                         time = 0.13;
@@ -544,6 +566,21 @@ public class gameController implements Initializable {
                         return new double[]{collision, velocityY, time};
                     }
                 }
+
+                for (int f = 0; f < fallingPlatList.size(); f++){
+                    if (gameHero.getPane().getBoundsInParent().intersects(fallingPlatList.get(f).getPane().getBoundsInParent())){
+
+                        if(this.timerCall == 0){
+                            this.timerCall++;
+                            fallingPlatTimer();
+                        }
+                        velocityY = -5.5;
+                        time = 0.13;
+                        collision = 1;
+                        return new double[]{collision, velocityY, time};
+                    }
+                }
+
 
                 for (int o = 0; o < orcList.size(); o++) {
                     if ((!orcList.get(o).isDisableCollision()) && !(orcList.get(o).getPane().getLayoutX() < gameHero.get_X() - 200 && orcList.get(o).getPane().getLayoutX() > gameHero.get_X() + 200)) {
@@ -693,6 +730,10 @@ public class gameController implements Initializable {
         else if (object instanceof Coin){
             Coin coin = (Coin) object;
             coinList.add(coin);
+        }
+        else if (object instanceof FallingPlatform){
+            FallingPlatform fallingPlat = (FallingPlatform) object;
+            fallingPlatList.add(fallingPlat);
         }
 
     }

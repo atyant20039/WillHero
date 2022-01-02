@@ -100,3 +100,8 @@
     -fx-text-fill: #000000;
 }
 
+.fallingPlat{
+    -fx-background-image:url('fallingPlat.png');
+    -fx-background-size: 100% 100%;
+}
+
