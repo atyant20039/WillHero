@@ -3,7 +3,9 @@ package com.example.willhero;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Shape;
 
-public abstract class GameObject {
+import java.io.Serializable;
+
+public abstract class GameObject implements Serializable {
     private double x_coordinate, y_coordinate;
     private StackPane myPane = null;
     private String myId = null;

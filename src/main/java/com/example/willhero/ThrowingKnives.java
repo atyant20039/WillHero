@@ -3,27 +3,17 @@ import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ThrowingKnives extends Weapon{
     private static int count = 0;
-    private static Map<Double, ThrowingKnives> instances = new HashMap<Double, ThrowingKnives>();
 
     {
         count++;
     }
 
-    private ThrowingKnives(double x, double y){
+    public ThrowingKnives(double x, double y){
         super(x, y);
         this.generateKnife();
-    }
-
-    public static ThrowingKnives getInstance(double x, Double y){
-        if (!instances.containsKey(y)){
-            instances.put(y, new ThrowingKnives(x,y));
-        }
-        return instances.get(y);
     }
 
     private void generateKnife(){
@@ -47,7 +37,6 @@ public class ThrowingKnives extends Weapon{
 
     @Override
     public void use_weapon(Hero hero) {
-        instances.remove(this);
         this.getPane().setVisible(true);
         TranslateTransition translate = new TranslateTransition();
         translate.setNode(this.getPane());
@@ -58,8 +47,6 @@ public class ThrowingKnives extends Weapon{
         translate.play();
         translate.setOnFinished(ActionEvent -> {
             this.getPane().setVisible(false);
-            this.getPane().setTranslateX(0);
-            instances.put(hero.getPane().getLayoutY(),this);
         });
     }
 }

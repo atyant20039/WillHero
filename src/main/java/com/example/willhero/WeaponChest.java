@@ -39,10 +39,10 @@ public class WeaponChest extends Chest{
         Wchest.setLayoutX(this.get_X());
         Wchest.setLayoutY(this.get_Y());
         if(rand_num==0){
-            this.giveWeapon = ThrowingKnives.getInstance(hero.getPane().getLayoutX() + (hero.getPane().getWidth() / 2), hero.getPane().getLayoutY() + (hero.getPane().getHeight()/2));
+            this.giveWeapon = new ThrowingKnives(hero.getPane().getLayoutX() + (hero.getPane().getWidth() / 2), hero.getPane().getLayoutY() + (hero.getPane().getHeight()/2));
         }
         else{
-            this.giveWeapon = Shuriken.getInstance(hero.getPane().getLayoutX() + (hero.getPane().getWidth() / 2), hero.getPane().getLayoutY() + (hero.getPane().getHeight()/2));
+            this.giveWeapon = new Shuriken(hero.getPane().getLayoutX() + (hero.getPane().getWidth() / 2), hero.getPane().getLayoutY() + (hero.getPane().getHeight()/2));
         }
         Wchest.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
         super.setId("wChest" + count);

@@ -10,22 +10,14 @@ import java.util.Map;
 
 public class Shuriken extends Weapon{
     private static int count = 0;
-    private static Map<Double, Shuriken> instances = new HashMap<Double, Shuriken>();
 
     {
         count++;
     }
 
-    private Shuriken(double x, double y){
+    public Shuriken(double x, double y){
         super(x, y);
         this.generateShuriken();
-    }
-
-    public static Shuriken getInstance(double x, Double y){
-        if (!instances.containsKey(y)){
-            instances.put(y, new Shuriken(x,y));
-        }
-        return instances.get(y);
     }
 
     private void generateShuriken(){
@@ -49,7 +41,6 @@ public class Shuriken extends Weapon{
 
     @Override
     public void use_weapon(Hero hero) {
-        instances.remove(this);
         this.getPane().setVisible(true);
         TranslateTransition translate = new TranslateTransition();
         translate.setNode(this.getPane());
@@ -60,8 +51,6 @@ public class Shuriken extends Weapon{
         translate.play();
         translate.setOnFinished(ActionEvent -> {
             this.getPane().setVisible(false);
-            this.getPane().setTranslateX(0);
-            instances.put(hero.getPane().getLayoutY(),this);
         });
     }
 }

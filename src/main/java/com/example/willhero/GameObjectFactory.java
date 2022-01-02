@@ -17,21 +17,19 @@ public class GameObjectFactory {
             case 5: //Platform
                 return (new Platform(x,y));
             case 6: //Throwing Knives
-                return (ThrowingKnives.getInstance(x, y));
+                return (new ThrowingKnives(x,y));
             case 7: //Coin
                 return (new Coin(x,y));
             case 8: // Abyss
                 return (new Abyss(x,y));
             case 9: // Shuriken
-                return (Shuriken.getInstance(x,y));
+                return (new Shuriken(x,y));
             case 10: //Falling Platform
                 return (new FallingPlatform(x,y));
             default: // Attention required: returning null in case of default!
                 return null;
         }
     }
-
-
 
     public ImageView create_bkgd_obj(int objno){
         ImageView obj = null;

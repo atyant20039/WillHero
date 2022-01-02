@@ -1,6 +1,8 @@
 package com.example.willhero;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private Hero hero;
     private Game game;
     private int myScore = 0, myCoin = 0;
