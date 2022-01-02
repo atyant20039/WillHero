@@ -54,7 +54,7 @@ public class gameController implements Initializable {
     private ArrayList<ImageView> BkgdObjList = new ArrayList<>();
     Timeline cloudTimer, floatLandTimer, platTimer, orcTimer, coinTimer;
     private Hero gameHero;
-    private int userScore = 0, userCoin = 0, orc_per_plat = 2, coin_per_plat = 3, coinDepth = 0;
+    private int userScore = 0, userCoin = 0, orc_per_plat = 2, coin_per_plat = 3;
     private Random rand = new Random();
     private boolean equiped_shuriken = false, equiped_knife = false;
 
@@ -180,13 +180,13 @@ public class gameController implements Initializable {
 
             if (genCoin) {
                 coin_per_plat = 2;
-                coinDepth = ((rand.nextInt(2)) * 66);
-                this.generateGameObj(7, 2700,300 + coinDepth);
+//                coinDepth = ((rand.nextInt(2)) * 66);
+                this.generateGameObj(7, 2700,300);
             }
 
             int rand_count = rand.nextInt(2);
             if (rand_count%2 == 0 && coin_per_plat > 0 && !(coinList.get(coinList.size() - 1).getPane().getLayoutX() > 2675)){
-                this.generateGameObj(7, 2700,300 + coinDepth);
+                this.generateGameObj(7, 2700,300);
                 coin_per_plat--;
             }
         }));
@@ -216,6 +216,18 @@ public class gameController implements Initializable {
 
         /*Generating Abyss*/
         generateGameObj(8,1000,625);
+
+
+//        Windmill mill = new Windmill(1500, 100);
+//        gamePane.getChildren().add(mill.getTower());
+//        gamePane.getChildren().add(mill.getPane());
+//        RotateTransition rotate = new RotateTransition();
+//        rotate.setNode(mill.getPane());
+//        rotate.setDuration(Duration.seconds(10));
+//        rotate.setByAngle(360);
+//        rotate.setCycleCount(RotateTransition.INDEFINITE);
+//        rotate.setInterpolator(Interpolator.LINEAR);
+//        rotate.play();
     }
 
     ImageView knife;
@@ -490,31 +502,14 @@ public class gameController implements Initializable {
                 }
             }
         }
-        else if (object instanceof CoinChest){
-            CoinChest c_Chest = (CoinChest) object;
-            if(!c_Chest.isDisableCollision()){
-
-                for(int p = 0; p < platformList.size(); p++){
-                    if (c_Chest.getPane().getBoundsInParent().intersects(platformList.get(p).getPane().getBoundsInParent())){
-                        velocityY = -0.1;
-                        time = 0.1;
-                        collision = 1;
-                        return new double[]{collision,velocityY,time};
-                    }
-                }
-            }
-        }
-
-        else if(object instanceof WeaponChest){
-            WeaponChest w_Chest = (WeaponChest) object;
-            if(!w_Chest.isDisableCollision()){
-                for(int p = 0; p < platformList.size(); p++){
-                    if (w_Chest.getPane().getBoundsInParent().intersects(platformList.get(p).getPane().getBoundsInParent())){
-                        velocityY = -0.1;
-                        time = 0.1;
-                        collision = 1;
-                        return new double[]{collision,velocityY,time};
-                    }
+        else if (object instanceof Chest){
+            Chest chest = (Chest) object;
+            for(int p = 0; p < platformList.size(); p++){
+                if (chest.getPane().getBoundsInParent().intersects(platformList.get(p).getPane().getBoundsInParent())){
+                    velocityY = -0.1;
+                    time = 0.1;
+                    collision = 1;
+                    return new double[]{collision,velocityY,time};
                 }
             }
         }
@@ -561,8 +556,12 @@ public class gameController implements Initializable {
                 }
 
                 for (int c = 0; c < chestList.size(); c++){
-                    if ((!chestList.get(c).isDisableCollision()) && !(chestList.get(c).getPane().getLayoutX() < gameHero.get_X() - 200 && orcList.get(c).getPane().getLayoutX() > gameHero.get_X() + 200)){
+                    if ((!chestList.get(c).isDisableCollision()) && !(chestList.get(c).getPane().getLayoutX() < gameHero.get_X() - 200 && chestList.get(c).getPane().getLayoutX() > gameHero.get_X() + 200)){
                         if(gameHero.getPane().getBoundsInParent().intersects(chestList.get(c).getPane().getBoundsInParent())){
+                            // chestList.get(c).give_hero(gameHero);
+
+
+                            // below code will be inside give_hero() function;
                             if (chestList.get(c) instanceof CoinChest){
                                 CoinChest c_Chest = (CoinChest) chestList.get(c);
                                 c_Chest.give_hero(gameHero);
@@ -571,7 +570,7 @@ public class gameController implements Initializable {
                             }
                             else{
                                 WeaponChest w_Chest = (WeaponChest) chestList.get(c);
-
+                                w_Chest.give_hero(gameHero);
                                 if (w_Chest.getWeapon().equals("ThrowingKnife")){
                                     knifeButton.setDisable(false);
                                     equiped_knife = true;

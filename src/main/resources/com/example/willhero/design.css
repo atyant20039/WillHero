@@ -52,6 +52,16 @@
     -fx-background-size: 100% 100%;
 }
 
+.windmill_tower{
+    -fx-background-image:url('windmill_tower.png');
+    -fx-background-size: 100% 100%;
+}
+
+.windmill_blade{
+    -fx-background-image:url('windmill_blades.png');
+    -fx-background-size: 100% 100%;
+}
+
 .coin {
     -fx-background-image:url('coin.png');
     -fx-background-size: 100% 100%;

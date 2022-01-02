@@ -41,8 +41,7 @@ public class Game extends Application {
     }
 
     public void music(){
-        String sound = "YouSeeBIGGIRLTT.mp3";
-        Media musicc = new Media(getClass().getResource("YouSeeBIGGIRLTT.mp3").toString());
+        Media musicc = new Media(getClass().getResource("background_music.mp3").toString());
         mediaPlayer = new MediaPlayer(musicc);
         mediaPlayer.setAutoPlay(true);
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
