@@ -275,8 +275,8 @@ public class gameController implements Initializable {
 //    }
 
     public void generate_fallingPlat(double x, double y){
-        for(int f = 0; f < 6; f++){
-            generateGameObj(10,x + 50*f ,y);
+        for(int f = 0; f < 10; f++){
+            generateGameObj(10,x + 30*f ,y);
         }
     }
 
@@ -724,12 +724,11 @@ public class gameController implements Initializable {
                 Coin coin = (Coin) object;
                 coinList.add(coin);
             }
+            else if (object instanceof FallingPlatform){
+                FallingPlatform fallingPlat = (FallingPlatform) object;
+                fallingPlatList.add(fallingPlat);
+            }
         }
-        else if (object instanceof FallingPlatform){
-            FallingPlatform fallingPlat = (FallingPlatform) object;
-            fallingPlatList.add(fallingPlat);
-        }
-
     }
 
     private boolean checkObjtoObjCollision(GameObject object){

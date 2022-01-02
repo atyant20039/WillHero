@@ -25,7 +25,7 @@ public class FallingPlatform extends Obstacle{
     public void generate_FallingPlatform() {
         StackPane fPlatformPane = new StackPane();
         fPlatformPane.getStylesheets().add(getClass().getResource("design.css").toExternalForm());
-        fPlatformPane.setPrefWidth(50.0);
+        fPlatformPane.setPrefWidth(30.0);
         fPlatformPane.setPrefHeight(10.0);
         fPlatformPane.setLayoutX(this.get_X());
         fPlatformPane.setLayoutY(this.get_Y());
