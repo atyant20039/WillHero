@@ -47,15 +47,23 @@ public class Orcs extends GameObject{
         return new double[0];
     }
 
-    public void jump(){
-
+    public double[] jump(){
+        double velocityY = -5.5, time = 0.13, collision = 1;
+        return new double[]{collision,velocityY,time};
     }
 
     public boolean isDisableCollision() {
         return disableCollision;
     }
 
-    public void die(){
+    public void reduceHealth(int power){
+        this.health -= power;
+        if (health <=  0){
+            this.die();
+        }
+    }
+
+    private void die(){
         disableCollision = true;
         this.getPane().getStyleClass().add("deadOrc");
         Hero.getHero().getUser().setMyCoin(Hero.getHero().getUser().getMyCoin() + 1);

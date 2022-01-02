@@ -30,7 +30,7 @@ public class gameController implements Initializable {
     @FXML
     private AnchorPane gamePane;
 
-    private StackPane abyss;
+    private Abyss abyss;
     @FXML
     private Button pause_button, move_hero_button, shurikenButton, knifeButton;
 
@@ -202,8 +202,8 @@ public class gameController implements Initializable {
         generateGameObj(7,2700,300);
 
 
-        generateGameObj(3,1500,300);
-        generateGameObj(4,1700,300);
+//        generateGameObj(3,1500,300);
+//        generateGameObj(4,1700,300);
         //Initial Work//
         /* x_coordinate = 1300
            y_coordinate = 100*/
@@ -238,29 +238,6 @@ public class gameController implements Initializable {
     ImageView knife;
     ImageView shuriken;
 
-//    public void sword_action(ActionEvent event) {
-//        if (equiped_knife){
-////            gameHero.getPane().getChildren().remove(2);
-//            knife.setVisible(false);
-//        }
-//        if (!equiped_sword){
-//            equiped_sword = true;
-//            equiped_knife = false;
-//            Image swordImg = new Image(String.valueOf(getClass().getResource("Sword2.png")));
-//            ImageView sword = new ImageView(swordImg);
-//            sword.setFitWidth(100.0);
-//            sword.setFitHeight(25.0);
-//            sword.setLayoutX(gameHero.getPane().getLayoutX() - sword.getFitWidth() + 10);
-//            sword.setLayoutY(gameHero.getPane().getLayoutY());
-//            sword.setTranslateY(gameHero.getPane().getTranslateY());
-////            weaponList.add(0,sword);
-//            gamePane.getChildren().add(sword);
-//        }
-//        Hero.getHero().changeWeapon(0);
-//
-//        // TODO: Remove sword image from scene
-//    }
-
     public void generate_fallingPlat(double x, double y){
         for(int f = 0; f < 10; f++){
             generateGameObj(10,x + 30*f ,y);
@@ -269,7 +246,6 @@ public class gameController implements Initializable {
 
     public void shuriken_action(ActionEvent event){
         if (equiped_knife){
-//            gameHero.getPane().getChildren().remove(2);
             equiped_shuriken = true;
             equiped_knife = false;
             shuriken.setVisible(true);
@@ -284,12 +260,10 @@ public class gameController implements Initializable {
             gameHero.getPane().setAlignment(shuriken, Pos.BOTTOM_LEFT);
             gameHero.getPane().getChildren().add(shuriken);
         }
-//        Hero.getHero().changeWeapon(0);
     }
 
     public void knife_action(ActionEvent event) {
         if (equiped_shuriken){
-//            gameHero.getPane().getChildren().remove(2);
             equiped_shuriken = false;
             equiped_knife = true;
             knife.setVisible(true);
@@ -305,19 +279,8 @@ public class gameController implements Initializable {
             gameHero.getPane().setAlignment(knife, Pos.BOTTOM_LEFT);
             gameHero.getPane().getChildren().add(knife);
         }
-//        Hero.getHero().changeWeapon(1);
         // TODO: Remove sword image from scene
     }
-
-//    public void enableKnifeButton(){
-//        this.knifeButton.setDisable(false);
-//    }
-//
-//    public void enableShurikenButton(){
-//        this.shurikenButton.setDisable(false);
-//    }
-
-//    ThrowingKnives t1 = ThrowingKnives.getInstance();
 
     public void move_hero(ActionEvent event) {
         this.userScore++;
@@ -445,35 +408,30 @@ public class gameController implements Initializable {
         if (object != null && object.getClass().equals(Orcs.class)){
             Orcs orc = (Orcs) object;
             if (!orc.isDisableCollision()){
-
-                if (orc.getPane().getBoundsInParent().intersects(abyss.getBoundsInParent())){
-                    System.out.println(orc.getId() + " fell in Abyss!");
-                    orc.die();
-                    this.userCoin++;
-                    coin_text.setText("" + this.userCoin);
+                if (orc.check_collision(orc,abyss)){
+                    orc.reduceHealth(110);
+//                    this.userCoin++;
+//                    coin_text.setText("" + this.userCoin);
                     killGameObj(orc);
-
                 }
 
                 for(int i = 0; i < platformList.size(); i++){
-
-                    if (orc.getPane().getBoundsInParent().intersects(platformList.get(i).getPane().getBoundsInParent())) {
-                        velocityY = -4.5;
-                        time = 0.13;
-                        collision = 1;
-                        return new double[]{collision,velocityY,time};
+                    if (orc.check_collision(orc,platformList.get(i))) {
+                        return orc.jump();
                     }
                 }
 
                 for (int i = 0; i < weaponList.size(); i++){
-                    if (weaponList.get(i).getPane().isVisible() && weaponList.get(i).getPane().getBoundsInParent().intersects(orc.getPane().getBoundsInParent())){
-                        orc.die();
-                        this.userCoin++;
-                        coin_text.setText("" + userCoin);
+                    if (weaponList.get(i).getPane().isVisible() && orc.check_collision(weaponList.get(i), orc)){
+                        orc.reduceHealth(weaponList.get(i).getDamage());
+//                        this.userCoin++;
+//                        coin_text.setText("" + userCoin);
                         weaponList.get(i).getPane().setVisible(false);
-                        //TODO: Kill instance of orc and remove from scene one dead orc touches abyss
+                        killGameObj(weaponList.get(i));
                     }
                 }
+            } else if (orc.check_collision(orc, abyss) && orc.isDisableCollision()) {
+                killGameObj(orc);
             }
         }
         else if (object instanceof Chest){
@@ -490,38 +448,27 @@ public class gameController implements Initializable {
             gameHero = (Hero) object;
             if (!gameHero.isDisableCollision()) {
                 for (int i = 0; i < platformList.size(); i++) {
-
-                    if (gameHero.getPane().getBoundsInParent().intersects(platformList.get(i).getPane().getBoundsInParent()) && ((platformList.get(i).get_Y() - gameHero.get_Y()) > 40)) {
-                        velocityY = -5.5;
-                        time = 0.13;
-                        collision = 1;
-                        return new double[]{collision, velocityY, time};
+                    if (gameHero.check_collision(gameHero, platformList.get(i)) && ((platformList.get(i).get_Y() - gameHero.get_Y()) > 40)) {
+                        return gameHero.jump();
                     }
                 }
 
                 for (int f = 0; f < fallingPlatList.size(); f++){
-                    if (gameHero.getPane().getBoundsInParent().intersects(fallingPlatList.get(f).getPane().getBoundsInParent())){
+                    if (gameHero.check_collision(gameHero, fallingPlatList.get(f))){
                         if(this.timerCall == 0){
                             this.timerCall++;
                             fallingPlatTimer();
                         }
-                        velocityY = -5.5;
-                        time = 0.13;
-                        collision = 1;
-                        return new double[]{collision, velocityY, time};
+                        return gameHero.jump();
                     }
                 }
 
 
                 for (int o = 0; o < orcList.size(); o++) {
                     if ((!orcList.get(o).isDisableCollision()) && !(orcList.get(o).getPane().getLayoutX() < gameHero.get_X() - 200 && orcList.get(o).getPane().getLayoutX() > gameHero.get_X() + 200)) {
-                        if (gameHero.getPane().getBoundsInParent().intersects(orcList.get(o).getPane().getBoundsInParent()) && ((orcList.get(o).get_Y() - gameHero.get_Y()) > 25)) {
-                            velocityY = -5.5;//5.5 (just for testing)
-                            time = 0.13;
-                            collision = 1;
-                            return new double[]{collision, velocityY, time};
-                        } else if (gameHero.getPane().getBoundsInParent().intersects(orcList.get(o).getPane().getBoundsInParent()) && ((gameHero.get_Y()) - orcList.get(o).get_Y() < 42)) {
-//                            System.out.println("orcY: " + orcList.get(o).get_Y() + "\norcX: " + orcList.get(o).get_X() + "\nheroY: " + gameHero.get_Y() + "\nheroX: " + gameHero.get_X());
+                        if (gameHero.check_collision(gameHero, orcList.get(o)) && ((orcList.get(o).get_Y() - gameHero.get_Y()) > 25)) {
+                            gameHero.jump();
+                        } else if (gameHero.check_collision(gameHero, orcList.get(o)) && ((gameHero.get_Y()) - orcList.get(o).get_Y() < 42)) {
                             boolean oCollision = false;
                             int shiftX = 0;
                             int totalShift = 0;
@@ -535,7 +482,7 @@ public class gameController implements Initializable {
                                 oCollision = checkObjtoObjCollision(orcList.get(o));
                             }
                         }
-                        else if (gameHero.getPane().getBoundsInParent().intersects(orcList.get(o).getPane().getBoundsInParent())){
+                        else if (gameHero.check_collision(gameHero, orcList.get(o))){
                             gameHero.die();
                         }
                     }
@@ -544,15 +491,11 @@ public class gameController implements Initializable {
                 for (int c = 0; c < chestList.size(); c++){
                     if ((!chestList.get(c).isDisableCollision()) && !(chestList.get(c).getPane().getLayoutX() < gameHero.get_X() - 200 && chestList.get(c).getPane().getLayoutX() > gameHero.get_X() + 200)){
                         if(gameHero.getPane().getBoundsInParent().intersects(chestList.get(c).getPane().getBoundsInParent())){
-                            // chestList.get(c).give_hero(gameHero);
-
-
-                            // below code will be inside give_hero() function;
                             if (chestList.get(c) instanceof CoinChest){
                                 CoinChest c_Chest = (CoinChest) chestList.get(c);
                                 c_Chest.give_hero(gameHero);
-                                this.userCoin += 10;
-                                coin_text.setText("" + userCoin);
+//                                this.userCoin += 10;
+//                                coin_text.setText("" + userCoin);
                             }
                             else{
                                 WeaponChest w_Chest = (WeaponChest) chestList.get(c);
@@ -573,35 +516,30 @@ public class gameController implements Initializable {
                 }
 
                 for (int i = 0; i < coinList.size(); i++) {
-                    if (coinList.get(i).getPane().isVisible() && coinList.get(i).getPane().getBoundsInParent().intersects(gameHero.getPane().getBoundsInParent())) {
+                    if (coinList.get(i).getPane().isVisible() && gameHero.check_collision(gameHero, coinList.get(i))) {
                         coinList.get(i).getPane().setVisible(false);
-                        userCoin++;
-                        coin_text.setText("" + this.userCoin);
+//                        userCoin++;
+//                        coin_text.setText("" + this.userCoin);
                     }
                 }
-                if (userScore > 90 && gameHero.getPane().getBoundsInParent().intersects(gameBoss.getPane().getBoundsInParent()) && ((gameHero.get_Y()) - gameBoss.get_Y() < 105)){
-//                    System.out.println("Side(<42): "+ gameHero.get_Y() + " " + gameBoss.get_Y());
+                if (userScore > 90 && gameBoss.check_collision(gameHero, gameBoss) && ((gameHero.get_Y()) - gameBoss.get_Y() < 105)){
                     gameBoss.getPane().setLayoutX(gameBoss.getPane().getLayoutX() + 30);
                 }
-                else if (userScore > 90  && gameHero.getPane().getBoundsInParent().intersects(gameBoss.getPane().getBoundsInParent())){
+                else if (userScore > 90  && gameBoss.check_collision(gameHero, gameBoss)){
                     gameHero.die();
-//                    System.out.println("Hero Died " + gameHero.get_Y() + " " + gameBoss.get_Y());
                 }
             }
         }
         else if (object instanceof Boss){
             gameBoss = (Boss) object;
             for (int i = 0; i < platformList.size(); i++) {
-                if (gameBoss.getPane().getBoundsInParent().intersects(platformList.get(i).getPane().getBoundsInParent())) {
-                    velocityY = -5.5;
-                    time = 0.13;
-                    collision = 1;
-                    return new double[]{collision, velocityY, time};
+                if (gameBoss.check_collision(gameBoss, platformList.get(i))) {
+                    return gameBoss.jump();
                 }
             }
 
             for (int i = 0; i < weaponList.size(); i++){
-                if (weaponList.get(i).getPane().isVisible() && weaponList.get(i).getPane().getBoundsInParent().intersects(gameBoss.getPane().getBoundsInParent())){
+                if (weaponList.get(i).getPane().isVisible() && gameBoss.check_collision(gameBoss, weaponList.get(i))){
                     if (gameBoss.getHealth() > 0){
                         int damage = 0;
                         if (weaponList.get(i) instanceof Shuriken){
@@ -614,20 +552,10 @@ public class gameController implements Initializable {
                         }
                         gameBoss.reduceHealth(damage);
                     }
-                    else if (gameBoss.getHealth() <= 100){
-                        gameBoss.die();
-                        this.userCoin+= 20;
-                        coin_text.setText("" + userCoin);
-                    }
                 }
-//
-                    weaponList.get(i).getPane().setVisible(false);
-                    //TODO: Kill instance of orc and remove from scene one dead orc touches abyss
+                weaponList.get(i).getPane().setVisible(false);
+                killGameObj(weaponList.get(i));
                 }
-        }
-        else if (object instanceof Platform){
-            Platform platform = (Platform) object;
-            gamePane.setBottomAnchor(platform.getPane(), 0.0);
         }
         return new double[]{0,velocityY,time};
     }
@@ -643,26 +571,18 @@ public class gameController implements Initializable {
                 Boss boss = (Boss) object;
                 applyGravity(boss, false);
             }
-            else if (object instanceof WeaponChest){
-                WeaponChest wChest =  (WeaponChest) object;
-                chestList.add(wChest);
-                applyGravity(wChest,false);
+            else if (object instanceof Chest){
+                Chest object1 = (Chest) object;
+                chestList.add(object1);
+                applyGravity(object1,false);
             }
-            else if (object instanceof CoinChest){
-                CoinChest cChest = (CoinChest) object;
-                chestList.add(cChest);
-                applyGravity(cChest,false);
-            }
+
             else if (object instanceof Platform){
                 Platform platform = (Platform) object;
                 platformList.add(platform);
             }
             else if (object instanceof Abyss){
-                Abyss gameAbyss = (Abyss) object;
-                this.abyss = gameAbyss.getPane();
-            }
-            else if (object instanceof ThrowingKnives){
-
+                abyss = (Abyss) object;
             }
             else if (object instanceof Coin){
                 Coin coin = (Coin) object;
@@ -676,14 +596,13 @@ public class gameController implements Initializable {
     }
 
     private boolean checkObjtoObjCollision(GameObject object){
-
         if(object instanceof Orcs){
             Orcs orc = (Orcs) object;
             for (int o = 0; o < orcList.size(); o++){
                 if (orc.getId().equals(orcList.get(o).getId())){
                     continue;
                 }
-                else if (orc.getPane().getBoundsInParent().intersects(orcList.get(o).getPane().getBoundsInParent())){
+                else if (orc.check_collision(orc, orcList.get(o))){
                     orcList.get(o).getPane().setLayoutX(orcList.get(o).getPane().getLayoutX() + 100);
                     return true;
                 }

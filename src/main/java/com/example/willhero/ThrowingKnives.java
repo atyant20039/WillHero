@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ThrowingKnives extends Weapon{
-    private int damage = 100, range = 200;
     private static int count = 0;
     private static Map<Double, ThrowingKnives> instances = new HashMap<Double, ThrowingKnives>();
 
@@ -43,7 +42,7 @@ public class ThrowingKnives extends Weapon{
 
     @Override
     public void upgrade() {
-        this.range += 50;
+        this.setRange(this.getRange() + 25);
     }
 
     @Override
@@ -54,7 +53,7 @@ public class ThrowingKnives extends Weapon{
         translate.setNode(this.getPane());
         translate.setDuration(Duration.millis(100));
         translate.setCycleCount(1);
-        translate.setByX(this.range);
+        translate.setByX(this.getRange());
         translate.setInterpolator(Interpolator.LINEAR);
         translate.play();
         translate.setOnFinished(ActionEvent -> {
@@ -62,21 +61,5 @@ public class ThrowingKnives extends Weapon{
             this.getPane().setTranslateX(0);
             instances.put(Hero.getHero().getPane().getLayoutY(),this);
         });
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
-    public int getRange() {
-        return range;
-    }
-
-    public void setRange(int range) {
-        this.range = range;
     }
 }

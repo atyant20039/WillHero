@@ -8,8 +8,6 @@ public class Boss extends Orcs{
         generateBoss();
     }
 
-
-
     @Override
     public double[] collision(GameObject o1, GameObject o2) {
 
@@ -31,10 +29,6 @@ public class Boss extends Orcs{
 
     public int getHealth(){
         return this.health;
-    }
-
-    public void reduceHealth(int power){
-        this.health -= power;
     }
 
 }
